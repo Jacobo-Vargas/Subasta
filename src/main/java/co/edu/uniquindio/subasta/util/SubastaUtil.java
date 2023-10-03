@@ -54,25 +54,4 @@ public  class SubastaUtil {
 
 
     }
-
-    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
-    }
-
-    public boolean mostrarMensajeConfirmacion(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Confirmación");
-        alert.setContentText(mensaje);
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
