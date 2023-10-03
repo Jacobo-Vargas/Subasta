@@ -1,13 +1,13 @@
 package co.edu.uniquindio.subasta.viewController;
 
-import co.edu.uniquindio.subasta.MainApp;
 import co.edu.uniquindio.subasta.SubastaAnuncianteApp;
 import co.edu.uniquindio.subasta.controller.LoginController;
-import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
-import co.edu.uniquindio.subasta.util.SubastaUtil;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+
+import java.util.Optional;
 
 public class LoginViewController {
     LoginController loginController;
@@ -32,7 +32,26 @@ public class LoginViewController {
         if (validarAcceso()){
             SubastaAnuncianteApp.launch();
         }else{
-            SubastaUtil
+            mostrarMensajeConfirmacion("No se encontro el usuario");
+        }
+    }
+
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Alert aler = new Alert(alertType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
+    }
+
+    public void mostrarMensajeConfirmacion(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Confirmación");
+        alert.setContentText(mensaje);
+        Optional<ButtonType> action = alert.showAndWait();
+        if (action.get() == ButtonType.OK) {
+        } else {
         }
     }
 }
