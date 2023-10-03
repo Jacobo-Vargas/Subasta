@@ -7,8 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Subasta implements IProductoServicies {
-    private String anuncianteLogueado;
+    private Anunciante anuncianteLogueado;
     private ArrayList<Anunciante> listaAnunciante = new ArrayList<>();
+
+
+
+
+
+    public Subasta() {
+    }
 
     public void registrarAnunciante(Anunciante anunciante) {
         listaAnunciante.add(anunciante);
@@ -28,21 +35,8 @@ public class Subasta implements IProductoServicies {
         return a;
     }
 
-
-
-    public Subasta() {
-    }
-
     public ArrayList<Anunciante> getListaAnunciante() {
         return listaAnunciante;
-    }
-
-    public String getAnuncianteLogueado() {
-        return anuncianteLogueado;
-    }
-
-    public void setAnuncianteLogueado(String anuncianteLogueado) {
-        this.anuncianteLogueado = anuncianteLogueado;
     }
 
     public void setListaAnunciante(ArrayList<Anunciante> listaAnunciante) {
@@ -67,5 +61,13 @@ public class Subasta implements IProductoServicies {
     @Override
     public boolean actualizarProducto(String cedulaActual, ProductoDto empleadoDto) {
         return false;
+    }
+
+    public Anunciante getAnuncianteLogueado() {
+        return anuncianteLogueado;
+    }
+
+    public void setAnuncianteLogueado(Anunciante anuncianteLogueado) {
+        this.anuncianteLogueado = anuncianteLogueado;
     }
 }
