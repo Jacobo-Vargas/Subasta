@@ -1,0 +1,25 @@
+.root{
+    -fx-background-color: rgba(0,0,0,0.9);
+    -fx-background-radius: 10;
+    -fx-text-fill: #ffffff;
+}
+
+.btn{
+    -fx-background-color: #00ECFF;
+    -fx-cursor: HAND;
+    -fx-border-radius: 2px;
+
+}
+.btn:hover{
+    -fx-background-color: #624686;
+
+}
+.btnRecuperarPass{
+    -fx-background-color: transparent;
+}
+.fondoTransparente{
+    -fx-background-color: transparent;
+}
+.table-view{
+    -fx-text-fill: #000000;
+}

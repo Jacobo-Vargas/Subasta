@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane prefHeight="477.0" prefWidth="661.0" styleClass="root" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.LoginViewController">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="400.0" prefWidth="400.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="250.0" valignment="CENTER" vgrow="ALWAYS" />
+    </rowConstraints>
+    <children>
+        <VBox alignment="CENTER" prefHeight="360.0" prefWidth="543.0" styleClass="fondoTransparente" stylesheets="@CSS/Style.css">
+            <children>
+                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="¡inicia sesión!" textAlignment="CENTER" wrappingWidth="659.9560546875">
+                    <font>
+                        <Font size="32.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="50.0" />
+                    </VBox.margin>
+                </Text>
+                <GridPane alignment="CENTER" prefHeight="217.0" prefWidth="662.0" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="257.0" minWidth="10.0" prefWidth="108.0" />
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="296.0" minWidth="10.0" prefWidth="272.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="52.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="52.0" valignment="TOP" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="txtUser" prefHeight="25.0" prefWidth="268.0" promptText="cedula" GridPane.columnIndex="1">
+                            <cursor>
+                                <Cursor fx:constant="TEXT" />
+                            </cursor>
+                            <GridPane.margin>
+                                <Insets right="35.0" />
+                            </GridPane.margin></TextField>
+                        <TextField fx:id="txtPassword" promptText="********" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets right="35.0" />
+                            </GridPane.margin>
+                            <cursor>
+                                <Cursor fx:constant="TEXT" />
+                            </cursor></TextField>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="25" />
+                        <FontAwesomeIconView fill="WHITE" glyphName="LOCK" size="25" GridPane.rowIndex="1" />
+                    </children>
+                    <VBox.margin>
+                        <Insets left="5.0" right="15.0" top="25.0" />
+                    </VBox.margin>
+                </GridPane>
+                  <JFXButton alignment="CENTER" onAction="#ingresar" prefHeight="25.0" prefWidth="77.0" styleClass="btn" stylesheets="CSS/Style.css" text="Ingresar" textAlignment="CENTER">
+                      <font>
+                          <Font name="Book Antiqua Bold" size="12.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnRecuperar" alignment="CENTER" onAction="#recuperarPass" prefHeight="25.0" prefWidth="261.0" styleClass="btnRecuperarPass" stylesheets="CSS/Style.css" text="¿Olvidaste tu contraseña?" textAlignment="CENTER" textFill="WHITE">
+                      <font>
+                          <Font name="Book Antiqua Bold" size="12.0" />
+                      </font>
+                      <cursor>
+                          <Cursor fx:constant="HAND" />
+                      </cursor>
+               <VBox.margin>
+                  <Insets bottom="100.0" />
+               </VBox.margin>
+                  </JFXButton>
+            </children>
+        </VBox>
+    </children>
+</GridPane>
