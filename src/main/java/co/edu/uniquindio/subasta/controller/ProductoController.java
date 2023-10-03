@@ -15,7 +15,7 @@ public class ProductoController implements IProductoServicies {
 
     @Override
     public List<ProductoDto> obtenerProducto() {
-    return modelFactoryController.obtenerProducto(" ");
+    return modelFactoryController.obtenerProducto(modelFactoryController.getSubasta().getAnuncianteLogueado().getCedula());
     }
 
     @Override
@@ -25,11 +25,15 @@ public class ProductoController implements IProductoServicies {
 
     @Override
     public boolean eliminarProducto(String cedula) {
-        return modelFactoryController.eliminarProducto(cedula);
+        return modelFactoryController.eliminarProducto(String.valueOf(cedula));
     }
 
     @Override
     public boolean actualizarProducto(String cedulaActual, ProductoDto empleadoDto) {
         return false;
+    }
+
+    public String obtenerCedulaLogueo(){
+        return modelFactoryController.getSubasta().getAnuncianteLogueado().getCedula();
     }
 }

@@ -66,8 +66,7 @@ public class ProductoViewController {
         codigo += 1;
 
         ProductoDto productoDto = new ProductoDto(txtNombre.getText(), cBoxTipoArticulo.getValue(), codigo);
-        productoController.agregarProducto(productoDto, "30");
-
+        productoController.agregarProducto(productoDto, productoController.obtenerCedulaLogueo() );
 
         listaProductoDto.add(productoDto);
         tvProducto.setItems(listaProductoDto);
@@ -89,25 +88,24 @@ public class ProductoViewController {
     }
 
     public void eliminarProducto() {
-
-
+        productoController.eliminarProducto(String.valueOf(productoSeleccionado.codigoProducto()));
         boolean productoEliminado = false;
-        if (productoSeleccionado != null) {
-            if (mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")) {
-                productoEliminado = productoController.eliminarProducto(String.valueOf(productoSeleccionado.codigoProducto()));
-                if (productoEliminado) {
-                    listaProductoDto.remove(productoSeleccionado);
-                    productoSeleccionado = null;
-                    tvProducto.getSelectionModel().clearSelection();
-                    nuevo();
-                    mostrarMensaje("Notificación empleado", "Empleado eliminado", "El empleado se ha eliminado con éxito", Alert.AlertType.INFORMATION);
-                } else {
-                    mostrarMensaje("Notificación empleado", "Empleado no eliminado", "El empleado no se puede eliminar", Alert.AlertType.ERROR);
-                }
-            }
-        } else {
-            mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Seleccionado un empleado de la lista", Alert.AlertType.WARNING);
-        }
+//        if (productoSeleccionado != null) {
+//            if (mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")) {
+//                productoEliminado = productoController.eliminarProducto(String.valueOf(productoSeleccionado.codigoProducto()));
+//                if (productoEliminado) {
+//                    listaProductoDto.remove(productoSeleccionado);
+//                    productoSeleccionado = null;
+//                    tvProducto.getSelectionModel().clearSelection();
+//                    nuevo();
+//                    mostrarMensaje("Notificación empleado", "Empleado eliminado", "El empleado se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+//                } else {
+//                    mostrarMensaje("Notificación empleado", "Empleado no eliminado", "El empleado no se puede eliminar", Alert.AlertType.ERROR);
+//                }
+//            }
+//        } else {
+//            mostrarMensaje("Notificación empleado", "Empleado no seleccionado", "Seleccionado un empleado de la lista", Alert.AlertType.WARNING);
+//        }
     }
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {

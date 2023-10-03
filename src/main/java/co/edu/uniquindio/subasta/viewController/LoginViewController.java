@@ -2,11 +2,17 @@ package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.SubastaAnuncianteApp;
 import co.edu.uniquindio.subasta.controller.LoginController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Optional;
 
 public class LoginViewController {
@@ -30,9 +36,18 @@ public class LoginViewController {
     public void ingresar() {
         validarAcceso();
         if (validarAcceso()){
-            SubastaAnuncianteApp.launch();
+            mostrarSubastaAnuncianteApp();
         }else{
             mostrarMensajeConfirmacion("No se encontro el usuario");
+        }
+    }
+    private void mostrarSubastaAnuncianteApp() {
+        try {
+            // Para este ejemplo, supondré que tienes una clase SubastaApp y un método start para mostrar la ventana
+            SubastaAnuncianteApp subastaApp = new SubastaAnuncianteApp();
+            subastaApp.start(new Stage());
+        } catch (IOException e) {
+            e.printStackTrace(); // Maneja adecuadamente las excepciones
         }
     }
 
@@ -53,5 +68,11 @@ public class LoginViewController {
         if (action.get() == ButtonType.OK) {
         } else {
         }
+    }
+
+    public void recuperarPass(ActionEvent actionEvent) {
+    }
+
+    public void confirmarRegistro(ActionEvent actionEvent) {
     }
 }

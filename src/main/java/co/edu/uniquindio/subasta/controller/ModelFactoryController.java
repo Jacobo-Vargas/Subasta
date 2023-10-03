@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ModelFactoryController implements IModelFactoryController {
     Subasta subasta;
-    String cedulaLogueo;
     MapperSubasta mapper = MapperSubasta.INSTANCE;
 
 
@@ -34,7 +33,6 @@ public class ModelFactoryController implements IModelFactoryController {
     public ModelFactoryController() {
         System.out.println("invocación clase singleton");
         cargarDatosBase();
-        cedulaLogueo = getSubasta().getAnuncianteLogueado();
     }
 
     private void cargarDatosBase() {
@@ -70,7 +68,7 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean eliminarProducto(String cedula) {
         boolean flagExiste = false;
         try {
-           // flagExiste = getSubasta().getListaAnunciante()
+           flagExiste = getSubasta().eliminarProducto(cedula);
         } catch (Exception e) {
             e.printStackTrace();
         }
