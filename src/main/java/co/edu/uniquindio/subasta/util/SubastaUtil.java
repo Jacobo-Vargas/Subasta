@@ -50,6 +50,8 @@ public  class SubastaUtil {
         subasta.registrarAnunciante(a2);
 
 
+
+
         return subasta;
 
 
