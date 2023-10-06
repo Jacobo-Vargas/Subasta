@@ -25,6 +25,7 @@
       <Tab text="Salir">
           <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="774.0" />
+              <fx:include source="LogOutView.fxml"> </fx:include>
           </content>
       </Tab>
   </tabs>

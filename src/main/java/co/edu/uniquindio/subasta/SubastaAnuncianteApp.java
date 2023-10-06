@@ -1,9 +1,11 @@
 package co.edu.uniquindio.subasta;
 
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -20,5 +22,7 @@ public class SubastaAnuncianteApp extends Application {
         stage.setTitle("Subasta");
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
+        stage.setOnCloseRequest(Event::consume);
     }
 }

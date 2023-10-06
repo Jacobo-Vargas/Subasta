@@ -43,15 +43,28 @@ public class ModelFactoryController implements IModelFactoryController {
         subasta = SubastaUtil.cargarDatos();
     }
 
-    @Override
-    public List<ProductoDto> obtenerProducto(String cedula) {
-        ArrayList<Producto> lista = new ArrayList<>();
-        for (Anunciante a : getSubasta().getListaAnunciante()) {
-            if (a.getCedula().equals(cedula)) {
-                lista.addAll(a.getListaProducto());
-                break;
-            }
+    public boolean  restaurarLogueo(){
+        Comprador comprador = null;
+        Anunciante anunciante = null;
+        getSubasta().setCompradorLogueado(comprador);
+        getSubasta().setAnuncianteLogueado(anunciante);
+        if(getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null){
+            return true;
+        }else{
+            return false;
         }
+    }
+    @Override
+    public List<ProductoDto> obtenerProducto() {
+
+        ArrayList<Producto> lista = new ArrayList<>(getSubasta().getAnuncianteLogueado().getListaProducto());
+
+//        for (Anunciante a : getSubasta().getListaAnunciante()) {
+//            if (a.getCedula().equals(getSubasta().getAnuncianteLogueado().getCedula())) {
+//                lista.addAll(a.getListaProducto());
+//                break;
+//            }
+//        }
         return mapper.getProductoDto(lista);
     }
 

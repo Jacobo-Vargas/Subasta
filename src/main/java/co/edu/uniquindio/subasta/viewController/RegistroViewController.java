@@ -2,6 +2,7 @@ package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.ProductoController;
 import co.edu.uniquindio.subasta.controller.RegistroController;
+import co.edu.uniquindio.subasta.exceptions.RegistroException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.model.Usuario;
@@ -51,7 +52,7 @@ public class RegistroViewController {
     }
 
     @FXML
-    void confirmarRegistro(ActionEvent event) {
+    void confirmarRegistro(ActionEvent event) throws RegistroException {
         if (!(chkComprador.isSelected() || chkAnunciante.isSelected())) {
             AlertaUtil.mostrarMensajeError("Seleccione si es anunciante o comprador.");
         } else if (validarSeleccion()) {
@@ -63,12 +64,22 @@ public class RegistroViewController {
 
     }
 
-    private void registrarComprador(CompradorDto compradorDto) {
-        registroControllerService.registrarComprador(compradorDto);
+    private void registrarComprador(CompradorDto compradorDto) throws RegistroException {
+        if(registroControllerService.registrarComprador(compradorDto)){
+            AlertaUtil.mostrarMensajeConfirmacion("Se agrego correctamente");
+        }else{
+            AlertaUtil.mostrarMensajeError("No se pudo agregar, verifique los datos ingresados.");
+            throw new RegistroException("Error al registrar");
+        }
     }
 
-    private void registrarAnunciante(AnuncianteDto anuncianteDto) {
-        registroControllerService.registrarAnunciante(anuncianteDto);
+    private void registrarAnunciante(AnuncianteDto anuncianteDto) throws RegistroException {
+        if(registroControllerService.registrarAnunciante(anuncianteDto)){
+            AlertaUtil.mostrarMensajeConfirmacion("Se agrego correctamente");
+        }else{
+            AlertaUtil.mostrarMensajeError("No se pudo agregar, verifique los datos ingresados.");
+            throw new RegistroException("Error en registro");
+        }
     }
 
 

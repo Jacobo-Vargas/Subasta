@@ -15,7 +15,7 @@ public class ProductoController implements IProductoServicies {
 
     @Override
     public List<ProductoDto> obtenerProducto() {
-    return modelFactoryController.obtenerProducto(modelFactoryController.getSubasta().getAnuncianteLogueado().getCedula());
+    return modelFactoryController.obtenerProducto();
     }
 
     @Override
