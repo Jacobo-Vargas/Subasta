@@ -9,13 +9,13 @@ import java.util.List;
 
 public class Subasta implements IProductoServicies, ISubastaService {
     private Anunciante anuncianteLogueado;
+    private Comprador compradorLogueado;
     private ArrayList<Anunciante> listaAnunciante = new ArrayList<>();
     private ArrayList<Comprador> listaCompradores = new ArrayList<>();
 
 
     public Subasta() {
     }
-
 
 
     public void EliminarAnunciante(Anunciante anunciante) {
@@ -53,14 +53,6 @@ public class Subasta implements IProductoServicies, ISubastaService {
         return false;
     }
 
-    public Anunciante getAnuncianteLogueado() {
-        return anuncianteLogueado;
-    }
-
-    public void setAnuncianteLogueado(Anunciante anuncianteLogueado) {
-        this.anuncianteLogueado = anuncianteLogueado;
-    }
-
 
     //--------------------------------   Registro   --------------------------------------
     @Override
@@ -78,8 +70,8 @@ public class Subasta implements IProductoServicies, ISubastaService {
     @Override
     public boolean verificarExistenciaAnunciante(String cedula) {
         boolean existe = false;
-        for (Anunciante a: getListaAnunciante()) {
-            if (a.getCedula().equals(cedula)){
+        for (Anunciante a : getListaAnunciante()) {
+            if (a.getCedula().equals(cedula)) {
                 existe = true;
                 break;
             }
@@ -113,4 +105,21 @@ public class Subasta implements IProductoServicies, ISubastaService {
     public void setListaCompradores(ArrayList<Comprador> listaCompradores) {
         this.listaCompradores = listaCompradores;
     }
+
+    public Anunciante getAnuncianteLogueado() {
+        return anuncianteLogueado;
+    }
+
+    public void setAnuncianteLogueado(Anunciante anuncianteLogueado) {
+        this.anuncianteLogueado = anuncianteLogueado;
+    }
+
+    public Comprador getCompradorLogueado() {
+        return compradorLogueado;
+    }
+
+    public void setCompradorLogueado(Comprador compradorLogueado) {
+        this.compradorLogueado = compradorLogueado;
+    }
+
 }

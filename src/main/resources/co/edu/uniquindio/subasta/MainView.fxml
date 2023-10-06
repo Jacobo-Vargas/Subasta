@@ -4,7 +4,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600" prefWidth="750" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.MainViewController">
+<AnchorPane prefHeight="600" prefWidth="750" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <TabPane prefHeight="600.0" prefWidth="750.0" stylesheets="@CSS/StyleTabPane.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>

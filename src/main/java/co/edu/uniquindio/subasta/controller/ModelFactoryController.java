@@ -117,7 +117,40 @@ public class ModelFactoryController implements IModelFactoryController {
 
 
 
-//   ---------------------------------------     Registro ----------------------
+
+
+//---------------------------------------Login ------------------------------------------
+
+    @Override
+    public boolean verificarAccesoComprador(String cedula, String contrasenia) {
+        boolean acceso = false;
+
+        for (Comprador c: getSubasta().getListaCompradores()) {
+            if(c.getCedula().equals(cedula) && c.getUsuario().getContrasenia().equals(contrasenia)){
+                getSubasta().setCompradorLogueado(c);
+                acceso = true;
+            }
+        }
+        return acceso;
+    }
+
+    @Override
+    public boolean verificarAccesoAnunciante(String cedula, String contrasenia) {
+        boolean acceso = false;
+
+        for (Anunciante a: getSubasta().getListaAnunciante()) {
+            if(a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)){
+                getSubasta().setAnuncianteLogueado(a);
+                acceso = true;
+            }
+        }
+        return acceso;
+    }
+
+    //--------------------------------------- fin Login ----------------------------
+
+
+
     public void setSubasta(Subasta subasta) {
         this.subasta = subasta;
     }

@@ -5,6 +5,7 @@ import co.edu.uniquindio.subasta.model.Anunciante;
 
 public interface ILoginController {
 
-    public boolean validarAcceso(String cedula, String contrasenia);
+    public boolean validarAccesoAnunciante(String cedula, String contrasenia);
+    public boolean validarAccesoComprador(String cedula, String contrasenia);
 
 }

@@ -6,11 +6,8 @@ import co.edu.uniquindio.subasta.model.TipoArticulo;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import java.util.Optional;
 
 public class ProductoViewController {
     private static int codigo = 0;
@@ -108,35 +105,14 @@ public class ProductoViewController {
 //        }
     }
 
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
-    }
-
-    private boolean mostrarMensajeConfirmacion(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Confirmación");
-        alert.setContentText(mensaje);
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     private void listenerSelection() {
         tvProducto.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             productoSeleccionado = newSelection;
-            mostrarInformacionEmpleado(productoSeleccionado);
+            mostrarInformacionProducto(productoSeleccionado);
         });
     }
 
-    private void mostrarInformacionEmpleado(ProductoDto productoSeleccionado) {
+    private void mostrarInformacionProducto(ProductoDto productoSeleccionado) {
         if(productoSeleccionado != null){
             txtNombre.setText(productoSeleccionado.nombre());
             txtCodigo.setText(String.valueOf(productoSeleccionado.codigoProducto()));

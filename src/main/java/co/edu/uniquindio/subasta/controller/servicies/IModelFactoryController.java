@@ -21,4 +21,10 @@ public interface IModelFactoryController {
     boolean agregarAnunciante(AnuncianteDto anuncianteDto);
     boolean agregarComprador(CompradorDto compradorDto);
 
+
+    //------------------------  Login ---------------------------------------
+
+    boolean verificarAccesoComprador(String cedula,String contrasenia);
+    boolean verificarAccesoAnunciante(String cedula,String contrasenia);
+
 }

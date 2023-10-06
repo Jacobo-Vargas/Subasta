@@ -49,6 +49,7 @@ public class AlertaUtil {
         alert.setHeaderText(null);
         alert.setTitle("Error");
         alert.setContentText(error);
+
         Optional<ButtonType> action = alert.showAndWait();
         if (action.get() == ButtonType.OK) {
             return true;

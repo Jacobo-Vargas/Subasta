@@ -2,20 +2,20 @@ package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.SubastaAnuncianteApp;
 import co.edu.uniquindio.subasta.controller.LoginController;
+import co.edu.uniquindio.subasta.util.AlertaUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
-import java.util.Optional;
 
-public class LoginViewController {
+
+public class LoginViewController extends Component {
     LoginController loginController;
     @FXML
     public TextField txtUser;
@@ -28,51 +28,61 @@ public class LoginViewController {
 
     }
 
-    public boolean validarAcceso(){
-      return loginController.validarAcceso(txtUser.getText(),txtPassword.getText());
+    public boolean validarAccesoAnunciante(){
+      return loginController.validarAccesoAnunciante(txtUser.getText(),txtPassword.getText());
     }
 
+    public boolean validarAccesoComprador(){
+        return loginController.validarAccesoComprador(txtUser.getText(),txtPassword.getText());
+    }
 
     public void ingresar() {
-        validarAcceso();
-        if (validarAcceso()){
-            mostrarSubastaAnuncianteApp();
-        }else{
-            mostrarMensajeConfirmacion("No se encontro el usuario");
-        }
+        mostrarVentanaConfirmacion();
     }
+
+    private void mostrarSubastaCompradorApp() {
+    }
+
     private void mostrarSubastaAnuncianteApp() {
         try {
-            // Para este ejemplo, supondré que tienes una clase SubastaApp y un método start para mostrar la ventana
             SubastaAnuncianteApp subastaApp = new SubastaAnuncianteApp();
             subastaApp.start(new Stage());
         } catch (IOException e) {
-            e.printStackTrace(); // Maneja adecuadamente las excepciones
-        }
-    }
-
-    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
-    }
-
-    public void mostrarMensajeConfirmacion(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Confirmación");
-        alert.setContentText(mensaje);
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-        } else {
+            e.printStackTrace();
         }
     }
 
     public void recuperarPass(ActionEvent actionEvent) {
     }
+    private void mostrarVentanaConfirmacion() {
 
-    public void confirmarRegistro(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText("¿Quieres ingresar como comprador o anunciante?");
+        alert.setContentText("Elija una opción:");
+
+        ButtonType buttonComprador = new ButtonType("Comprador");
+        ButtonType buttonAnunciante = new ButtonType("Anunciante");
+
+        alert.getButtonTypes().setAll(buttonComprador, buttonAnunciante);
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.setAlwaysOnTop(true);
+
+        alert.showAndWait().ifPresent(result -> {
+            if (result == buttonComprador) {
+                if (validarAccesoComprador()) {
+                    mostrarSubastaCompradorApp();
+                } else {
+                    AlertaUtil.mostrarMensajeError("No se encuentra el usuario para ingreso como comprador.");
+                }
+            } else if (result == buttonAnunciante) {
+                if (validarAccesoAnunciante()) {
+                    mostrarSubastaAnuncianteApp();
+                } else {
+                    AlertaUtil.mostrarMensajeError("No se encuentra el usuario para ingreso como anunciante.");
+                }
+            }
+        });
     }
 }
