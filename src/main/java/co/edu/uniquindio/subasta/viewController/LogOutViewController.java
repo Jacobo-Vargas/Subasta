@@ -16,7 +16,7 @@ public class LogOutViewController {
     public void salirApp(ActionEvent actionEvent) {
         if(logOutController.salirDeApp()){
             cerrarVentana(actionEvent);
-            AlertaUtil.mostrarMensajeConfirmacion("Sesion cerrada correctamente.");
+            AlertaUtil.mostrarMensajeOk("Sesion cerrada correctamente.");
 
         }else{
             AlertaUtil.mostrarMensajeError("No se pudo cerrar sesión, intentelo nuevamente.");

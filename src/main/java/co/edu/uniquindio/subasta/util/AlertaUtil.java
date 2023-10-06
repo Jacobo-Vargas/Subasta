@@ -56,6 +56,18 @@ public class AlertaUtil {
         } else {
             return false;
         }
+    }
 
+    public static boolean mostrarMensajeOk(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Exitoso");
+        alert.setContentText(mensaje);
+
+        // Quitar el botón "Cancelar" (ButtonBar.ButtonData.CANCEL_CLOSE)
+        alert.getButtonTypes().remove(ButtonType.CANCEL);
+
+        Optional<ButtonType> action = alert.showAndWait();
+        return action.isPresent() && action.get() == ButtonType.OK;
     }
 }

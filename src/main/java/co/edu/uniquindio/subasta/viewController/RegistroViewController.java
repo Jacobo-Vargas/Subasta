@@ -65,21 +65,37 @@ public class RegistroViewController {
     }
 
     private void registrarComprador(CompradorDto compradorDto) throws RegistroException {
-        if(registroControllerService.registrarComprador(compradorDto)){
-            AlertaUtil.mostrarMensajeConfirmacion("Se agrego correctamente");
-        }else{
-            AlertaUtil.mostrarMensajeError("No se pudo agregar, verifique los datos ingresados.");
-            throw new RegistroException("Error al registrar");
+
+        try{
+            if(registroControllerService.registrarComprador(compradorDto)){
+                AlertaUtil.mostrarMensajeOk("Se agrego correctamente");
+                limpiarCampos();
+            }else{
+                AlertaUtil.mostrarMensajeError("No se pudo agregar, verifique los datos ingresados.");
+                throw new RegistroException("Error al registrar, ya existe.");
+            }
+        }catch (RegistroException r){
+            System.out.println("E/S: "+r);
         }
+
     }
 
+
+
     private void registrarAnunciante(AnuncianteDto anuncianteDto) throws RegistroException {
-        if(registroControllerService.registrarAnunciante(anuncianteDto)){
-            AlertaUtil.mostrarMensajeConfirmacion("Se agrego correctamente");
-        }else{
-            AlertaUtil.mostrarMensajeError("No se pudo agregar, verifique los datos ingresados.");
-            throw new RegistroException("Error en registro");
+
+        try{
+            if(registroControllerService.registrarAnunciante(anuncianteDto)){
+                AlertaUtil.mostrarMensajeOk("Se agrego correctamente");
+                limpiarCampos();
+            }else{
+                AlertaUtil.mostrarMensajeError("No se pudo agregar, verifique los datos ingresados.");
+                throw new RegistroException("Error en registro, ya exite");
+            }
+        }catch (RegistroException e){
+            System.out.println("E/S: "+ e);
         }
+
     }
 
 
@@ -143,5 +159,18 @@ public class RegistroViewController {
         } else {
             chkComprador.setDisable(false);
         }
+    }
+    private void limpiarCampos() {
+        txtContrasenia.setText("");
+        txtCedula.setText("");
+        txtApellido.setText("");
+        txtNombre.setText("");
+        txtEdad.setText("");
+        txtDireccion.setText("");
+        txtTelefono.setText("");
+        chkAnunciante.setSelected(false);
+        chkAnunciante.setDisable(false);
+        chkComprador.setSelected(false);
+        chkComprador.setDisable(false);
     }
 }

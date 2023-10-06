@@ -104,9 +104,13 @@ public class ModelFactoryController implements IModelFactoryController {
         try{
             if(!(subasta.verificarExistenciaAnunciante(anuncianteDto.cedula()))){
                 getSubasta().registrarAnunciante(mapper.anuncianteDtoToAnunciante(anuncianteDto));
+                System.out.println(getSubasta().getListaAnunciante().size());
+                return true;
+            }else{
+                System.out.println(getSubasta().getListaAnunciante().size());
+                return false;
             }
-            System.out.println(getSubasta().getListaAnunciante().size());
-            return true;
+
         }catch (Exception e){
             return false;
         }
@@ -118,11 +122,12 @@ public class ModelFactoryController implements IModelFactoryController {
             if(!(subasta.verificarExistenciaComprador(compradorDto.cedula()))){
                 Comprador c = mapper.compradorDtoToComprador(compradorDto);
                 getSubasta().registrarComprador(c);
-
+                System.out.println(getSubasta().getListaCompradores().size());
+                return true;
+            }else{
+                System.out.println(getSubasta().getListaCompradores().size());
+                return false;
             }
-            System.out.println(getSubasta().getListaCompradores().size());
-
-            return true;
         }catch (Exception e){
             return false;
         }
