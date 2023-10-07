@@ -11,7 +11,6 @@ import co.edu.uniquindio.subasta.model.Producto;
 import co.edu.uniquindio.subasta.model.Subasta;
 import co.edu.uniquindio.subasta.util.SubastaUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,27 +53,22 @@ public class ModelFactoryController implements IModelFactoryController {
             return false;
         }
     }
+
+
+//    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
     @Override
     public List<ProductoDto> obtenerProducto() {
-
         ArrayList<Producto> lista = new ArrayList<>(getSubasta().getAnuncianteLogueado().getListaProducto());
-
-//        for (Anunciante a : getSubasta().getListaAnunciante()) {
-//            if (a.getCedula().equals(getSubasta().getAnuncianteLogueado().getCedula())) {
-//                lista.addAll(a.getListaProducto());
-//                break;
-//            }
-//        }
         return mapper.getProductoDto(lista);
     }
 
     @Override
-    public boolean agregarProducto(ProductoDto productoDto, String cedula) {
+    public boolean agregarProducto(ProductoDto productoDto) {
         boolean exito = false;
         Producto producto = mapper.productoDtoToProducto(productoDto);
         for (Anunciante a : getSubasta().getListaAnunciante()) {
-            if (a.getCedula().equals(cedula)) {
-                a.registrarProducto(producto);
+            if (a.getCedula().equals(getSubasta().getAnuncianteLogueado().getCedula())) {
+                a.getListaProducto().add(producto);
                 exito = true;
             }
         }
@@ -82,18 +76,21 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public boolean eliminarProducto(String cedula) {
-        boolean flagExiste = false;
-        try {
-           flagExiste = getSubasta().eliminarProducto(cedula);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public boolean eliminarProducto(ProductoDto productoDto) {
+        boolean eliminado = false;
+        Producto producto = mapper.productoDtoToProducto(productoDto);
+        for (Producto p: getSubasta().getAnuncianteLogueado().getListaProducto()) {
+            if(p.getCodigo().equals(producto.getCodigo())){
+                getSubasta().getAnuncianteLogueado().getListaProducto().remove(p);
+                eliminado = true;
+                break;
+            }
         }
-        return flagExiste;
+        return eliminado;
     }
 
     @Override
-    public boolean actualizarProducto(String cedulaActual, ProductoDto empleadoDto) {
+    public boolean actualizarProducto(ProductoDto empleadoDto) {
         return false;
     }
 //  --------------------------------------- Registro ---------------------------
@@ -103,7 +100,7 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean agregarAnunciante(AnuncianteDto anuncianteDto) {
         try{
             if(!(subasta.verificarExistenciaAnunciante(anuncianteDto.cedula()))){
-                getSubasta().registrarAnunciante(mapper.anuncianteDtoToAnunciante(anuncianteDto));
+                getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
                 System.out.println(getSubasta().getListaAnunciante().size());
                 return true;
             }else{
@@ -121,7 +118,7 @@ public class ModelFactoryController implements IModelFactoryController {
         try{
             if(!(subasta.verificarExistenciaComprador(compradorDto.cedula()))){
                 Comprador c = mapper.compradorDtoToComprador(compradorDto);
-                getSubasta().registrarComprador(c);
+                getSubasta().getListaCompradores().add(c);
                 System.out.println(getSubasta().getListaCompradores().size());
                 return true;
             }else{

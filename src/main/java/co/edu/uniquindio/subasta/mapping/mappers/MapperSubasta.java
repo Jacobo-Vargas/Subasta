@@ -22,6 +22,7 @@ public interface MapperSubasta {
     Comprador compradorDtoToComprador(CompradorDto compradorDto);
 
     @Named("productoToProductoDto")
+
     ProductoDto productoToProductoDto(Producto producto);
     Producto productoDtoToProducto(ProductoDto productoDto);
 

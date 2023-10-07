@@ -1,13 +1,13 @@
 package co.edu.uniquindio.subasta.model;
 
-import co.edu.uniquindio.subasta.controller.servicies.IProductoServicies;
+import co.edu.uniquindio.subasta.controller.servicies.IProductoService;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subasta implements IProductoServicies, ISubastaService {
+public class Subasta implements ISubastaService {
     private Anunciante anuncianteLogueado;
     private Comprador compradorLogueado;
     private ArrayList<Anunciante> listaAnunciante = new ArrayList<>();
@@ -17,7 +17,7 @@ public class Subasta implements IProductoServicies, ISubastaService {
     public Subasta() {
     }
 
-
+//------------------------------------ CRUD ANUNCIANTE ------------------------------------------
     public void EliminarAnunciante(Anunciante anunciante) {
         listaAnunciante.remove(anunciante);
     }
@@ -32,26 +32,26 @@ public class Subasta implements IProductoServicies, ISubastaService {
         return a;
     }
 
-
-    @Override
-    public List<ProductoDto> obtenerProducto() {
-        return null;
-    }
-
-    @Override
-    public boolean agregarProducto(ProductoDto productoDto, String cedula) {
-        return false;
-    }
-
-    @Override
-    public boolean eliminarProducto(String cedula) {
-        return false;
-    }
-
-    @Override
-    public boolean actualizarProducto(String cedulaActual, ProductoDto empleadoDto) {
-        return false;
-    }
+// ------------------------------------ CRUD PRODUCTO ------------------------------------
+//    @Override
+//    public List<ProductoDto> obtenerProducto() {
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean agregarProducto(ProductoDto productoDto) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean eliminarProducto(ProductoDto productoDto) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean actualizarProducto(ProductoDto empleadoDto) {
+//        return false;
+//    }
 
 
     //--------------------------------   Registro   --------------------------------------
@@ -77,14 +77,6 @@ public class Subasta implements IProductoServicies, ISubastaService {
             }
         }
         return existe;
-    }
-
-    public void registrarAnunciante(Anunciante anunciante) {
-        listaAnunciante.add(anunciante);
-    }
-
-    public void registrarComprador(Comprador comprador) {
-        listaCompradores.add(comprador);
     }
 
 

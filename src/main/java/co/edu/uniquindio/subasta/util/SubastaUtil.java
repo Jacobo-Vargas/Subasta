@@ -1,9 +1,6 @@
 package co.edu.uniquindio.subasta.util;
 
-import co.edu.uniquindio.subasta.model.Anunciante;
-import co.edu.uniquindio.subasta.model.Producto;
-import co.edu.uniquindio.subasta.model.Subasta;
-import co.edu.uniquindio.subasta.model.Usuario;
+import co.edu.uniquindio.subasta.model.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -40,14 +37,18 @@ public  class SubastaUtil {
         Producto producto = new Producto();
 
         producto.setNombre("Casa");
-        a1.registrarProducto(producto);
-        subasta.registrarAnunciante(a1);
+        producto.setCodigo("0");
+        producto.setTipoArticulo(TipoArticulo.DEPORTES);
+        a1.getListaProducto().add(producto);
+        subasta.getListaAnunciante().add(a1);
 
         Producto producto1 = new Producto();
 
         producto1.setNombre("tv");
-        a2.registrarProducto(producto1);
-        subasta.registrarAnunciante(a2);
+        producto1.setCodigo("1");
+        producto1.setTipoArticulo(TipoArticulo.TECNOLOGIA);
+        a2.getListaProducto().add(producto1);
+        subasta.getListaAnunciante().add(a2);
 
 
 

@@ -1,12 +1,11 @@
 package co.edu.uniquindio.subasta.model;
 
 public class Producto {
-    private static int contador = 0;
     private String nombre;
-    private int id;
+    private String codigo;
+    private TipoArticulo tipoArticulo;
 
     public Producto() {
-        this.id = ++contador;
     }
 
     public String getNombre() {
@@ -17,13 +16,19 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public int getId() {
-        return id;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
+    public TipoArticulo getTipoArticulo() {
+        return tipoArticulo;
+    }
 
+    public void setTipoArticulo(TipoArticulo tipoArticulo) {
+        this.tipoArticulo = tipoArticulo;
+    }
 }

@@ -12,24 +12,6 @@ public class Anunciante extends Persona {
     }
 
 
-    public void registrarProducto(Producto producto) {
-        listaProducto.add(producto);
-    }
-
-    public void EliminarProducto(Producto producto) {
-        listaProducto.remove(producto);
-    }
-
-    public Producto buscarProducto(int id) {
-        Producto a = null;
-        for (Producto e : listaProducto) {
-            if (e.getId() == id) {
-                a = e;
-            }
-        }
-        return a;
-    }
-
     public ArrayList<Producto> getListaProducto() {
         return listaProducto;
     }

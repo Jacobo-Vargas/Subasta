@@ -7,12 +7,14 @@ import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import java.util.List;
 
 public interface IModelFactoryController {
+
+
     List<ProductoDto> obtenerProducto();
-    boolean agregarProducto(ProductoDto empleadoDto,String cedula);
+    boolean agregarProducto(ProductoDto empleadoDto);
 
-    boolean eliminarProducto(String cedula);
+    boolean eliminarProducto(ProductoDto productoDto);
 
-    boolean actualizarProducto(String cedulaActual, ProductoDto empleadoDto);
+    boolean actualizarProducto(ProductoDto empleadoDto);
 
 
 

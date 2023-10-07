@@ -1,11 +1,11 @@
 package co.edu.uniquindio.subasta.controller;
 
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
-import co.edu.uniquindio.subasta.controller.servicies.IProductoServicies;
+import co.edu.uniquindio.subasta.controller.servicies.IProductoService;
 
 import java.util.List;
 
-public class ProductoController implements IProductoServicies {
+public class ProductoController implements IProductoService {
     ModelFactoryController modelFactoryController;
 
     public ProductoController() {
@@ -19,17 +19,17 @@ public class ProductoController implements IProductoServicies {
     }
 
     @Override
-    public boolean agregarProducto(ProductoDto productoDto,String cedula) {
-        return modelFactoryController.agregarProducto(productoDto,cedula);
+    public boolean agregarProducto(ProductoDto productoDto) {
+        return modelFactoryController.agregarProducto(productoDto);
     }
 
     @Override
-    public boolean eliminarProducto(String cedula) {
-        return modelFactoryController.eliminarProducto(String.valueOf(cedula));
+    public boolean eliminarProducto(ProductoDto productoDto) {
+        return modelFactoryController.eliminarProducto(productoDto);
     }
 
     @Override
-    public boolean actualizarProducto(String cedulaActual, ProductoDto empleadoDto) {
+    public boolean actualizarProducto(ProductoDto empleadoDto) {
         return false;
     }
 

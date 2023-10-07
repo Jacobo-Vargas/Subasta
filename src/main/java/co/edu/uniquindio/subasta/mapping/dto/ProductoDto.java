@@ -5,8 +5,9 @@ import co.edu.uniquindio.subasta.model.TipoArticulo;
 
 public record ProductoDto(
         String nombre,
-        TipoArticulo tipoArticulo,
-        int codigoProducto
+        String tipoArticulo,
+        String codigo
+
         ) {
 
 
