@@ -6,6 +6,7 @@ module com.example.ejemplodto {
     requires  org.mapstruct.processor;
     requires com.jfoenix;
     requires java.desktop;
+    requires java.logging;
 
     opens co.edu.uniquindio.subasta to javafx.fxml;
     opens co.edu.uniquindio.subasta.model to javafx.graphics;

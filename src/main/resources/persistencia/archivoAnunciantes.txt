@@ -1,0 +1,3 @@
+juan,null,123,0,null,123,123,[Producto{nombre='Casa', codigo='0', tipoArticulo=DEPORTES}]
+jose,null,321,0,null,321,321,[Producto{nombre='tv', codigo='1', tipoArticulo=TECNOLOGIA}]
+Jacobo,vargas,1094958613,27,3186569265,1094958613,123456,[]

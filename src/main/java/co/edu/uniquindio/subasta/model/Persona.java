@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.model;
 
 public class Persona {
+    private static final long serialVersionUID = 1L;
 
     private String nombre;
     private String apellido;
@@ -51,6 +52,7 @@ public class Persona {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
 
 
 }

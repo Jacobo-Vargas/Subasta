@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.model;
 import java.time.LocalDate;
 
 public class Puja {
+    private static final long serialVersionUID = 1L;
 
     private String direccion ;
     private String codigo;
@@ -40,4 +41,17 @@ public class Puja {
         return fechaPuja;
     }
 
+    public void setFechaPuja(LocalDate fechaPuja) {
+        this.fechaPuja = fechaPuja;
+    }
+
+    @Override
+    public String toString() {
+        return "Puja{" +
+                "direccion='" + direccion + '\'' +
+                ", codigo='" + codigo + '\'' +
+                ", ofertaInicial=" + ofertaInicial +
+                ", fechaPuja=" + fechaPuja +
+                '}';
+    }
 }

@@ -8,50 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Subasta implements ISubastaService {
+    private static final long serialVersionUID = 1L;
     private Anunciante anuncianteLogueado;
     private Comprador compradorLogueado;
     private ArrayList<Anunciante> listaAnunciante = new ArrayList<>();
     private ArrayList<Comprador> listaCompradores = new ArrayList<>();
 
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+
 
     public Subasta() {
     }
-
-//------------------------------------ CRUD ANUNCIANTE ------------------------------------------
-    public void EliminarAnunciante(Anunciante anunciante) {
-        listaAnunciante.remove(anunciante);
-    }
-
-    public Anunciante buscarAnunciante(String nombre) {
-        Anunciante a = null;
-        for (Anunciante e : listaAnunciante) {
-            if (e.getNombre().equals(nombre)) {
-                a = e;
-            }
-        }
-        return a;
-    }
-
-// ------------------------------------ CRUD PRODUCTO ------------------------------------
-//    @Override
-//    public List<ProductoDto> obtenerProducto() {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean agregarProducto(ProductoDto productoDto) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean eliminarProducto(ProductoDto productoDto) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean actualizarProducto(ProductoDto empleadoDto) {
-//        return false;
-//    }
 
 
     //--------------------------------   Registro   --------------------------------------
@@ -112,6 +79,14 @@ public class Subasta implements ISubastaService {
 
     public void setCompradorLogueado(Comprador compradorLogueado) {
         this.compradorLogueado = compradorLogueado;
+    }
+
+    public ArrayList<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
 
 }

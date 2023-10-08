@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.model;
 
 public class Anuncio {
+    private static final long serialVersionUID = 1L;
     private String nombre;
     private String descripcion;
     private String codigo ;
@@ -30,5 +31,14 @@ public class Anuncio {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    @Override
+    public String toString() {
+        return "Anuncio{" +
+                "nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", codigo='" + codigo + '\'' +
+                '}';
     }
 }

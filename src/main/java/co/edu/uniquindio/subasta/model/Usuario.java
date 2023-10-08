@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.model;
 
 public class Usuario{
+    private static final long serialVersionUID = 1L;
 
     private String user;
     private String contrasenia;
@@ -26,4 +27,13 @@ public class Usuario{
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "user='" + user + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                '}';
+    }
+
 }

@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.model;
 import java.util.ArrayList;
 
 public class Comprador extends Persona{
+    private static final long serialVersionUID = 1L;
     private String direccion;
     private final ArrayList<Puja> listaPujas = new ArrayList<>();
 
@@ -29,5 +30,14 @@ public class Comprador extends Persona{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    @Override
+    public String toString() {
+        return "Comprador{" +
+                "direccion='" + direccion + '\'' +
+                ", listaPujas=" + listaPujas +
+                ", usuario=" + usuario +
+                '}';
     }
 }

@@ -1,0 +1,28 @@
+oct. 07, 2023 9:51:13 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 9:52:05 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarProducto,Agregar producto,2023-10-07
+oct. 07, 2023 9:55:56 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 9:56:52 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 9:58:02 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 9:59:27 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarProducto,Agregar producto,2023-10-07
+oct. 07, 2023 9:59:45 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarProducto,Agregar producto,2023-10-07
+oct. 07, 2023 10:01:33 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 10:02:09 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarProducto,Agregar producto,2023-10-07
+oct. 07, 2023 10:04:03 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 10:05:53 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarProducto,Agregar producto,2023-10-07
+oct. 07, 2023 10:06:46 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 10:08:35 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: agregarProducto,Agregar producto,2023-10-07
+oct. 07, 2023 10:09:37 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
