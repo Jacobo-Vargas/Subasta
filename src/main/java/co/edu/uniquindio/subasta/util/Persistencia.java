@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Persistencia {
-    public static final String RUTA_ARCHIVO_ANUNCIANTES = "src/main/resources/persistencia/archivoAnunciantes.txt";
-    public static final String RUTA_ARCHIVO_COMPRADORES = "src/main/resources/persistencia/archivoCompradores.txt";
-    public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivoProductos.txt";
+    public static final String RUTA_ARCHIVO_ANUNCIANTES = "src/main/resources/persistencia/archivos/archivoAnunciantes.txt";
+    public static final String RUTA_ARCHIVO_COMPRADORES = "src/main/resources/persistencia/archivos/archivoCompradores.txt";
+    public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivos/archivoProductos.txt";
 
-    public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivoUsuarios.txt";
-    public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/SubastaLog.txt";
+    public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
+    public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/Subasta_Log.txt";
     public static final String RUTA_ARCHIVO_OBJETOS = "co.edu.uniquindio.subasta/src/main/resources/persistencia/archivoObjetos.txt";
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_BINARIO = "src/main/resources/persistencia/model.dat";
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_XML = "src/main/resources/persistencia/model.xml";
@@ -38,13 +38,13 @@ public class Persistencia {
 
         for (Anunciante anunciante : listaAnunciante) {
             contenido += anunciante.getNombre() +
-                    "," + anunciante.getApellido() +
-                    "," + anunciante.getCedula() +
-                    "," + anunciante.getEdad() +
-                    "," + anunciante.getTelefono() +
-                    "," + anunciante.getUsuario().getUser() +
-                    "," + anunciante.getUsuario().getContrasenia() +
-                    "," + anunciante.getListaProducto() + "\n";
+                    "@@" + anunciante.getApellido() +
+                    "@@" + anunciante.getCedula() +
+                    "@@" + anunciante.getEdad() +
+                    "@@" + anunciante.getTelefono() +
+                    "@@" + anunciante.getUsuario().getUser() +
+                    "@@" + anunciante.getUsuario().getContrasenia() +
+                    "@@" + anunciante.getListaProducto() + "\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_ANUNCIANTES, contenido, false);
     }
@@ -54,8 +54,8 @@ public class Persistencia {
 
         for (Producto p: listaProductos) {
             contenido += p.getCodigo() +
-                    "," + p.getNombre() +
-                    "," + p.getTipoArticulo() + "\n";
+                    "@@" + p.getNombre() +
+                    "@@" + p.getTipoArticulo() + "<-new->";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS,contenido,false);
     }
@@ -65,13 +65,13 @@ public class Persistencia {
         String contenido = "";
         for (Comprador comprador : listaEmpleados) {
             contenido += comprador.getNombre() +
-                    "," + comprador.getApellido() +
-                    "," + comprador.getCedula() +
-                    "," + comprador.getEdad() +
-                    "," + comprador.getTelefono() +
-                    "," + comprador.getDireccion() +
-                    "," + comprador.getUsuario().getUser() +
-                    "," + comprador.getUsuario().getContrasenia() + "\n";
+                    "@@" + comprador.getApellido() +
+                    "@@" + comprador.getCedula() +
+                    "@@" + comprador.getEdad() +
+                    "@@" + comprador.getTelefono() +
+                    "@@" + comprador.getDireccion() +
+                    "@@" + comprador.getUsuario().getUser() +
+                    "@@" + comprador.getUsuario().getContrasenia() + "\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_COMPRADORES, contenido, false);
     }
@@ -84,21 +84,21 @@ public class Persistencia {
         ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_ANUNCIANTES);
         String linea = "";
         for (int i = 0; i < contenido.size(); i++) {
-            linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
+            linea = contenido.get(i);
 
             Anunciante anunciante = new Anunciante();
-            anunciante.setNombre(linea.split(",")[0]);
-            anunciante.setApellido(linea.split(",")[1]);
-            anunciante.setCedula(linea.split(",")[2]);
-            anunciante.setEdad(Integer.parseInt(linea.split(",")[3]));
-            anunciante.setTelefono(linea.split(",")[4]);
+            anunciante.setNombre(linea.split("@@")[0]);
+            anunciante.setApellido(linea.split("@@")[1]);
+            anunciante.setCedula(linea.split("@@")[2]);
+            anunciante.setEdad(Integer.parseInt(linea.split("@@")[3]));
+            anunciante.setTelefono(linea.split("@@")[4]);
 
             Usuario usuario = new Usuario();
 
-            usuario.setUser(linea.split(",")[5]);
-            usuario.setContrasenia(linea.split(",")[6]);
+            usuario.setUser(linea.split("@@")[5]);
+            usuario.setContrasenia(linea.split("@@")[6]);
             anunciante.setUsuario(usuario);
-
+            //anunciante.setListaProducto();
             anunciantes.add(anunciante);
         }
         return anunciantes;
@@ -112,21 +112,36 @@ public class Persistencia {
         for (int i = 0; i < contenido.size(); i++) {
             linea = contenido.get(i);
             Comprador comprador = new Comprador();
-            comprador.setNombre(linea.split(",")[0]);
-            comprador.setApellido(linea.split(",")[1]);
-            comprador.setCedula(linea.split(",")[2]);
-            comprador.setEdad(Integer.parseInt(linea.split(",")[3]));
-            comprador.setDireccion(linea.split(",")[4]);
+            comprador.setNombre(linea.split("@@")[0]);
+            comprador.setApellido(linea.split("@@")[1]);
+            comprador.setCedula(linea.split("@@")[2]);
+            comprador.setEdad(Integer.parseInt(linea.split("@@")[3]));
+            comprador.setDireccion(linea.split("@@")[4]);
 
             Usuario usuario = new Usuario();
 
-            usuario.setUser(linea.split(",")[5]);
-            usuario.setContrasenia(linea.split(",")[6]);
+            usuario.setUser(linea.split("@@")[5]);
+            usuario.setContrasenia(linea.split("@@")[6]);
 
             comprador.setUsuario(usuario);
             compradores.add(comprador);
         }
         return compradores;
+    }
+
+    public static ArrayList<Producto> cargarProductos() throws FileNotFoundException,IOException{
+        ArrayList<Producto> productos = new ArrayList<Producto>();
+        ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_PRODUCTOS);
+        String linea = "";
+        for (int i = 0; i < contenido.size(); i++) {
+            linea = contenido.get(i);
+            Producto producto = new Producto();
+            producto.setCodigo(linea.split("@@")[i]);
+            producto.setNombre(linea.split("@@")[1+i]);
+            producto.setTipoArticulo(TipoArticulo.valueOf(linea.split("@@")[2+i]));
+
+        }
+        return productos;
     }
 
 
@@ -185,15 +200,16 @@ public class Persistencia {
      * @throws IOException
      */
 
-//    public static void guardarObjetos(ArrayList<Cliente> listaClientes, String ruta) throws IOException {
-//        String contenido = "";
-//
-//        for (Cliente clienteAux : listaClientes) {
-//            contenido += clienteAux.getNombre() + "," + clienteAux.getApellido() + "," + clienteAux.getCedula() + clienteAux.getDireccion()
-//                    + "," + clienteAux.getCorreo() + "," + clienteAux.getFechaNacimiento() + "," + clienteAux.getTelefono() + "\n";
-//        }
-//        ArchivoUtil.guardarArchivo(ruta, contenido, true);
-//    }
+    public static void guardarObjetos(ArrayList<Producto> listaClientes, String ruta) throws IOException {
+        String contenido = "";
+
+        for (Producto productoAux : listaClientes) {
+            contenido += productoAux.getNombre() +
+                    "@@"  + productoAux.getCodigo()+
+                    "@@" + productoAux.getTipoArticulo()+"\n";
+        }
+        ArchivoUtil.guardarArchivo(ruta, contenido, true);
+    }
 
 
     //------------------------------------SERIALIZACIÓN  y XML

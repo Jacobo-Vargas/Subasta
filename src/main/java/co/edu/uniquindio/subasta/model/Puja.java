@@ -1,8 +1,11 @@
 package co.edu.uniquindio.subasta.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Puja {
+public class Puja implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String direccion ;

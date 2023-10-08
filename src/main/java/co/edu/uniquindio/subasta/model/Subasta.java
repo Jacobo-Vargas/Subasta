@@ -4,10 +4,13 @@ import co.edu.uniquindio.subasta.controller.servicies.IProductoService;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subasta implements ISubastaService {
+public class Subasta implements ISubastaService, Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private Anunciante anuncianteLogueado;
     private Comprador compradorLogueado;

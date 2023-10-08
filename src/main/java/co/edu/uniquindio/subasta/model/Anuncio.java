@@ -1,6 +1,10 @@
 package co.edu.uniquindio.subasta.model;
 
-public class Anuncio {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Anuncio implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     private String nombre;
     private String descripcion;

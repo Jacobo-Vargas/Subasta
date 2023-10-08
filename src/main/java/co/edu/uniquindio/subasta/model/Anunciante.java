@@ -1,8 +1,10 @@
 package co.edu.uniquindio.subasta.model;
 
+import java.io.Serial;
 import java.util.ArrayList;
 
 public class Anunciante extends Persona {
+    @Serial
     private static final long serialVersionUID = 1L;
     private ArrayList<Producto> listaProducto = new ArrayList<>();
     private ArrayList<Anuncio> listaAnucio = new ArrayList<>();
