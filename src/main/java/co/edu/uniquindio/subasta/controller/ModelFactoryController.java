@@ -38,55 +38,50 @@ public class ModelFactoryController implements IModelFactoryController {
 
     public ModelFactoryController() {
 
-
-        crearCopiaDeSeguridad(); // se crea copia del xml una vez inicia el sistema
-
         System.out.println("invocación clase singleton");
-        if(subasta == null){
+
+        // crearCopiaDeSeguridad(); // se crea copia del xml una vez inicia el sistema
+
+        //1. inicializar datos y luego guardarlo en archivos
+
+        //cargarDatosBase();
+        // salvarDatosPrueba();
+
+        //2. Cargar los datos de los archivos
+        //cargarDatosDesdeArchivos();
+
+        //3. Guardar y Cargar el recurso serializable binario
+        //cargarResourceBinario();
+        //guardarResourceBinario();
+
+        //4. Guardar y Cargar el recurso serializable XML
+
+        // cargarResourceXML();
+        //guardarResourceXML();
+
+        if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
             registrarAccionesSistema("Inicio de sistema", 1, "INICIOAPP");
-
-            //1. inicializar datos y luego guardarlo en archivos
-
             cargarDatosBase();
-            salvarDatosPrueba();
-
-            //2. Cargar los datos de los archivos
-             //cargarDatosDesdeArchivos();
-
-            //3. Guardar y Cargar el recurso serializable binario
-            //cargarResourceBinario();
-            //guardarResourceBinario();
-
-            //4. Guardar y Cargar el recurso serializable XML
-
-           // cargarResourceXML();
-            guardarResourceXML();
-
-            //Siempre se debe verificar si la raiz del recurso es null
         }
-
-
-
-
     }
 
     private void cargarDatosBase() {
         subasta = SubastaUtil.cargarDatos();
     }
 
-    public boolean  restaurarLogueo(){
+    public boolean restaurarLogueo() {
 
         getSubasta().setCompradorLogueado(null);
         getSubasta().setAnuncianteLogueado(null);
-        if(getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null){
+        if (getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
 
-//    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
+    //    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
     @Override
     public List<ProductoDto> obtenerProducto() {
         ArrayList<Producto> lista = new ArrayList<>(getSubasta().getAnuncianteLogueado().getListaProducto());
@@ -113,8 +108,8 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean eliminarProducto(ProductoDto productoDto) {
         boolean eliminado = false;
         Producto producto = mapper.productoDtoToProducto(productoDto);
-        for (Producto p: getSubasta().getAnuncianteLogueado().getListaProducto()) {
-            if(p.getCodigo().equals(producto.getCodigo())){
+        for (Producto p : getSubasta().getAnuncianteLogueado().getListaProducto()) {
+            if (p.getCodigo().equals(producto.getCodigo())) {
                 getSubasta().getAnuncianteLogueado().getListaProducto().remove(p);
                 registrarAccionesSistema("Eliminar producto", 1, "eliminarProducto");
                 eliminado = true;
@@ -133,35 +128,35 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
-
 //  --------------------------------------- Registro ---------------------------
 
 
     @Override
     public boolean agregarAnunciante(AnuncianteDto anuncianteDto) {
-        try{
+        try {
 
-            if(!(subasta.verificarExistenciaAnunciante(anuncianteDto.cedula()))){
+            if (!(subasta.verificarExistenciaAnunciante(anuncianteDto.cedula()))) {
                 getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
                 System.out.println(getSubasta().getListaAnunciante().size());
                 registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
                 salvarDatosPrueba();
                 guardarResourceXML();
                 return true;
-            }else{
+            } else {
                 System.out.println(getSubasta().getListaAnunciante().size());
                 return false;
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 
     }
+
     @Override
     public boolean agregarComprador(CompradorDto compradorDto) {
-        try{
-            if(!(subasta.verificarExistenciaComprador(compradorDto.cedula()))){
+        try {
+            if (!(subasta.verificarExistenciaComprador(compradorDto.cedula()))) {
                 Comprador c = mapper.compradorDtoToComprador(compradorDto);
                 getSubasta().getListaCompradores().add(c);
                 System.out.println(getSubasta().getListaCompradores().size());
@@ -169,17 +164,14 @@ public class ModelFactoryController implements IModelFactoryController {
                 salvarDatosPrueba();
                 guardarResourceXML();
                 return true;
-            }else{
+            } else {
                 System.out.println(getSubasta().getListaCompradores().size());
                 return false;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
-
-
-
 
 
 //---------------------------------------Login ------------------------------------------
@@ -188,10 +180,10 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean verificarAccesoComprador(String cedula, String contrasenia) {
         boolean acceso = false;
 
-        for (Comprador c: getSubasta().getListaCompradores()) {
-            if(c.getCedula().equals(cedula) && c.getUsuario().getContrasenia().equals(contrasenia)){
+        for (Comprador c : getSubasta().getListaCompradores()) {
+            if (c.getCedula().equals(cedula) && c.getUsuario().getContrasenia().equals(contrasenia)) {
                 getSubasta().setCompradorLogueado(c);
-                registrarAccionesSistema("INICIO DE SESION: "+c.getCedula(), 1, "inicio de sesion");
+                registrarAccionesSistema("INICIO DE SESION: " + c.getCedula(), 1, "inicio de sesion");
                 acceso = true;
             }
         }
@@ -202,10 +194,10 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean verificarAccesoAnunciante(String cedula, String contrasenia) {
         boolean acceso = false;
 
-        for (Anunciante a: getSubasta().getListaAnunciante()) {
-            if(a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)){
+        for (Anunciante a : getSubasta().getListaAnunciante()) {
+            if (a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)) {
                 getSubasta().setAnuncianteLogueado(a);
-                registrarAccionesSistema("INICIO DE SESION: "+a.getCedula(), 1, "inicio de sesion");
+                registrarAccionesSistema("INICIO DE SESION: " + a.getCedula(), 1, "inicio de sesion");
                 acceso = true;
             }
         }
@@ -215,9 +207,9 @@ public class ModelFactoryController implements IModelFactoryController {
 
     //-------------------------------   PERSISTENCIA ------------------------------------
 
-    private void crearCopiaDeSeguridad(){
+    private void crearCopiaDeSeguridad() {
         Persistencia.crearCopiaSeguridadXML();
-        registrarAccionesSistema("Copia de seguridad",1,"crearCopiaSeguridad");
+        registrarAccionesSistema("Copia de seguridad", 1, "crearCopiaSeguridad");
     }
 
     private void cargarResourceXML() {
@@ -239,6 +231,7 @@ public class ModelFactoryController implements IModelFactoryController {
     public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
         Persistencia.guardaRegistroLog(mensaje, nivel, accion);
     }
+
     private void cargarDatosDesdeArchivos() {
         subasta = new Subasta();
         try {
@@ -252,7 +245,7 @@ public class ModelFactoryController implements IModelFactoryController {
         try {
             Persistencia.guardarCompradores(getSubasta().getListaCompradores());
             Persistencia.guardarAnunciantes(getSubasta().getListaAnunciante());
-           // Persistencia.guardarProductos(getSubasta().getAnuncianteLogueado().getListaProducto());
+            // Persistencia.guardarProductos(getSubasta().getAnuncianteLogueado().getListaProducto());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
