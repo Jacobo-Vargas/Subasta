@@ -9,6 +9,7 @@ import co.edu.uniquindio.subasta.model.Anunciante;
 import co.edu.uniquindio.subasta.model.Comprador;
 import co.edu.uniquindio.subasta.model.Producto;
 import co.edu.uniquindio.subasta.model.Subasta;
+import co.edu.uniquindio.subasta.util.ArchivoUtil;
 import co.edu.uniquindio.subasta.util.Persistencia;
 import co.edu.uniquindio.subasta.util.SubastaUtil;
 
@@ -37,26 +38,29 @@ public class ModelFactoryController implements IModelFactoryController {
 
     public ModelFactoryController() {
 
+
+        crearCopiaDeSeguridad(); // se crea copia del xml una vez inicia el sistema
+
         System.out.println("invocación clase singleton");
         if(subasta == null){
-            registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
+            registrarAccionesSistema("Inicio de sistema", 1, "INICIOAPP");
 
             //1. inicializar datos y luego guardarlo en archivos
 
             cargarDatosBase();
-            //salvarDatosPrueba();
+            salvarDatosPrueba();
 
             //2. Cargar los datos de los archivos
              //cargarDatosDesdeArchivos();
 
             //3. Guardar y Cargar el recurso serializable binario
             //cargarResourceBinario();
-            guardarResourceBinario();
+            //guardarResourceBinario();
 
             //4. Guardar y Cargar el recurso serializable XML
 
-            //cargarResourceXML();
-            //guardarResourceXML();
+           // cargarResourceXML();
+            guardarResourceXML();
 
             //Siempre se debe verificar si la raiz del recurso es null
         }
@@ -71,10 +75,9 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     public boolean  restaurarLogueo(){
-        Comprador comprador = null;
-        Anunciante anunciante = null;
-        getSubasta().setCompradorLogueado(comprador);
-        getSubasta().setAnuncianteLogueado(anunciante);
+
+        getSubasta().setCompradorLogueado(null);
+        getSubasta().setAnuncianteLogueado(null);
         if(getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null){
             return true;
         }else{
@@ -100,6 +103,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 registrarAccionesSistema("Agregar producto", 1, "agregarProducto");
                 exito = true;
                 guardarResourceXML();
+                salvarDatosPrueba();
             }
         }
         return exito;
@@ -114,6 +118,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().getAnuncianteLogueado().getListaProducto().remove(p);
                 registrarAccionesSistema("Eliminar producto", 1, "eliminarProducto");
                 eliminado = true;
+                salvarDatosPrueba();
                 guardarResourceXML();
                 break;
 
@@ -126,6 +131,9 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean actualizarProducto(ProductoDto empleadoDto) {
         return false;
     }
+
+
+
 //  --------------------------------------- Registro ---------------------------
 
 
@@ -204,9 +212,13 @@ public class ModelFactoryController implements IModelFactoryController {
         return acceso;
     }
 
-    //--------------------------------------- fin Login ----------------------------
 
     //-------------------------------   PERSISTENCIA ------------------------------------
+
+    private void crearCopiaDeSeguridad(){
+        Persistencia.crearCopiaSeguridadXML();
+        registrarAccionesSistema("Copia de seguridad",1,"crearCopiaSeguridad");
+    }
 
     private void cargarResourceXML() {
         subasta = Persistencia.cargarRecursoSubastaXML();
@@ -240,7 +252,7 @@ public class ModelFactoryController implements IModelFactoryController {
         try {
             Persistencia.guardarCompradores(getSubasta().getListaCompradores());
             Persistencia.guardarAnunciantes(getSubasta().getListaAnunciante());
-            Persistencia.guardarProductos(getSubasta().getAnuncianteLogueado().getListaProducto());
+           // Persistencia.guardarProductos(getSubasta().getAnuncianteLogueado().getListaProducto());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

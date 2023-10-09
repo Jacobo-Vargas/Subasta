@@ -3,9 +3,18 @@ package co.edu.uniquindio.subasta.util;
 import co.edu.uniquindio.subasta.exceptions.UsuarioException;
 import co.edu.uniquindio.subasta.model.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Persistencia {
     public static final String RUTA_ARCHIVO_ANUNCIANTES = "src/main/resources/persistencia/archivos/archivoAnunciantes.txt";
@@ -18,66 +27,34 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_BINARIO = "src/main/resources/persistencia/model.dat";
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_XML = "src/main/resources/persistencia/model.xml";
 
+    public static final String RUTA_ARCHIVO_COPIA_SEGURIDAD_XML = "src/main/resources/persistencia/respaldo/";
 
-    public static void cargarDatosArchivos(Subasta subasta) throws FileNotFoundException, IOException {
-        //cargar archivo de anunciantes
-        ArrayList<Anunciante> anunciantesCargados = cargarAnunciantes();
-        if (!anunciantesCargados.isEmpty())
-            subasta.getListaAnunciante().addAll(anunciantesCargados);
 
-        //cargar archivos compradores
-        ArrayList<Comprador> compradoresCargados = cargarEmpleados();
-        if (!compradoresCargados.isEmpty())
-            subasta.getListaCompradores().addAll(compradoresCargados);
 
-    }
 
-    public static void guardarAnunciantes(ArrayList<Anunciante> listaAnunciante) throws IOException {
 
-        String contenido = "";
+//	-------------------------------------------   LOADS       -----------------------------------------------
 
-        for (Anunciante anunciante : listaAnunciante) {
-            contenido += anunciante.getNombre() +
-                    "@@" + anunciante.getApellido() +
-                    "@@" + anunciante.getCedula() +
-                    "@@" + anunciante.getEdad() +
-                    "@@" + anunciante.getTelefono() +
-                    "@@" + anunciante.getUsuario().getUser() +
-                    "@@" + anunciante.getUsuario().getContrasenia() +
-                    "@@" + anunciante.getListaProducto() + "\n";
+    private static ArrayList<Producto> procesarCadenaProductos(String cadena) {
+        ArrayList<Producto> productos = new ArrayList<>();
+
+        Pattern pattern = Pattern.compile("Producto\\{nombre='(.*?)', codigo='(.*?)', tipoArticulo=(\\w+)}");
+        Matcher matcher = pattern.matcher(cadena);
+
+        while (matcher.find()) {
+            String nombre = matcher.group(1);
+            String codigo = matcher.group(2);
+            String tipoArticulo = matcher.group(3);
+
+            Producto producto = new Producto();
+            producto.setNombre(nombre);
+            producto.setCodigo(codigo);
+            producto.setTipoArticulo(TipoArticulo.valueOf(tipoArticulo));
+            productos.add(producto);
         }
-        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_ANUNCIANTES, contenido, false);
+
+        return productos;
     }
-    public static void guardarProductos(ArrayList<Producto> listaProductos)throws IOException{
-
-        String contenido = "";
-
-        for (Producto p: listaProductos) {
-            contenido += p.getCodigo() +
-                    "@@" + p.getNombre() +
-                    "@@" + p.getTipoArticulo() + "<-new->";
-        }
-        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS,contenido,false);
-    }
-
-
-    public static void guardarCompradores(ArrayList<Comprador> listaEmpleados) throws IOException {
-        String contenido = "";
-        for (Comprador comprador : listaEmpleados) {
-            contenido += comprador.getNombre() +
-                    "@@" + comprador.getApellido() +
-                    "@@" + comprador.getCedula() +
-                    "@@" + comprador.getEdad() +
-                    "@@" + comprador.getTelefono() +
-                    "@@" + comprador.getDireccion() +
-                    "@@" + comprador.getUsuario().getUser() +
-                    "@@" + comprador.getUsuario().getContrasenia() + "\n";
-        }
-        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_COMPRADORES, contenido, false);
-    }
-
-
-//	----------------------LOADS------------------------
 
     public static ArrayList<Anunciante> cargarAnunciantes() throws FileNotFoundException, IOException {
         ArrayList<Anunciante> anunciantes = new ArrayList<Anunciante>();
@@ -98,7 +75,11 @@ public class Persistencia {
             usuario.setUser(linea.split("@@")[5]);
             usuario.setContrasenia(linea.split("@@")[6]);
             anunciante.setUsuario(usuario);
-            //anunciante.setListaProducto();
+
+            String productosString = linea.split("@@")[7];
+            ArrayList<Producto> productos = procesarCadenaProductos(productosString);
+
+            anunciante.setListaProducto(productos);
             anunciantes.add(anunciante);
         }
         return anunciantes;
@@ -129,18 +110,19 @@ public class Persistencia {
         return compradores;
     }
 
-    public static ArrayList<Producto> cargarProductos() throws FileNotFoundException,IOException{
+    public static ArrayList<Producto> cargarProductos() throws FileNotFoundException, IOException {
         ArrayList<Producto> productos = new ArrayList<Producto>();
         ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_PRODUCTOS);
         String linea = "";
         for (int i = 0; i < contenido.size(); i++) {
             linea = contenido.get(i);
             Producto producto = new Producto();
-            producto.setCodigo(linea.split("@@")[i]);
-            producto.setNombre(linea.split("@@")[1+i]);
-            producto.setTipoArticulo(TipoArticulo.valueOf(linea.split("@@")[2+i]));
+            producto.setCodigo(linea.split("@@")[0]);
+            producto.setNombre(linea.split("@@")[1]);
+            producto.setTipoArticulo(TipoArticulo.valueOf(linea.split("@@")[2]));
 
         }
+
         return productos;
     }
 
@@ -191,28 +173,114 @@ public class Persistencia {
     }
 
 
-//	----------------------SAVES------------------------
+//----------------------------------  SAVES  ---------------------------------------------------
 
-    /**
-     * Guarda en un archivo de texto todos la información de las personas almacenadas en el ArrayList
-     *
-     * @param
-     * @throws IOException
-     */
+
+public static void cargarDatosArchivos(Subasta subasta) throws FileNotFoundException, IOException {
+    //cargar archivo de anunciantes
+    ArrayList<Anunciante> anunciantesCargados = cargarAnunciantes();
+    if (!anunciantesCargados.isEmpty())
+        subasta.getListaAnunciante().addAll(anunciantesCargados);
+
+
+    //cargar archivos compradores
+    ArrayList<Comprador> compradoresCargados = cargarEmpleados();
+    if (!compradoresCargados.isEmpty())
+        subasta.getListaCompradores().addAll(compradoresCargados);
+
+}
+
+    public static void guardarAnunciantes(ArrayList<Anunciante> listaAnunciante) throws IOException {
+
+        String contenido = "";
+
+        for (Anunciante anunciante : listaAnunciante) {
+            contenido += anunciante.getNombre() +
+                    "@@" + anunciante.getApellido() +
+                    "@@" + anunciante.getCedula() +
+                    "@@" + anunciante.getEdad() +
+                    "@@" + anunciante.getTelefono() +
+                    "@@" + anunciante.getUsuario().getUser() +
+                    "@@" + anunciante.getUsuario().getContrasenia() +
+                    "@@" + anunciante.getListaProducto() + "\n";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_ANUNCIANTES, contenido, false);
+    }
+
+    public static void guardarProductos(ArrayList<Producto> listaProductos) throws IOException {
+
+        String contenido = "";
+
+        for (Producto p : listaProductos) {
+            contenido += p.getCodigo() +
+                    "@@" + p.getNombre() +
+                    "@@" + p.getTipoArticulo() + "<-new->";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
+    }
+
+
+    public static void guardarCompradores(ArrayList<Comprador> listaEmpleados) throws IOException {
+        String contenido = "";
+        for (Comprador comprador : listaEmpleados) {
+            contenido += comprador.getNombre() +
+                    "@@" + comprador.getApellido() +
+                    "@@" + comprador.getCedula() +
+                    "@@" + comprador.getEdad() +
+                    "@@" + comprador.getTelefono() +
+                    "@@" + comprador.getDireccion() +
+                    "@@" + comprador.getUsuario().getUser() +
+                    "@@" + comprador.getUsuario().getContrasenia() + "\n";
+        }
+        ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_COMPRADORES, contenido, false);
+    }
 
     public static void guardarObjetos(ArrayList<Producto> listaClientes, String ruta) throws IOException {
         String contenido = "";
 
         for (Producto productoAux : listaClientes) {
             contenido += productoAux.getNombre() +
-                    "@@"  + productoAux.getCodigo()+
-                    "@@" + productoAux.getTipoArticulo()+"\n";
+                    "@@" + productoAux.getCodigo() +
+                    "@@" + productoAux.getTipoArticulo() + "\n";
         }
         ArchivoUtil.guardarArchivo(ruta, contenido, true);
     }
 
 
-    //------------------------------------SERIALIZACIÓN  y XML
+
+
+    //    --------------------------------------  COPIA DE SEGURIDAD -------------------------------------
+
+
+    public static void crearCopiaSeguridadXML() {
+
+        String nombreArchivoNuevo = generarNombre("model.xml");
+        try {
+
+            Path origenPath = Paths.get(RUTA_ARCHIVO_MODELO_SUBASTA_XML);
+            Path destinoPath = Paths.get(RUTA_ARCHIVO_COPIA_SEGURIDAD_XML, nombreArchivoNuevo);
+
+            Files.createFile(destinoPath);
+
+            Files.copy(origenPath, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    private static String generarNombre(String nombreArchivoNuevo) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fechaActual = dateFormat.format(new Date());
+        return nombreArchivoNuevo.replace(".xml", "_" + fechaActual + ".xml");
+    }
+
+
+
+    //    ------------------------------------ SERIALIZACIÓN  y XML --------------------------------------------------------
+
+
     public static Subasta cargarRecursoSubastaBinario() {
 
         Subasta subasta = null;
@@ -242,6 +310,7 @@ public class Persistencia {
 
         try {
             subasta = (Subasta) ArchivoUtil.cargarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_SUBASTA_XML);
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

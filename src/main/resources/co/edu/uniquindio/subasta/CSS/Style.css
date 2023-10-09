@@ -1,17 +1,17 @@
 .root{
-    -fx-background-color: rgba(0,0,0,0.9);
+    -fx-background-color: rgb(0, 0, 0);
     -fx-background-radius: 10;
     -fx-text-fill: #ffffff;
 }
 
 .btn{
-    -fx-background-color: #00ECFF;
+    -fx-background-color: #485052;
     -fx-cursor: HAND;
     -fx-border-radius: 2px;
 
 }
 .btn:hover{
-    -fx-background-color: #624686;
+    -fx-background-color: rgba(192, 191, 194, 0.85);
 
 }
 .btnRecuperarPass{
@@ -22,4 +22,18 @@
 }
 .table-view{
     -fx-text-fill: #000000;
+}
+.table-view {
+    -fx-background-color: lightgray;
+}
+
+/* Estilo para las celdas */
+.table-cell {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+/* Estilo para las filas alternas */
+.table-row-cell:odd {
+    -fx-background-color: lightblue;
 }

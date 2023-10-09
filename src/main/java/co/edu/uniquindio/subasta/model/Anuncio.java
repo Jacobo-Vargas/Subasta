@@ -2,13 +2,20 @@ package co.edu.uniquindio.subasta.model;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
 
 public class Anuncio implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private String nombre;
     private String descripcion;
-    private String codigo ;
+    private String foto;
+    private String nombreAnunciante;
+    private Date fechaPublicacion;
+    private Date fechaTerminacion;
+
+    private float valorInicial;
+    private int codigo ;
 
     public Anuncio() {
     }
@@ -29,12 +36,52 @@ public class Anuncio implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getNombreAnunciante() {
+        return nombreAnunciante;
+    }
+
+    public void setNombreAnunciante(String nombreAnunciante) {
+        this.nombreAnunciante = nombreAnunciante;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public Date getFechaTerminacion() {
+        return fechaTerminacion;
+    }
+
+    public void setFechaTerminacion(Date fechaTerminacion) {
+        this.fechaTerminacion = fechaTerminacion;
+    }
+
+    public float getValorInicial() {
+        return valorInicial;
+    }
+
+    public void setValorInicial(float valorInicial) {
+        this.valorInicial = valorInicial;
     }
 
     @Override
@@ -42,6 +89,11 @@ public class Anuncio implements Serializable {
         return "Anuncio{" +
                 "nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                ", foto='" + foto + '\'' +
+                ", nombreAnunciante='" + nombreAnunciante + '\'' +
+                ", fechaPublicacion=" + fechaPublicacion +
+                ", fechaTerminacion=" + fechaTerminacion +
+                ", valorInicial=" + valorInicial +
                 ", codigo='" + codigo + '\'' +
                 '}';
     }

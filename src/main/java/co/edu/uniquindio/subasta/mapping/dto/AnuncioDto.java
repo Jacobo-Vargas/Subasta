@@ -5,14 +5,15 @@ import javafx.scene.image.Image;
 import java.time.LocalDate;
 
 public record AnuncioDto(
-        String codigoAnuncio,
         Producto producto,
         String descripcion,
-        float valorInicial,
-        Image fotoAnuncio,
+        String foto,
         String nombreAnunciante,
+
         LocalDate fechaPublicacion,
-        LocalDate fechaFinPublicacion
+        LocalDate fechaFinPublicacion,
+        float valorInicial,
+        int codigo
 
 
 ) {

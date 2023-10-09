@@ -1,2 +1,54 @@
-
-
+oct. 08, 2023 9:10:09 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:10:17 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 123,2023-10-08
+oct. 08, 2023 9:11:33 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:15:43 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:27:34 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:27:34 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:29:06 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:29:06 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:29:15 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 123,2023-10-08
+oct. 08, 2023 9:31:54 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:31:54 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:32:05 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 123,2023-10-08
+oct. 08, 2023 9:35:09 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:35:09 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:35:27 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 123,2023-10-08
+oct. 08, 2023 9:36:58 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:36:58 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:37:05 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 123,2023-10-08
+oct. 08, 2023 9:40:54 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:40:54 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:41:01 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 123,2023-10-08
+oct. 08, 2023 9:46:17 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:46:17 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
+oct. 08, 2023 9:48:35 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 123,2023-10-08
+oct. 08, 2023 9:49:20 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicio de sesion,INICIO DE SESION: 321,2023-10-08
+oct. 08, 2023 9:51:22 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crearCopiaSeguridad,Copia de seguridad,2023-10-08
+oct. 08, 2023 9:51:22 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-10-08
