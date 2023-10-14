@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 public record AnuncioDto(
         Producto producto,
+        String nombre,
         String descripcion,
         String foto,
         String nombreAnunciante,

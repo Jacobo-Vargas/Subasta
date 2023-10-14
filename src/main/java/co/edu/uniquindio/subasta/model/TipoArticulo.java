@@ -1,6 +1,8 @@
 package co.edu.uniquindio.subasta.model;
 
-public enum TipoArticulo {
+import java.io.Serializable;
+
+public enum TipoArticulo implements Serializable {
 
     TECNOLOGIA,
     HOGAR,
@@ -9,4 +11,9 @@ public enum TipoArticulo {
     BIENRAIZ,
 
     CASAS,
+    ;
+
+    TipoArticulo() {
+    }
+
 }

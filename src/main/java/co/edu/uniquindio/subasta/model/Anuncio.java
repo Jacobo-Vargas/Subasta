@@ -2,17 +2,20 @@ package co.edu.uniquindio.subasta.model;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Anuncio implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    private Producto producto;
     private String nombre;
     private String descripcion;
     private String foto;
     private String nombreAnunciante;
-    private Date fechaPublicacion;
-    private Date fechaTerminacion;
+    private LocalDate fechaPublicacion;
+    private LocalDate fechaTerminacion;
 
     private float valorInicial;
     private int codigo ;
@@ -36,14 +39,6 @@ public class Anuncio implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
     public String getFoto() {
         return foto;
     }
@@ -60,19 +55,19 @@ public class Anuncio implements Serializable {
         this.nombreAnunciante = nombreAnunciante;
     }
 
-    public Date getFechaPublicacion() {
+    public LocalDate getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public Date getFechaTerminacion() {
+    public LocalDate getFechaTerminacion() {
         return fechaTerminacion;
     }
 
-    public void setFechaTerminacion(Date fechaTerminacion) {
+    public void setFechaTerminacion(LocalDate fechaTerminacion) {
         this.fechaTerminacion = fechaTerminacion;
     }
 
@@ -82,6 +77,22 @@ public class Anuncio implements Serializable {
 
     public void setValorInicial(float valorInicial) {
         this.valorInicial = valorInicial;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     @Override
@@ -97,4 +108,5 @@ public class Anuncio implements Serializable {
                 ", codigo='" + codigo + '\'' +
                 '}';
     }
+
 }

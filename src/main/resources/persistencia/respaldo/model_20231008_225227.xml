@@ -3,8 +3,14 @@
  <object class="co.edu.uniquindio.subasta.model.Subasta" id="Subasta0">
   <void property="anuncianteLogueado">
    <object class="co.edu.uniquindio.subasta.model.Anunciante" id="Anunciante0">
+    <void property="apellido">
+     <string>vargas</string>
+    </void>
     <void property="cedula">
-     <string>123</string>
+     <string>123456789</string>
+    </void>
+    <void property="edad">
+     <int>27</int>
     </void>
     <void property="listaProducto">
      <void method="add">
@@ -13,12 +19,12 @@
         <string>3</string>
        </void>
        <void property="nombre">
-        <string>Cama c</string>
+        <string>Carro</string>
        </void>
        <void property="tipoArticulo">
         <object class="java.lang.Enum" method="valueOf">
          <class>co.edu.uniquindio.subasta.model.TipoArticulo</class>
-         <string>BIENRAIZ</string>
+         <string>VEHICULO</string>
         </object>
        </void>
       </object>
@@ -29,27 +35,30 @@
         <string>4</string>
        </void>
        <void property="nombre">
-        <string>carro mazda nuevo</string>
+        <string>Cama</string>
        </void>
        <void property="tipoArticulo">
-        <object class="java.lang.Enum" id="TipoArticulo0" method="valueOf">
+        <object class="java.lang.Enum" method="valueOf">
          <class>co.edu.uniquindio.subasta.model.TipoArticulo</class>
-         <string>VEHICULO</string>
+         <string>HOGAR</string>
         </object>
        </void>
       </object>
      </void>
     </void>
     <void property="nombre">
-     <string>juan</string>
+     <string>Jacobo</string>
+    </void>
+    <void property="telefono">
+     <string>1234567890</string>
     </void>
     <void property="usuario">
      <object class="co.edu.uniquindio.subasta.model.Usuario">
       <void property="contrasenia">
-       <string>123</string>
+       <string>123456789</string>
       </void>
       <void property="user">
-       <string>123</string>
+       <string>123456789</string>
       </void>
      </object>
     </void>
@@ -57,10 +66,45 @@
   </void>
   <void property="listaAnunciante">
    <void method="add">
-    <object idref="Anunciante0"/>
+    <object class="co.edu.uniquindio.subasta.model.Anunciante" id="Anunciante1">
+     <void property="cedula">
+      <string>123</string>
+     </void>
+     <void property="listaProducto">
+      <void method="add">
+       <object class="co.edu.uniquindio.subasta.model.Producto">
+        <void property="codigo">
+         <string>0</string>
+        </void>
+        <void property="nombre">
+         <string>Casa</string>
+        </void>
+        <void property="tipoArticulo">
+         <object class="java.lang.Enum" method="valueOf">
+          <class>co.edu.uniquindio.subasta.model.TipoArticulo</class>
+          <string>DEPORTES</string>
+         </object>
+        </void>
+       </object>
+      </void>
+     </void>
+     <void property="nombre">
+      <string>juan</string>
+     </void>
+     <void property="usuario">
+      <object class="co.edu.uniquindio.subasta.model.Usuario">
+       <void property="contrasenia">
+        <string>123</string>
+       </void>
+       <void property="user">
+        <string>123</string>
+       </void>
+      </object>
+     </void>
+    </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.subasta.model.Anunciante" id="Anunciante1">
+    <object class="co.edu.uniquindio.subasta.model.Anunciante" id="Anunciante2">
      <void property="cedula">
       <string>321</string>
      </void>
@@ -98,64 +142,7 @@
     </object>
    </void>
    <void method="add">
-    <object class="co.edu.uniquindio.subasta.model.Anunciante" id="Anunciante2">
-     <void property="apellido">
-      <string>vargas</string>
-     </void>
-     <void property="cedula">
-      <string>123456789</string>
-     </void>
-     <void property="edad">
-      <int>27</int>
-     </void>
-     <void property="listaProducto">
-      <void method="add">
-       <object class="co.edu.uniquindio.subasta.model.Producto">
-        <void property="codigo">
-         <string>3</string>
-        </void>
-        <void property="nombre">
-         <string>Carro</string>
-        </void>
-        <void property="tipoArticulo">
-         <object idref="TipoArticulo0"/>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="co.edu.uniquindio.subasta.model.Producto">
-        <void property="codigo">
-         <string>4</string>
-        </void>
-        <void property="nombre">
-         <string>Cama</string>
-        </void>
-        <void property="tipoArticulo">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>co.edu.uniquindio.subasta.model.TipoArticulo</class>
-          <string>HOGAR</string>
-         </object>
-        </void>
-       </object>
-      </void>
-     </void>
-     <void property="nombre">
-      <string>Jacobo</string>
-     </void>
-     <void property="telefono">
-      <string>1234567890</string>
-     </void>
-     <void property="usuario">
-      <object class="co.edu.uniquindio.subasta.model.Usuario">
-       <void property="contrasenia">
-        <string>123456789</string>
-       </void>
-       <void property="user">
-        <string>123456789</string>
-       </void>
-      </object>
-     </void>
-    </object>
+    <object idref="Anunciante0"/>
    </void>
   </void>
  </object>

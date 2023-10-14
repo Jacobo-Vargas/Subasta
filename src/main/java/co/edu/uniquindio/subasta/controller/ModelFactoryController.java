@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.controller;
 
 import co.edu.uniquindio.subasta.controller.servicies.IModelFactoryController;
+import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
@@ -50,19 +51,20 @@ public class ModelFactoryController implements IModelFactoryController {
         //2. Cargar los datos de los archivos
         //cargarDatosDesdeArchivos();
 
-        //3. Guardar y Cargar el recurso serializable binario
-        //cargarResourceBinario();
+        //3 binario
+
         //guardarResourceBinario();
+        //cargarResourceBinario();
 
-        //4. Guardar y Cargar el recurso serializable XML
+        //4 XML
 
-        // cargarResourceXML();
         //guardarResourceXML();
+        cargarResourceXML();
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
-            registrarAccionesSistema("Inicio de sistema", 1, "INICIOAPP");
             cargarDatosBase();
         }
+        registrarAccionesSistema("Inicio de sistema", 1, "INICIOAPP");
     }
 
     private void cargarDatosBase() {
@@ -73,6 +75,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         getSubasta().setCompradorLogueado(null);
         getSubasta().setAnuncianteLogueado(null);
+
         if (getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null) {
             return true;
         } else {
@@ -84,47 +87,49 @@ public class ModelFactoryController implements IModelFactoryController {
     //    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
     @Override
     public List<ProductoDto> obtenerProducto() {
-        ArrayList<Producto> lista = new ArrayList<>(getSubasta().getAnuncianteLogueado().getListaProducto());
+        ArrayList<Producto> lista = new ArrayList<>(getSubasta().obtenerProducto());
         return mapper.getProductoDto(lista);
     }
 
     @Override
-    public boolean agregarProducto(ProductoDto productoDto) {
-        boolean exito = false;
+    public boolean agregarProducto(ProductoDto productoDto) throws ProductoException {
         Producto producto = mapper.productoDtoToProducto(productoDto);
-        for (Anunciante a : getSubasta().getListaAnunciante()) {
-            if (a.getCedula().equals(getSubasta().getAnuncianteLogueado().getCedula())) {
-                a.getListaProducto().add(producto);
-                registrarAccionesSistema("Agregar producto", 1, "agregarProducto");
-                exito = true;
-                guardarResourceXML();
-                salvarDatosPrueba();
-            }
+        if (getSubasta().agregarProducto(producto)) {
+            guardarResourceXML();
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " agregó un producto.", 1, "AGREGAR PRODUCTO");
+            return true;
+        } else {
+            return false;
         }
-        return exito;
     }
 
     @Override
-    public boolean eliminarProducto(ProductoDto productoDto) {
-        boolean eliminado = false;
+    public boolean eliminarProducto(ProductoDto productoDto) throws ProductoException {
         Producto producto = mapper.productoDtoToProducto(productoDto);
-        for (Producto p : getSubasta().getAnuncianteLogueado().getListaProducto()) {
-            if (p.getCodigo().equals(producto.getCodigo())) {
-                getSubasta().getAnuncianteLogueado().getListaProducto().remove(p);
-                registrarAccionesSistema("Eliminar producto", 1, "eliminarProducto");
-                eliminado = true;
-                salvarDatosPrueba();
-                guardarResourceXML();
-                break;
 
-            }
+        if (getSubasta().eliminarProducto(producto)) {
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " eliminó un producto.", 1, "ELIMINAR PRODUCTO");
+
+            guardarResourceXML();
+            return true;
+        } else {
+            return false;
         }
-        return eliminado;
     }
 
     @Override
-    public boolean actualizarProducto(ProductoDto empleadoDto) {
-        return false;
+    public boolean actualizarProducto(ProductoDto productoDto) throws ProductoException {
+
+        Producto producto = mapper.productoDtoToProducto(productoDto);
+
+        if (getSubasta().actualizarProducto(producto)) {
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " actualizó un producto.", 1, "ACTUALIZAR PRODUCTO");
+
+            guardarResourceXML();
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
@@ -139,7 +144,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
                 System.out.println(getSubasta().getListaAnunciante().size());
                 registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
-                salvarDatosPrueba();
+                guardarResourceBinario();
                 guardarResourceXML();
                 return true;
             } else {
@@ -161,7 +166,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().getListaCompradores().add(c);
                 System.out.println(getSubasta().getListaCompradores().size());
                 registrarAccionesSistema("Agregar Comprador", 1, "agregarComprador");
-                salvarDatosPrueba();
+                guardarResourceBinario();
                 guardarResourceXML();
                 return true;
             } else {

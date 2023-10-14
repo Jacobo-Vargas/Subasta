@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.model;
 
 import co.edu.uniquindio.subasta.controller.servicies.IProductoService;
+import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
 
@@ -24,7 +25,7 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
 
-    //--------------------------------   Registro   --------------------------------------
+    //--------------------------------   Registro   --------------------------------------//
     @Override
     public boolean verificarExistenciaComprador(String cedula) {
         boolean existe = false;
@@ -47,6 +48,48 @@ public class Subasta implements ISubastaService, Serializable {
             }
         }
         return existe;
+    }
+
+    //---------------------------------- CRUD  PRODUCTO --------------------------------//
+    @Override
+    public List<Producto> obtenerProducto() {
+        return anuncianteLogueado.getListaProducto();
+    }
+
+    @Override
+    public boolean agregarProducto(Producto producto) throws ProductoException {
+        if (anuncianteLogueado.getListaProducto().add(producto)) {
+            return true;
+        } else {
+            throw new ProductoException("No se agrego el producto.");
+        }
+
+    }
+
+    @Override
+    public boolean eliminarProducto(Producto producto) throws ProductoException {
+        if (anuncianteLogueado.getListaProducto().remove(producto)) {
+            return true;
+        } else {
+            throw new ProductoException("No se pudo eliminar el producto.");
+        }
+    }
+
+    @Override
+    public boolean actualizarProducto(Producto producto) throws ProductoException {
+        boolean actualizado = false;
+        for (Producto p : anuncianteLogueado.getListaProducto()) {
+            if (p.getCodigo().equals(producto.getCodigo())) {
+                p.setNombre(producto.getNombre());
+                p.setTipoArticulo(producto.getTipoArticulo());
+                actualizado = true;
+
+            }
+        }
+        if (!actualizado) {
+            throw new ProductoException("No se pudo actualizar el producto.");
+        }
+        return actualizado;
     }
 
 
@@ -92,4 +135,14 @@ public class Subasta implements ISubastaService, Serializable {
         this.listaUsuarios = listaUsuarios;
     }
 
+    @Override
+    public String toString() {
+        return "Subasta{" +
+                "anuncianteLogueado=" + anuncianteLogueado +
+                ", compradorLogueado=" + compradorLogueado +
+                ", listaAnunciante=" + listaAnunciante +
+                ", listaCompradores=" + listaCompradores +
+                ", listaUsuarios=" + listaUsuarios +
+                '}';
+    }
 }

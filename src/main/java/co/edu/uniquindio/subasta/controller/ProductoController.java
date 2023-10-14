@@ -1,5 +1,6 @@
 package co.edu.uniquindio.subasta.controller;
 
+import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.controller.servicies.IProductoService;
 
@@ -19,21 +20,21 @@ public class ProductoController implements IProductoService {
     }
 
     @Override
-    public boolean agregarProducto(ProductoDto productoDto) {
+    public boolean agregarProducto(ProductoDto productoDto) throws ProductoException {
         return modelFactoryController.agregarProducto(productoDto);
     }
 
     @Override
-    public boolean eliminarProducto(ProductoDto productoDto) {
+    public boolean eliminarProducto(ProductoDto productoDto) throws ProductoException {
         return modelFactoryController.eliminarProducto(productoDto);
     }
 
     @Override
-    public boolean actualizarProducto(ProductoDto empleadoDto) {
-        return false;
+    public boolean actualizarProducto(ProductoDto productoDto) throws ProductoException {
+        return modelFactoryController.actualizarProducto(productoDto);
     }
 
-    public String obtenerCedulaLogueo(){
-        return modelFactoryController.getSubasta().getAnuncianteLogueado().getCedula();
-    }
+//    public String obtenerCedulaLogueo(){
+//        return modelFactoryController.getSubasta().getAnuncianteLogueado().getCedula();
+//    }
 }

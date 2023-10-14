@@ -42,4 +42,5 @@ public class Comprador extends Persona{
                 ", usuario=" + usuario +
                 '}';
     }
+
 }

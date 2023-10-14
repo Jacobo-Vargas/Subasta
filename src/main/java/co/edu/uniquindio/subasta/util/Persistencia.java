@@ -255,6 +255,7 @@ public static void cargarDatosArchivos(Subasta subasta) throws FileNotFoundExcep
     public static void crearCopiaSeguridadXML() {
 
         String nombreArchivoNuevo = generarNombre("model.xml");
+
         try {
 
             Path origenPath = Paths.get(RUTA_ARCHIVO_MODELO_SUBASTA_XML);

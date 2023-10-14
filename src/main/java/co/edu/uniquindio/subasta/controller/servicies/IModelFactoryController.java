@@ -1,5 +1,6 @@
 package co.edu.uniquindio.subasta.controller.servicies;
 
+import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
@@ -10,11 +11,11 @@ public interface IModelFactoryController {
 
 
     List<ProductoDto> obtenerProducto();
-    boolean agregarProducto(ProductoDto empleadoDto);
+    boolean agregarProducto(ProductoDto empleadoDto) throws ProductoException;
 
-    boolean eliminarProducto(ProductoDto productoDto);
+    boolean eliminarProducto(ProductoDto productoDto) throws ProductoException;
 
-    boolean actualizarProducto(ProductoDto empleadoDto);
+    boolean actualizarProducto(ProductoDto empleadoDto) throws ProductoException;
 
 
 

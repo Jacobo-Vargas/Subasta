@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.ProductoController;
+import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.TipoArticulo;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
@@ -35,21 +36,20 @@ public class ProductoViewController {
 
     @FXML
     void initialize() {
-
         productoController = new ProductoController();
         intiView();
     }
 
     private void intiView() {
+
         llenarComboBox();
         obtenerProducto();
         initDataBinding();
-        tvProducto.getItems().clear();
-        tvProducto.setItems(listaProductoDto);
         listenerSelection();
     }
 
     private void initDataBinding() {
+
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcTipoArticulo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().tipoArticulo())));
         tcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
@@ -57,11 +57,15 @@ public class ProductoViewController {
     }
 
     private void obtenerProducto() {
+
+        listaProductoDto.removeAll();
         listaProductoDto.addAll(productoController.obtenerProducto());
+        tvProducto.setItems(listaProductoDto);
+        tvProducto.refresh();
     }
 
 
-    public void agregarProducto() {
+    public void agregarProducto() throws ProductoException {
         codigo +=1;
         ProductoDto productoDto = new ProductoDto(txtNombre.getText(), String.valueOf(cBoxTipoArticulo.getValue()),String.valueOf(codigo));
         productoController.agregarProducto(productoDto);
@@ -79,10 +83,20 @@ public class ProductoViewController {
         txtNombre.clear();
     }
 
-    public void actualizarProducto() {
+    public void actualizarProducto() throws ProductoException {
+
+        ProductoDto productoDto = new ProductoDto(txtNombre.getText(),String.valueOf(cBoxTipoArticulo.getValue()), productoSeleccionado.codigo());
+        if(productoController.actualizarProducto(productoDto)){
+            AlertaUtil.mostrarMensajeOk("Se actualizo con exito.");
+            listaProductoDto.remove(productoSeleccionado);
+            listaProductoDto.add(productoDto);
+            tvProducto.refresh();
+            limpiarCampos();
+
+        }
     }
 
-    public void eliminarProducto() {
+    public void eliminarProducto() throws ProductoException {
         if(productoController.eliminarProducto(productoSeleccionado)){
             AlertaUtil.mostrarMensajeOk("Se elimino con éxito");
             listaProductoDto.remove(productoSeleccionado);

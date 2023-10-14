@@ -14,6 +14,7 @@ module com.example.ejemplodto {
 
     exports co.edu.uniquindio.subasta.model;
     exports co.edu.uniquindio.subasta.mapping.dto;
+    exports co.edu.uniquindio.subasta.exceptions;
     exports co.edu.uniquindio.subasta to javafx.graphics;
 
 

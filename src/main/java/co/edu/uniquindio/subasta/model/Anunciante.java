@@ -46,4 +46,5 @@ public class Anunciante extends Persona {
                 ", usuario=" + usuario +
                 '}';
     }
+
 }
