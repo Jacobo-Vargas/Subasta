@@ -15,15 +15,23 @@ public class Anuncio implements Serializable {
     private String descripcion;
     private String foto;
     private String nombreAnunciante;
-    private LocalDate fechaPublicacion;
-    private LocalDate fechaTerminacion;
+    private String fechaPublicacion;
+    private String fechaTerminacion;
 
     private float valorInicial;
-    private int codigo ;
+    private String codigo ;
 
     private ArrayList<Puja> listaPujas ;
 
     public Anuncio() {
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public String getNombre() {
@@ -58,19 +66,19 @@ public class Anuncio implements Serializable {
         this.nombreAnunciante = nombreAnunciante;
     }
 
-    public LocalDate getFechaPublicacion() {
+    public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+    public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public LocalDate getFechaTerminacion() {
+    public String getFechaTerminacion() {
         return fechaTerminacion;
     }
 
-    public void setFechaTerminacion(LocalDate fechaTerminacion) {
+    public void setFechaTerminacion(String fechaTerminacion) {
         this.fechaTerminacion = fechaTerminacion;
     }
 
@@ -82,20 +90,12 @@ public class Anuncio implements Serializable {
         this.valorInicial = valorInicial;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
     }
 
     public ArrayList<Puja> getListaPujas() {
@@ -104,5 +104,21 @@ public class Anuncio implements Serializable {
 
     public void setListaPujas(ArrayList<Puja> listaPujas) {
         this.listaPujas = listaPujas;
+    }
+
+    @Override
+    public String toString() {
+        return "Anuncio{" +
+                "producto=" + producto +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", foto='" + foto + '\'' +
+                ", nombreAnunciante='" + nombreAnunciante + '\'' +
+                ", fechaPublicacion='" + fechaPublicacion + '\'' +
+                ", fechaTerminacion='" + fechaTerminacion + '\'' +
+                ", valorInicial=" + valorInicial +
+                ", codigo='" + codigo + '\'' +
+                ", listaPujas=" + listaPujas +
+                '}';
     }
 }

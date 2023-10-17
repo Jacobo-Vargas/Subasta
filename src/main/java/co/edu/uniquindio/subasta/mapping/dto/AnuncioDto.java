@@ -7,16 +7,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public record AnuncioDto(
-        ProductoDto productoDto,
+        ProductoDto producto,
         String nombre,
         String descripcion,
         String foto,
         String nombreAnunciante,
 
-        LocalDate fechaPublicacion,
-        LocalDate fechaFinPublicacion,
+        String fechaPublicacion,
+        String fechaTerminacion,
         float valorInicial,
-        int codigo,
+        String codigo,
 
         ArrayList<PujaDto> listaPujas
 

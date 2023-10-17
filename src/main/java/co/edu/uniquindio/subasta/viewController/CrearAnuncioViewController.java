@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.AnuncioController;
+import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.Anuncio;
@@ -16,10 +17,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.util.converter.LocalDateStringConverter;
 
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.chrono.Chronology;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,19 +47,19 @@ public class CrearAnuncioViewController {
     private DatePicker dateInicio;
 
     @FXML
-    private TableColumn<Anuncio, String> tcCodigo;
+    private TableColumn<AnuncioDto, String> tcCodigo;
 
     @FXML
-    private TableColumn<Anuncio, String> tcFechaFin;
+    private TableColumn<AnuncioDto, String> tcFechaFin;
 
     @FXML
-    private TableColumn<Anuncio, String> tcFechaInicio;
+    private TableColumn<AnuncioDto, String> tcFechaInicio;
 
     @FXML
-    private TableColumn<Anuncio, String> tcNombreProducto;
+    private TableColumn<AnuncioDto, String> tcNombreProducto;
 
     @FXML
-    private TableColumn<Anuncio, String> tcValorInicial;
+    private TableColumn<AnuncioDto, String> tcValorInicial;
 
     @FXML
     private TableView<AnuncioDto> tvAnuncios;
@@ -83,15 +86,21 @@ public class CrearAnuncioViewController {
     }
 
     @FXML
-    void agregarAnuncio(ActionEvent event) {
+    void agregarAnuncio(ActionEvent event) throws AnuncioException {
         ProductoDto productoDtoAsociado = null;
-        for (ProductoDto p: listaProductos) {
-            if(p.nombre().equals(cBoxProducto.getValue())){
-                 productoDtoAsociado = new ProductoDto(p.nombre(),p.tipoArticulo(), p.codigo());
+
+        for (ProductoDto p : listaProductos) {
+            if (p.nombre().equals(cBoxProducto.getValue())) {
+                productoDtoAsociado = new ProductoDto(p.nombre(), p.tipoArticulo(), p.codigo());
+                break;
             }
         }
-//        AnuncioDto anuncioDto = new AnuncioDto(productoDtoAsociado,txtNombrePublicacion.getText(),
-//                txtDescripcion.getText(),)
+
+        AnuncioDto anuncioDto = crearAnuncioDto(productoDtoAsociado);
+
+        anuncioController.agregarAnuncio(anuncioDto);
+        listaAnuncioDto.add(anuncioDto);
+        tvAnuncios.refresh();
     }
 
     @FXML
@@ -104,12 +113,17 @@ public class CrearAnuncioViewController {
 
     }
 
+    public String recuperarNombreAnunciante() {
+        return anuncioController.recuperarNombre();
+    }
+
     public void initialize() {
         anuncioController = new AnuncioController();
         initView();
     }
 
     private void initView() {
+        obtenerAnuncios();
         obtenerProductos();
         llenarComboBox();
         initDataBinding();
@@ -118,11 +132,11 @@ public class CrearAnuncioViewController {
 
     private void initDataBinding() {
 
-        tcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getCodigo())));
-        tcFechaFin.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getFechaTerminacion())));
-        tcFechaInicio.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getFechaPublicacion())));
-        tcNombreProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProducto().getNombre()));
-        tcValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getValorInicial())));
+        tcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
+        tcFechaFin.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaTerminacion())));
+        tcFechaInicio.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaPublicacion())));
+        tcNombreProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().producto().nombre()));
+        tcValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
     }
 
     private void llenarComboBox() {
@@ -141,15 +155,18 @@ public class CrearAnuncioViewController {
     private void obtenerAnuncios() {
         listaAnuncioDto.clear();
         listaAnuncioDto.addAll(anuncioController.obtenerAnuncio());
+        tvAnuncios.setItems(listaAnuncioDto);
+        tvAnuncios.refresh();
     }
 
     private void limpiarCampos() {
         txtDescripcion.setText("");
         txtValorInicial.setText("");
-        dateFin.setValue(LocalDate.parse(""));
-        dateInicio.setValue(LocalDate.parse(""));
+        dateFin.setValue(null);
+        dateInicio.setValue(null);
         cBoxProducto.setValue("Producto");
         txtCodigo.setText("");
+        txtNombrePublicacion.setText("");
     }
 
     private void listenerSelection() {
@@ -164,9 +181,16 @@ public class CrearAnuncioViewController {
         txtDescripcion.setText(anuncioDtoSelecionado.descripcion());
         txtValorInicial.setText(String.valueOf(anuncioDtoSelecionado.valorInicial()));
         txtCodigo.setText(String.valueOf(anuncioDtoSelecionado.codigo()));
-        dateInicio.setChronology(Chronology.from(anuncioDtoSelecionado.fechaPublicacion()));
-        dateFin.setChronology(Chronology.from(anuncioDtoSelecionado.fechaFinPublicacion()));
-        cBoxProducto.setValue(anuncioDtoSelecionado.productoDto().nombre());
+        dateInicio.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaPublicacion())));
+        dateFin.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaTerminacion())));
+        cBoxProducto.setValue(anuncioDtoSelecionado.producto().nombre());
+    }
+
+    private AnuncioDto crearAnuncioDto(ProductoDto productoDtoAsociado) {
+        return new AnuncioDto(productoDtoAsociado, txtNombrePublicacion.getText(),
+                txtDescripcion.getText(), "src/main/resources/imagenes app/logo.png",
+                recuperarNombreAnunciante(), String.valueOf(dateInicio.getValue()), String.valueOf(dateFin.getValue()),
+                Float.parseFloat(txtValorInicial.getText()), txtCodigo.getText(), new ArrayList<>());
     }
 }
 

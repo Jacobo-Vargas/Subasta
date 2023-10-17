@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.model;
 
 import co.edu.uniquindio.subasta.controller.servicies.IProductoService;
+import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
@@ -104,8 +105,12 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
     @Override
-    public boolean agregarAnuncio(Anuncio anuncio) {
-        return false;
+    public boolean agregarAnuncio(Anuncio anuncio) throws AnuncioException {
+        if(anuncianteLogueado.getListaAnucio().add(anuncio)){
+        return true;
+        }else{
+            throw new AnuncioException("No se pudo registrar el anuncio");
+        }
     }
 
     @Override

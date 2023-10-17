@@ -1,5 +1,6 @@
 package co.edu.uniquindio.subasta.controller.servicies;
 
+import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
@@ -21,7 +22,9 @@ public interface IModelFactoryController {
 //    ----------------------- CRUD ANUNCIO ---------------------------------------
     List<AnuncioDto> obtenerAnuncio();
 
-    boolean agregarAnuncio(AnuncioDto anuncioDto);
+    String recuperarNombreAnunciante();
+
+    boolean agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
     boolean eliminarAnuncio(AnuncioDto anuncioDto);
     boolean actuaizarAnuncio(AnuncioDto anuncioDto);
 

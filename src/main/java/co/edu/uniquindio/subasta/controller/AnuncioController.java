@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.controller;
 
 import co.edu.uniquindio.subasta.controller.servicies.IAnuncioControllerService;
+import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.Producto;
@@ -25,8 +26,13 @@ public class AnuncioController implements IAnuncioControllerService {
     }
 
     @Override
-    public boolean agregarAnuncio(AnuncioDto anuncioDto) {
-        return false;
+    public String recuperarNombre() {
+        return modelFactoryController.recuperarNombreAnunciante();
+    }
+
+    @Override
+    public boolean agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+        return modelFactoryController.agregarAnuncio(anuncioDto);
     }
 
     @Override

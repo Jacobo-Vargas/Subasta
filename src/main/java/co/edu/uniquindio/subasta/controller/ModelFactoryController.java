@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.controller;
 
 import co.edu.uniquindio.subasta.controller.servicies.IModelFactoryController;
+import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
@@ -144,8 +145,21 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public boolean agregarAnuncio(AnuncioDto anuncioDto) {
-        return false;
+    public String recuperarNombreAnunciante() {
+        return getSubasta().getAnuncianteLogueado().getNombre();
+    }
+
+    @Override
+    public boolean agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+        Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
+        if(getSubasta().agregarAnuncio(anuncio)){
+            guardarResourceXML();
+            registrarAccionesSistema("Se agrego un anuncio.",1,"AGREGAR ANUNCIO");
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.subasta.model.services;
 
+import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
@@ -28,7 +29,7 @@ public interface ISubastaService {
 
     List<Anuncio> obtenerAnuncio();
 
-    boolean agregarAnuncio(Anuncio anuncio);
+    boolean agregarAnuncio(Anuncio anuncio) throws AnuncioException;
     boolean eliminarAnuncio(Anuncio anuncio);
     boolean actuaizarAnuncio(Anuncio anuncio);
 
