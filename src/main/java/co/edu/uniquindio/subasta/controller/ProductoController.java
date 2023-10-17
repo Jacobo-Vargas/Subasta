@@ -31,7 +31,7 @@ public class ProductoController implements IProductoService {
 
     @Override
     public boolean actualizarProducto(ProductoDto productoDto) throws ProductoException {
-        return modelFactoryController.actualizarProducto(productoDto);
+        return modelFactoryController.actualizarAnuncio(productoDto);
     }
 
 //    public String obtenerCedulaLogueo(){

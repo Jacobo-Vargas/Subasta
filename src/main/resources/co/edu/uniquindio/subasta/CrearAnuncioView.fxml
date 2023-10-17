@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="743.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="743.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.CrearAnuncioViewController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
          <children>
@@ -30,29 +30,29 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ComboBox prefHeight="24.0" prefWidth="175.0" promptText="Producto">
+                  <ComboBox fx:id="comboBoxProducto" prefHeight="24.0" prefWidth="175.0" promptText="Producto">
                      <GridPane.margin>
                         <Insets left="3.0" right="3.0" />
                      </GridPane.margin>
                   </ComboBox>
-                  <DatePicker promptText="Fecha de fin" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <DatePicker fx:id="datePickerFechaFin" promptText="Fecha de fin" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="3.0" right="3.0" />
                      </GridPane.margin>
                   </DatePicker>
-                  <DatePicker promptText="Fecha de inicio" GridPane.columnIndex="1">
+                  <DatePicker fx:id="datePickerFechaInicio" promptText="Fecha de inicio" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="3.0" right="3.0" />
                      </GridPane.margin>
                   </DatePicker>
-                  <TextField promptText="Valor inicial" GridPane.rowIndex="1">
+                  <TextField fx:id="textFieldValorInicial" promptText="Valor inicial" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="3.0" right="3.0" />
                      </GridPane.margin>
                   </TextField>
                </children>
             </GridPane>
-            <TextArea prefHeight="98.0" prefWidth="288.0" promptText="Decripción..." />
+            <TextArea fx:id="textAreaDescriṕcion" prefHeight="98.0" prefWidth="288.0" promptText="Decripción..." />
          </children>
          <VBox.margin>
             <Insets top="25.0" />
@@ -61,17 +61,17 @@
       <HBox alignment="CENTER" prefHeight="52.0" prefWidth="725.0" spacing="50.0">
          <children>
             <Button mnemonicParsing="false" stylesheets="@CSS/Style.css" text="Nuevo" />
-            <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="76.0" stylesheets="@CSS/Style.css" text="Agregar " />
+            <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="76.0" stylesheets="@CSS/Style.css" text="Agregar " onAction="#agregarAnuncio"/>
             <Button mnemonicParsing="false" stylesheets="@CSS/Style.css" text="Actualizar" />
          </children>
       </HBox>
-      <TableView fx:id="tvAnuncios" prefHeight="200.0" prefWidth="200.0" stylesheets="@CSS/Style.css">
+      <TableView fx:id="tableViewAnuncios" prefHeight="200.0" prefWidth="200.0" stylesheets="@CSS/Style.css">
         <columns>
-            <TableColumn prefWidth="90.0" text="Codigo" />
-          <TableColumn prefWidth="213.0" text="Nombre del producto" />
-          <TableColumn prefWidth="155.0" text="Valor inicial" />
-            <TableColumn prefWidth="133.0" text="Fecha de inicio" />
-            <TableColumn prefWidth="159.0" text="Fecha de fin" />
+            <TableColumn fx:id="tebleColumnCodigo" prefWidth="90.0" text="Codigo" />
+          <TableColumn fx:id="tebleColumnNombreProducto" prefWidth="213.0" text="Nombre del producto" />
+          <TableColumn fx:id="tebleColumnValorInicial" prefWidth="155.0" text="Valor inicial" />
+            <TableColumn fx:id="tebleColumnFecheInicio" prefWidth="133.0" text="Fecha de inicio" />
+            <TableColumn fx:id="tebleColumnFechaFin" prefWidth="159.0" text="Fecha de fin" />
         </columns>
          <VBox.margin>
             <Insets left="5.0" right="5.0" />

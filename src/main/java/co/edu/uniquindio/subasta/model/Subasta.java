@@ -92,6 +92,48 @@ public class Subasta implements ISubastaService, Serializable {
         return actualizado;
     }
 
+    //---------------------------Crud Anuncio------------------------------//
+
+    @Override
+    public List<Anuncio> obtenerAnuncio() {
+        return anuncianteLogueado.getListaAnucio();
+    }
+
+    @Override
+    public boolean agregarAnuncio(Anuncio anuncio) throws Exception {
+        if(anuncianteLogueado.getListaAnucio().add(anuncio)){
+            return true;
+        }else {
+            throw new Exception("No se agreg el Anunico");
+        }
+    }
+
+    @Override
+    public boolean elimlnarAnuncio(Anuncio anuncio) throws Exception {
+        if(anuncianteLogueado.getListaAnucio().remove(anuncio)){
+            return true;
+        }else{
+            throw new Exception("No se pudo eliminar el Anuncio");
+        }
+    }
+
+    @Override
+    public boolean actuliarAnuncio(Anuncio anuncio) throws Exception {
+        boolean actualizado=true;
+        for(Anuncio a:anuncianteLogueado.getListaAnucio()){
+            if(anuncio.getCodigo()==a.getCodigo()){
+                a.setCodigo(anuncio.getCodigo());
+                a.setDescripcion(anuncio.getDescripcion());
+                a.setNombre(anuncio.getNombre());
+                actualizado= true;
+            }
+        }
+        if(!actualizado){
+            throw new Exception("El anuncio no se pudo actulizar");
+        }
+        return actualizado;
+    }
+
 
     //----------------------listas--------------------------------
 

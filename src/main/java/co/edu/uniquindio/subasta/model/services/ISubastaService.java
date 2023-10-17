@@ -2,10 +2,7 @@ package co.edu.uniquindio.subasta.model.services;
 
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
-import co.edu.uniquindio.subasta.model.Anunciante;
-import co.edu.uniquindio.subasta.model.Comprador;
-import co.edu.uniquindio.subasta.model.Persona;
-import co.edu.uniquindio.subasta.model.Producto;
+import co.edu.uniquindio.subasta.model.*;
 
 import java.util.List;
 
@@ -25,6 +22,13 @@ public interface ISubastaService {
     boolean eliminarProducto(Producto producto) throws ProductoException;
 
     boolean actualizarProducto(Producto empleado) throws ProductoException;
+
+    //------------------------Crud Anuncio-----------------------------------
+    List<Anuncio> obtenerAnuncio();
+    boolean agregarAnuncio(Anuncio anuncio) throws Exception;
+    boolean elimlnarAnuncio(Anuncio anuncio) throws Exception;
+    boolean actuliarAnuncio(Anuncio anuncio) throws Exception;
+
 
 
 }

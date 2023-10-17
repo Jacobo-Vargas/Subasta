@@ -3,13 +3,11 @@ package co.edu.uniquindio.subasta.controller;
 import co.edu.uniquindio.subasta.controller.servicies.IModelFactoryController;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
+import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.mapping.mappers.MapperSubasta;
-import co.edu.uniquindio.subasta.model.Anunciante;
-import co.edu.uniquindio.subasta.model.Comprador;
-import co.edu.uniquindio.subasta.model.Producto;
-import co.edu.uniquindio.subasta.model.Subasta;
+import co.edu.uniquindio.subasta.model.*;
 import co.edu.uniquindio.subasta.util.ArchivoUtil;
 import co.edu.uniquindio.subasta.util.Persistencia;
 import co.edu.uniquindio.subasta.util.SubastaUtil;
@@ -118,7 +116,7 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public boolean actualizarProducto(ProductoDto productoDto) throws ProductoException {
+    public boolean actualizarAnuncio(ProductoDto productoDto) throws ProductoException {
 
         Producto producto = mapper.productoDtoToProducto(productoDto);
 
@@ -128,6 +126,55 @@ public class ModelFactoryController implements IModelFactoryController {
             guardarResourceXML();
             return true;
         } else {
+            return false;
+        }
+    }
+// -----------------------------------------Crud Anuncio-----------------------
+
+
+    @Override
+    public List<AnuncioDto> obtenerAnuncio() {
+        ArrayList<Anuncio> lista = new ArrayList<>(getSubasta().obtenerAnuncio());
+        return mapper.getAnunciosDto(lista);
+
+    }
+
+    @Override
+    public boolean agregarAnuncio(AnuncioDto anuncioDto) throws Exception {
+        Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
+        if (getSubasta().agregarAnuncio(anuncio)) {
+            guardarResourceXML();
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " agrego un anuncio", 1,
+                    "AGREGAR PRODUCTO");
+            return true;
+        } else {
+            return false;
+
+        }
+    }
+
+    @Override
+    public boolean alimanarAnuncio(AnuncioDto anuncioDto) throws Exception {
+        Anuncio anuncio=mapper.anuncioDtoToAnuncio(anuncioDto);
+        if(getSubasta().elimlnarAnuncio(anuncio)){
+            guardarResourceXML();
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " Elimino el producto", 1,
+                    "AGREGAR PRODUCTO");
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean actualizarAnuncio(AnuncioDto anuncioDto) throws Exception {
+        Anuncio anuncio=mapper.anuncioDtoToAnuncio(anuncioDto);
+        if(getSubasta().actuliarAnuncio(anuncio)){
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " Realizo un actulizacion de producto", 1,
+                    "AGREGAR PRODUCTO");
+            guardarResourceXML();
+            return true;
+        }else{
             return false;
         }
     }

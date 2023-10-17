@@ -1,5 +1,7 @@
 package co.edu.uniquindio.subasta.model;
 
+import javafx.scene.control.DatePicker;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -14,8 +16,8 @@ public class Anuncio implements Serializable {
     private String descripcion;
     private String foto;
     private String nombreAnunciante;
-    private LocalDate fechaPublicacion;
-    private LocalDate fechaTerminacion;
+    private DatePicker fechaPublicacion;
+    private DatePicker fechaTerminacion;
 
     private float valorInicial;
     private int codigo ;
