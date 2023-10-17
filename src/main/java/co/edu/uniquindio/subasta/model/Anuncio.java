@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.model;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Anuncio implements Serializable {
@@ -19,6 +20,8 @@ public class Anuncio implements Serializable {
 
     private float valorInicial;
     private int codigo ;
+
+    private ArrayList<Puja> listaPujas ;
 
     public Anuncio() {
     }
@@ -95,18 +98,11 @@ public class Anuncio implements Serializable {
         this.producto = producto;
     }
 
-    @Override
-    public String toString() {
-        return "Anuncio{" +
-                "nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", foto='" + foto + '\'' +
-                ", nombreAnunciante='" + nombreAnunciante + '\'' +
-                ", fechaPublicacion=" + fechaPublicacion +
-                ", fechaTerminacion=" + fechaTerminacion +
-                ", valorInicial=" + valorInicial +
-                ", codigo='" + codigo + '\'' +
-                '}';
+    public ArrayList<Puja> getListaPujas() {
+        return listaPujas;
     }
 
+    public void setListaPujas(ArrayList<Puja> listaPujas) {
+        this.listaPujas = listaPujas;
+    }
 }

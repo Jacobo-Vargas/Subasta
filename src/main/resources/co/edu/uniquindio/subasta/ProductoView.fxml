@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -54,16 +53,13 @@
       </HBox>
       <TableView fx:id="tvProducto" prefHeight="221.0" prefWidth="695.0">
          <columns>
-            <TableColumn fx:id="tcCodigo" prefWidth="194.0" text="Codigo" />
-            <TableColumn fx:id="tcNombre" prefWidth="311.0" text="Nombre" />
-            <TableColumn fx:id="tcTipoArticulo" prefWidth="199.0" text="Tipo de articulo" />
+            <TableColumn fx:id="tcCodigo" prefWidth="113.0" text="Codigo" />
+            <TableColumn fx:id="tcNombre" prefWidth="323.0" text="Nombre" />
+            <TableColumn fx:id="tcTipoArticulo" prefWidth="286.0" text="Tipo de articulo" />
          </columns>
          <VBox.margin>
             <Insets left="10.0" right="10.0" />
          </VBox.margin>
-         <effect>
-            <Blend />
-         </effect>
       </TableView>
       <Button mnemonicParsing="false" onAction="#eliminarProducto" text="Eliminar">
          <VBox.margin>

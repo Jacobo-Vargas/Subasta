@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class ProductoViewController {
+
     public static int codigo = 2;
     ProductoController productoController;
     ObservableList<ProductoDto> listaProductoDto = FXCollections.observableArrayList();
@@ -37,10 +38,10 @@ public class ProductoViewController {
     @FXML
     void initialize() {
         productoController = new ProductoController();
-        intiView();
+        initView();
     }
 
-    private void intiView() {
+    private void initView() {
 
         llenarComboBox();
         obtenerProducto();
@@ -66,6 +67,7 @@ public class ProductoViewController {
 
 
     public void agregarProducto() throws ProductoException {
+
         codigo +=1;
         ProductoDto productoDto = new ProductoDto(txtNombre.getText(), String.valueOf(cBoxTipoArticulo.getValue()),String.valueOf(codigo));
         productoController.agregarProducto(productoDto);
@@ -79,8 +81,7 @@ public class ProductoViewController {
     }
 
     public void nuevo() {
-        txtCodigo.clear();
-        txtNombre.clear();
+        limpiarCampos();
     }
 
     public void actualizarProducto() throws ProductoException {
@@ -121,6 +122,7 @@ public class ProductoViewController {
     }
 
     private void mostrarInformacionProducto(ProductoDto productoSeleccionado) {
+
         if(productoSeleccionado != null){
             txtNombre.setText(productoSeleccionado.nombre());
             txtCodigo.setText(String.valueOf(productoSeleccionado.codigo()));

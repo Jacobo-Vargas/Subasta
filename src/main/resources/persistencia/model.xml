@@ -13,23 +13,7 @@
         <string>3</string>
        </void>
        <void property="nombre">
-        <string>Cama c</string>
-       </void>
-       <void property="tipoArticulo">
-        <object class="java.lang.Enum" method="valueOf">
-         <class>co.edu.uniquindio.subasta.model.TipoArticulo</class>
-         <string>BIENRAIZ</string>
-        </object>
-       </void>
-      </object>
-     </void>
-     <void method="add">
-      <object class="co.edu.uniquindio.subasta.model.Producto">
-       <void property="codigo">
-        <string>4</string>
-       </void>
-       <void property="nombre">
-        <string>carro mazda nuevo</string>
+        <string>hola</string>
        </void>
        <void property="tipoArticulo">
         <object class="java.lang.Enum" id="TipoArticulo0" method="valueOf">

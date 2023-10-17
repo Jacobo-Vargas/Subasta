@@ -1,11 +1,11 @@
 package co.edu.uniquindio.subasta.controller;
 
-import co.edu.uniquindio.subasta.controller.servicies.ILoginController;
+import co.edu.uniquindio.subasta.controller.servicies.ILoginControllerService;
 
-public class LoginController implements ILoginController {
+public class LoginControllerService implements ILoginControllerService {
     ModelFactoryController modelFactoryController;
 
-    public LoginController() {
+    public LoginControllerService() {
         modelFactoryController = ModelFactoryController.getInstance();
     }
 

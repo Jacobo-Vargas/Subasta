@@ -1,7 +1,7 @@
 package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.SubastaAnuncianteApp;
-import co.edu.uniquindio.subasta.controller.LoginController;
+import co.edu.uniquindio.subasta.controller.LoginControllerService;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 public class LoginViewController extends Component {
-    LoginController loginController;
+    LoginControllerService loginController;
     @FXML
     public TextField txtUser;
     @FXML
@@ -24,7 +24,7 @@ public class LoginViewController extends Component {
 
     @FXML
     public void initialize() {
-        loginController = new LoginController();
+        loginController = new LoginControllerService();
 
     }
 

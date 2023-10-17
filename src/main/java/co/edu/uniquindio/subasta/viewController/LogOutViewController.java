@@ -2,6 +2,8 @@ package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.LogOutController;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
+import co.edu.uniquindio.subasta.util.ArchivoUtil;
+import co.edu.uniquindio.subasta.util.Persistencia;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;

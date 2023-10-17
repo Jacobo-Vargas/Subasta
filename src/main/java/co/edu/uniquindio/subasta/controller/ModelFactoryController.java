@@ -3,13 +3,11 @@ package co.edu.uniquindio.subasta.controller;
 import co.edu.uniquindio.subasta.controller.servicies.IModelFactoryController;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
+import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.mapping.mappers.MapperSubasta;
-import co.edu.uniquindio.subasta.model.Anunciante;
-import co.edu.uniquindio.subasta.model.Comprador;
-import co.edu.uniquindio.subasta.model.Producto;
-import co.edu.uniquindio.subasta.model.Subasta;
+import co.edu.uniquindio.subasta.model.*;
 import co.edu.uniquindio.subasta.util.ArchivoUtil;
 import co.edu.uniquindio.subasta.util.Persistencia;
 import co.edu.uniquindio.subasta.util.SubastaUtil;
@@ -73,14 +71,15 @@ public class ModelFactoryController implements IModelFactoryController {
 
     public boolean restaurarLogueo() {
 
-        getSubasta().setCompradorLogueado(null);
-        getSubasta().setAnuncianteLogueado(null);
-
-        if (getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null) {
-            return true;
-        } else {
-            return false;
+        if(getSubasta().getAnuncianteLogueado() != null){
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre()+" cerró sesión.",1,"CIERRE DE SESIÓN.");
+            getSubasta().setAnuncianteLogueado(null);
         }
+        if(getSubasta().getCompradorLogueado() != null){
+            registrarAccionesSistema(getSubasta().getCompradorLogueado().getNombre()+" cerró sesion.",1,"CIERRE DE SESIÓN.");
+            getSubasta().setCompradorLogueado(null);
+        }
+        return getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null;
     }
 
 
@@ -133,6 +132,33 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
+
+
+//    ---------------------------------------- CRUD ANUNCIO ----------------------------//
+
+
+    @Override
+    public List<AnuncioDto> obtenerAnuncio() {
+        ArrayList<Anuncio> lista = new ArrayList<>(getSubasta().obtenerAnuncio());
+        return mapper.getAnunciosDto(lista);
+    }
+
+    @Override
+    public boolean agregarAnuncio(AnuncioDto anuncioDto) {
+        return false;
+    }
+
+    @Override
+    public boolean eliminarAnuncio(AnuncioDto anuncioDto) {
+        return false;
+    }
+
+    @Override
+    public boolean actuaizarAnuncio(AnuncioDto anuncioDto) {
+        return false;
+    }
+
+
 //  --------------------------------------- Registro ---------------------------
 
 
@@ -144,7 +170,6 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
                 System.out.println(getSubasta().getListaAnunciante().size());
                 registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
-                guardarResourceBinario();
                 guardarResourceXML();
                 return true;
             } else {
@@ -166,7 +191,6 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().getListaCompradores().add(c);
                 System.out.println(getSubasta().getListaCompradores().size());
                 registrarAccionesSistema("Agregar Comprador", 1, "agregarComprador");
-                guardarResourceBinario();
                 guardarResourceXML();
                 return true;
             } else {
@@ -188,7 +212,7 @@ public class ModelFactoryController implements IModelFactoryController {
         for (Comprador c : getSubasta().getListaCompradores()) {
             if (c.getCedula().equals(cedula) && c.getUsuario().getContrasenia().equals(contrasenia)) {
                 getSubasta().setCompradorLogueado(c);
-                registrarAccionesSistema("INICIO DE SESION: " + c.getCedula(), 1, "inicio de sesion");
+                registrarAccionesSistema( c.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
             }
         }
@@ -202,7 +226,7 @@ public class ModelFactoryController implements IModelFactoryController {
         for (Anunciante a : getSubasta().getListaAnunciante()) {
             if (a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)) {
                 getSubasta().setAnuncianteLogueado(a);
-                registrarAccionesSistema("INICIO DE SESION: " + a.getCedula(), 1, "inicio de sesion");
+                registrarAccionesSistema(a.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
             }
         }

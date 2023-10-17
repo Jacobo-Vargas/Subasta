@@ -4,6 +4,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -47,15 +48,13 @@
                             <GridPane.margin>
                                 <Insets right="35.0" />
                             </GridPane.margin></TextField>
-                        <TextField fx:id="txtPassword" promptText="********" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <GridPane.margin>
-                                <Insets right="35.0" />
-                            </GridPane.margin>
-                            <cursor>
-                                <Cursor fx:constant="TEXT" />
-                            </cursor></TextField>
                         <FontAwesomeIconView fill="WHITE" glyphName="USER" size="25" />
                         <FontAwesomeIconView fill="WHITE" glyphName="LOCK" size="25" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="txtPassword" prefHeight="24.0" prefWidth="262.0" promptText="*************" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="35.0" />
+                     </GridPane.margin>
+                  </PasswordField>
                     </children>
                     <VBox.margin>
                         <Insets left="5.0" right="15.0" top="25.0" />

@@ -5,6 +5,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -75,7 +76,6 @@
                   <TextField fx:id="txtTelefono" promptText="3101234567" GridPane.columnIndex="3" />
                   <TextField fx:id="txtApellido" promptText="Perez" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="txtNombre" promptText="Juan" GridPane.columnIndex="1" />
-                  <TextField fx:id="txtContrasenia" promptText="************" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <Label text="Contraseña:" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <padding>
                         <Insets left="25.0" />
@@ -87,6 +87,7 @@
                      </padding>
                   </Label>
                   <TextField fx:id="txtDireccion" promptText="Avenida bolivar # 14" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <PasswordField fx:id="txtContrasenia" GridPane.columnIndex="3" GridPane.rowIndex="2" promptText="*********" />
                </children>
                <VBox.margin>
                   <Insets left="5.0" right="15.0" top="30.0" />

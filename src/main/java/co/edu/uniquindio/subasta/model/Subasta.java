@@ -68,7 +68,9 @@ public class Subasta implements ISubastaService, Serializable {
 
     @Override
     public boolean eliminarProducto(Producto producto) throws ProductoException {
-        if (anuncianteLogueado.getListaProducto().remove(producto)) {
+
+
+        if (anuncianteLogueado.getListaProducto().removeIf(p -> p.getCodigo().equals(producto.getCodigo()))) {
             return true;
         } else {
             throw new ProductoException("No se pudo eliminar el producto.");
@@ -91,6 +93,32 @@ public class Subasta implements ISubastaService, Serializable {
         }
         return actualizado;
     }
+
+
+
+    // ----------------------------------- CRUD ANUNCIO ------------------------------------//
+
+    @Override
+    public List<Anuncio> obtenerAnuncio() {
+        return anuncianteLogueado.getListaAnucio();
+    }
+
+    @Override
+    public boolean agregarAnuncio(Anuncio anuncio) {
+        return false;
+    }
+
+    @Override
+    public boolean eliminarAnuncio(Anuncio anuncio) {
+        return false;
+    }
+
+    @Override
+    public boolean actuaizarAnuncio(Anuncio anuncio) {
+        return false;
+    }
+
+
 
 
     //----------------------listas--------------------------------
