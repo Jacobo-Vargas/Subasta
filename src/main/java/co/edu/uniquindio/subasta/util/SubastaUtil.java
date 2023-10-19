@@ -51,8 +51,34 @@ public  class SubastaUtil {
         subasta.getListaAnunciante().add(a2);
 
 
+        Usuario usuario=new Usuario();
+        usuario.setContrasenia("123456789");
+        usuario.setContrasenia("123456789");
+
+        Comprador c=new Comprador();
+        c.setNombre("juan pablo");
+        c.setApellido("buitrago");
+        c.setCedula("123456789");
+        c.setEdad(19);
+        c.setTelefono("3128638699");
+        c.setDireccion("Barrio quinio");
+        c.setUsuario(usuario);
 
 
+        Usuario usuario2=new Usuario();
+        usuario2.setContrasenia("1234567890");
+        usuario2.setContrasenia("1234567890");
+
+        Comprador c2=new Comprador();
+        c2.setNombre("lisa");
+        c2.setApellido("Maya");
+        c2.setCedula("1234567890");
+        c2.setEdad(19);
+        c2.setTelefono("21312");
+        c2.setDireccion("terranova");
+        c2.setUsuario(usuario2);
+        subasta.getListaCompradores().add(c);
+        subasta.getListaCompradores().add(c2);
         return subasta;
 
 

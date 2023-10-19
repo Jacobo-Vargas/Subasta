@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.SubastaAnuncianteApp;
+import co.edu.uniquindio.subasta.SubastaCompradorApp;
 import co.edu.uniquindio.subasta.controller.LoginControllerService;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
 import javafx.event.ActionEvent;
@@ -41,6 +42,12 @@ public class LoginViewController extends Component {
     }
 
     private void mostrarSubastaCompradorApp() {
+        try {
+            SubastaCompradorApp compardorApp = new SubastaCompradorApp();
+            compardorApp.start(new Stage());
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void mostrarSubastaAnuncianteApp() {

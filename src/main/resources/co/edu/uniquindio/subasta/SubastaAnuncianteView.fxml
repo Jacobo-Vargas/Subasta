@@ -9,7 +9,6 @@
       <Tab text="Crear anuncio">
           <content>
               <fx:include source="CrearAnuncioView.fxml"> </fx:include>
-
           </content>
       </Tab>
     <Tab text="Registrar producto">

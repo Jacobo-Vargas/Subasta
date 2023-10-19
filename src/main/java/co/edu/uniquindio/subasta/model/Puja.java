@@ -12,6 +12,7 @@ public class Puja implements Serializable {
     private String codigo;
     private float ofertaInicial;
     private LocalDate fechaPuja;
+    private Anuncio Anuncio;
 
     public Puja() {
     }
@@ -46,6 +47,14 @@ public class Puja implements Serializable {
 
     public void setFechaPuja(LocalDate fechaPuja) {
         this.fechaPuja = fechaPuja;
+    }
+
+    public co.edu.uniquindio.subasta.model.Anuncio getAnuncio() {
+        return Anuncio;
+    }
+
+    public void setAnuncio(co.edu.uniquindio.subasta.model.Anuncio anuncio) {
+        Anuncio = anuncio;
     }
 
     @Override

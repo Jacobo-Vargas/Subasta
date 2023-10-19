@@ -96,7 +96,6 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
 
-
     // ----------------------------------- CRUD ANUNCIO ------------------------------------//
 
     @Override
@@ -106,9 +105,9 @@ public class Subasta implements ISubastaService, Serializable {
 
     @Override
     public boolean agregarAnuncio(Anuncio anuncio) throws AnuncioException {
-        if(anuncianteLogueado.getListaAnucio().add(anuncio)){
-        return true;
-        }else{
+        if (anuncianteLogueado.getListaAnucio().add(anuncio)) {
+            return true;
+        } else {
             throw new AnuncioException("No se pudo registrar el anuncio");
         }
     }
@@ -123,7 +122,62 @@ public class Subasta implements ISubastaService, Serializable {
         return false;
     }
 
+    //----------------------------------Crud Puja------------------------
 
+    @Override
+    public List<Puja> obtenerLitaPuja() {
+        return compradorLogueado.getListaPujas();
+    }
+
+    @Override
+    public boolean realizarPuja(Puja puja) throws Exception {
+        if (compradorLogueado.getListaPujas().add(puja)) {
+            for (int i = 0; i < listaAnunciante.size(); i++) {
+
+                for (int j = 0; j < listaAnunciante.get(i).getListaAnucio().size(); j++) {
+
+                    for (int h = 0; h < listaAnunciante.get(i).getListaAnucio().get(i).getListaPujas().size(); h++) {
+
+                        if (listaAnunciante.get(i).getListaAnucio().get(i).getListaPujas().get(h).getCodigo().equals(puja.getCodigo())) {
+
+                            listaAnunciante.get(i).getListaAnucio().get(i).getListaPujas().add(puja);
+                        }
+                    }
+                }
+
+            }
+            return true;
+        } else {
+            throw new Exception("No se puedo relizar la Puja");
+        }
+    }
+
+    @Override
+    public boolean elimnarPuja(Puja puja) throws Exception {
+        if (compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()))) {
+            return true;
+        } else {
+            throw new Exception("No se puedo elimanar la puja");
+        }
+    }
+
+    @Override
+    public boolean actulizarPuja(Puja puja) throws Exception {
+        boolean actulizado = false;
+        for (Puja p : compradorLogueado.getListaPujas()) {
+            if (p.getCodigo().equals(puja.getCodigo())) {
+                p.setDireccion(puja.getDireccion());
+                p.setOfertaInicial(puja.getOfertaInicial());
+                p.setFechaPuja(puja.getFechaPuja());
+                actulizado = true;
+            }
+        }
+        if (actulizado) {
+            return actulizado;
+        } else {
+            throw new Exception("No se pudo actulizar la puja");
+        }
+    }
 
 
     //----------------------listas--------------------------------

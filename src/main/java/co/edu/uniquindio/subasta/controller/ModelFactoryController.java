@@ -3,10 +3,7 @@ package co.edu.uniquindio.subasta.controller;
 import co.edu.uniquindio.subasta.controller.servicies.IModelFactoryController;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
-import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
-import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
-import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
-import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
+import co.edu.uniquindio.subasta.mapping.dto.*;
 import co.edu.uniquindio.subasta.mapping.mappers.MapperSubasta;
 import co.edu.uniquindio.subasta.model.*;
 import co.edu.uniquindio.subasta.util.ArchivoUtil;
@@ -44,7 +41,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        //cargarDatosBase();
+        cargarDatosBase();
         // salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -58,7 +55,7 @@ public class ModelFactoryController implements IModelFactoryController {
         //4 XML
 
         //guardarResourceXML();
-        cargarResourceXML();
+        //cargarResourceXML();
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
             cargarDatosBase();
@@ -291,6 +288,45 @@ public class ModelFactoryController implements IModelFactoryController {
             // Persistencia.guardarProductos(getSubasta().getAnuncianteLogueado().getListaProducto());
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+//----------------------------Crud Puja---------------------------------------------
+
+
+    @Override
+    public List<PujaDto> obtenerLitaPuja() { //esta en Dto por es la lista que va mostrar
+        ArrayList<Puja>listaPuja=new ArrayList<>(getSubasta().obtenerLitaPuja());
+        return mapper.getPujaDto(listaPuja);
+
+    }
+
+    @Override
+    public boolean realizarPuja(PujaDto pujaDto) throws Exception {
+        Puja puja=mapper.pujaDtoToPuja(pujaDto);
+        if(getSubasta().realizarPuja(puja)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean elimnarPuja(PujaDto pujaDto) throws Exception {
+        Puja puja=mapper.pujaDtoToPuja(pujaDto);
+        if(getSubasta().elimnarPuja(puja)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean actulizarPuja(PujaDto pujaDto) throws Exception {
+        Puja puja=mapper.pujaDtoToPuja(pujaDto);
+        if(getSubasta().actulizarPuja(puja)){
+            return true;
+        }else {
+            return  false;
         }
     }
 

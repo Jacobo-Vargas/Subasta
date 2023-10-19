@@ -4,6 +4,7 @@ import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
+import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.model.*;
 
 import java.util.List;
@@ -32,6 +33,12 @@ public interface ISubastaService {
     boolean agregarAnuncio(Anuncio anuncio) throws AnuncioException;
     boolean eliminarAnuncio(Anuncio anuncio);
     boolean actuaizarAnuncio(Anuncio anuncio);
+
+    //-----------------------Crud Puja-----------------------
+    List<Puja> obtenerLitaPuja();
+    boolean realizarPuja(Puja puja) throws Exception;
+    boolean elimnarPuja(Puja puja) throws Exception;
+    boolean actulizarPuja(Puja puja) throws Exception;
 
 
 }
