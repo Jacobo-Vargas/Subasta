@@ -42,7 +42,7 @@ public class ModelFactoryController implements IModelFactoryController {
         //1. inicializar datos y luego guardarlo en archivos
 
         cargarDatosBase();
-        // salvarDatosPrueba();
+        //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
         //cargarDatosDesdeArchivos();
@@ -86,6 +86,13 @@ public class ModelFactoryController implements IModelFactoryController {
     public List<ProductoDto> obtenerProducto() {
         ArrayList<Producto> lista = new ArrayList<>(getSubasta().obtenerProducto());
         return mapper.getProductoDto(lista);
+    }
+
+    @Override
+    public List<AnuncianteDto> obtenerListaAnunciante() {
+        ArrayList<Anunciante>listaAnunciante= new ArrayList<>(getSubasta().getListaAnunciante());
+        return  mapper.getListaAnunciante(listaAnunciante);
+
     }
 
     @Override
@@ -330,7 +337,14 @@ public class ModelFactoryController implements IModelFactoryController {
         }
     }
 
+    //---------------------------------Anunciante---------------------------
+
     public void setSubasta(Subasta subasta) {
         this.subasta = subasta;
+    }
+
+    //-------------ojo-------------------------
+    public ArrayList<Anunciante>    retornar(){
+        return getSubasta().getListaAnunciante();
     }
 }

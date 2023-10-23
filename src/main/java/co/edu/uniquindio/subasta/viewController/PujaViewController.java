@@ -1,8 +1,11 @@
 package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.PujaController;
+import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
+import co.edu.uniquindio.subasta.model.Anunciante;
+import co.edu.uniquindio.subasta.model.Anuncio;
 import co.edu.uniquindio.subasta.model.Puja;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +18,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PujaViewController {
-
     PujaController pujaController;
     ObservableList<PujaDto>listaPuja= FXCollections.observableArrayList();
-    ObservableList<AnuncioDto>listaAnuncio= FXCollections.observableArrayList();
+    ObservableList<AnuncianteDto>listaAnuncio= FXCollections.observableArrayList();
     @FXML
     public ComboBox<String> comboBoxAnuncio;
     @FXML
@@ -56,9 +58,21 @@ public class PujaViewController {
         llenarCombox();
     }
     public void llenarCombox(){
-        List<String> listaCombo=listaAnuncio.stream().map(AnuncioDto::nombre).collect(Collectors.toList());
-        comboBoxAnuncio.setItems(FXCollections.observableArrayList(listaCombo));
+        List<Anunciante> combo = new ArrayList<>(pujaController.retoar());
+        List<String> nombre=new ArrayList<>();
+        for(int i=0;i<combo.size();i++){
+            List<Anuncio>lista=combo.get(i).getListaAnucio();
+            if(lista != null){
+                for(int h=0;h<lista.size();h++){
+                    nombre.add(lista.get(h).getNombre());
+                    System.out.println(lista.get(h).getNombre());
+                }
+            }
+        }
+        ObservableList<String>lista=FXCollections.observableArrayList(nombre);
+        comboBoxAnuncio.setItems(lista);
     }
+
     public void updateCombo(){
         initialize();
     }

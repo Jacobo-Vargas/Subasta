@@ -1,8 +1,10 @@
 package co.edu.uniquindio.subasta.controller;
 
 import co.edu.uniquindio.subasta.controller.servicies.IPujaControllerService;
+import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
+import co.edu.uniquindio.subasta.model.Anunciante;
 
 import java.util.List;
 
@@ -34,7 +36,11 @@ public class PujaController implements IPujaControllerService {
     }
 
     @Override
-    public List<AnuncioDto> ObenerlistaAnuncio() {
-        return modelFactoryController.obtenerAnuncio();
+    public List<AnuncianteDto> ObenerlistaAnuncio() {
+        return modelFactoryController.obtenerListaAnunciante();
+    }
+
+    public List<Anunciante> retoar(){
+        return modelFactoryController.retornar();
     }
 }
