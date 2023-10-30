@@ -180,6 +180,18 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
 
+    @Override
+    public List<Anuncio> obtenerListaAnuncio() {
+        List<Anuncio> listaAnuncio = new ArrayList<>();
+        for (int i = 0; i < listaAnunciante.size(); i++) {
+            for (int h = 0; h < listaAnunciante.get(i).getListaAnucio().size(); h++) {
+                listaAnuncio.add(listaAnunciante.get(i).getListaAnucio().get(h));
+                System.out.println(listaAnunciante.get(i).getListaAnucio().get(h));
+            }
+        }
+        return listaAnuncio;
+
+    }
     //----------------------listas--------------------------------
 
     public ArrayList<Anunciante> getListaAnunciante() {

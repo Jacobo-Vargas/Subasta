@@ -90,7 +90,8 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<AnuncianteDto> obtenerListaAnunciante() {
-        ArrayList<Anunciante>listaAnunciante= new ArrayList<>(getSubasta().getListaAnunciante());
+        ArrayList<Anunciante>listaAnunciante= new ArrayList<>();
+        listaAnunciante=getSubasta().getListaAnunciante();
         return  mapper.getListaAnunciante(listaAnunciante);
 
     }
@@ -337,6 +338,17 @@ public class ModelFactoryController implements IModelFactoryController {
         }
     }
 
+    @Override
+    public List<AnuncioDto> obtenerListaNuncio() {
+        List<Anuncio>lista=new ArrayList<>();
+        lista=getSubasta().obtenerListaAnuncio();
+        List<AnuncioDto>listaRetornar=new ArrayList<>();
+        for(int i=0;i<lista.size();i++){
+            Anuncio anuncio=lista.get(i);
+            listaRetornar.add(mapper.anuncioToAnuncioDto(anuncio));
+        }
+        return listaRetornar;
+    }
     //---------------------------------Anunciante---------------------------
 
     public void setSubasta(Subasta subasta) {
@@ -344,7 +356,4 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     //-------------ojo-------------------------
-    public ArrayList<Anunciante>    retornar(){
-        return getSubasta().getListaAnunciante();
-    }
 }

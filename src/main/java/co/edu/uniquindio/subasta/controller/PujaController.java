@@ -36,11 +36,7 @@ public class PujaController implements IPujaControllerService {
     }
 
     @Override
-    public List<AnuncianteDto> ObenerlistaAnuncio() {
-        return modelFactoryController.obtenerListaAnunciante();
-    }
-
-    public List<Anunciante> retoar(){
-        return modelFactoryController.retornar();
+    public List<AnuncioDto> obtenerListaNuncio() {
+        return modelFactoryController.obtenerListaNuncio();
     }
 }

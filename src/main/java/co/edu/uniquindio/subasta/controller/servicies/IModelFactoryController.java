@@ -53,8 +53,11 @@ public interface IModelFactoryController {
 
     boolean actulizarPuja(PujaDto pujaDto) throws Exception;
 
+
     //-----------------------anunciante---------------------------
     List<AnuncianteDto> obtenerListaAnunciante();
+
+    List<AnuncioDto>obtenerListaNuncio();
 
 
 

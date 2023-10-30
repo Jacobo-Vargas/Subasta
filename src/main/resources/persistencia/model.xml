@@ -13,7 +13,7 @@
         <string>1</string>
        </void>
        <void property="descripcion">
-        <string>sdfsdfsfdgsfg</string>
+        <string>fdsf</string>
        </void>
        <void property="fechaPublicacion">
         <string>null</string>
@@ -28,7 +28,7 @@
         <object class="java.util.ArrayList"/>
        </void>
        <void property="nombre">
-        <string>peluche</string>
+        <string>pepas</string>
        </void>
        <void property="nombreAnunciante">
         <string>jose</string>
@@ -60,7 +60,7 @@
         <string>1</string>
        </void>
        <void property="descripcion">
-        <string>sdfsdfsfdgsfg</string>
+        <string>fdsf</string>
        </void>
        <void property="fechaPublicacion">
         <string>null</string>
@@ -75,7 +75,7 @@
         <object class="java.util.ArrayList"/>
        </void>
        <void property="nombre">
-        <string>perro</string>
+        <string>perico</string>
        </void>
        <void property="nombreAnunciante">
         <string>jose</string>
@@ -142,7 +142,7 @@
          <string>1</string>
         </void>
         <void property="descripcion">
-         <string>dkhsflgf</string>
+         <string>afd</string>
         </void>
         <void property="fechaPublicacion">
          <string>null</string>
@@ -157,7 +157,7 @@
          <object class="java.util.ArrayList"/>
         </void>
         <void property="nombre">
-         <string>nkd</string>
+         <string>tusy</string>
         </void>
         <void property="nombreAnunciante">
          <string>juan</string>
@@ -189,7 +189,7 @@
          <string>1</string>
         </void>
         <void property="descripcion">
-         <string>dkhsflgf</string>
+         <string>afd</string>
         </void>
         <void property="fechaPublicacion">
          <string>null</string>
@@ -204,7 +204,7 @@
          <object class="java.util.ArrayList"/>
         </void>
         <void property="nombre">
-         <string>teta</string>
+         <string>bareta</string>
         </void>
         <void property="nombreAnunciante">
          <string>juan</string>
