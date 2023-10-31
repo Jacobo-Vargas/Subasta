@@ -6,7 +6,6 @@ import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.*;
 import co.edu.uniquindio.subasta.mapping.mappers.MapperSubasta;
 import co.edu.uniquindio.subasta.model.*;
-import co.edu.uniquindio.subasta.util.ArchivoUtil;
 import co.edu.uniquindio.subasta.util.Persistencia;
 import co.edu.uniquindio.subasta.util.SubastaUtil;
 
@@ -321,7 +320,7 @@ public class ModelFactoryController implements IModelFactoryController {
     @Override
     public boolean elimnarPuja(PujaDto pujaDto) throws Exception {
         Puja puja=mapper.pujaDtoToPuja(pujaDto);
-        if(getSubasta().elimnarPuja(puja)){
+        if(getSubasta().eliminarPuja(puja)){
             return true;
         }else{
             return false;
@@ -331,7 +330,7 @@ public class ModelFactoryController implements IModelFactoryController {
     @Override
     public boolean actulizarPuja(PujaDto pujaDto) throws Exception {
         Puja puja=mapper.pujaDtoToPuja(pujaDto);
-        if(getSubasta().actulizarPuja(puja)){
+        if(getSubasta().actualizarPuja(puja)){
             return true;
         }else {
             return  false;
