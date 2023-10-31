@@ -6,6 +6,7 @@ import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.Anuncio;
 import co.edu.uniquindio.subasta.model.Producto;
+import co.edu.uniquindio.subasta.util.AlertaUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,9 +99,12 @@ public class CrearAnuncioViewController {
 
         AnuncioDto anuncioDto = crearAnuncioDto(productoDtoAsociado);
 
-        anuncioController.agregarAnuncio(anuncioDto);
-        listaAnuncioDto.add(anuncioDto);
-        tvAnuncios.refresh();
+        if(anuncioController.agregarAnuncio(anuncioDto)){
+            listaAnuncioDto.add(anuncioDto);
+            tvAnuncios.refresh();
+        }else {
+            AlertaUtil.mostrarMensajeError("Tiene 3 Anuncios activos");
+        }
     }
 
     @FXML
@@ -177,13 +181,14 @@ public class CrearAnuncioViewController {
     }
 
     private void mostrarInformacionAnuncio(AnuncioDto anuncioDtoSelecionado) {
-
-        txtDescripcion.setText(anuncioDtoSelecionado.descripcion());
-        txtValorInicial.setText(String.valueOf(anuncioDtoSelecionado.valorInicial()));
-        txtCodigo.setText(String.valueOf(anuncioDtoSelecionado.codigo()));
-        dateInicio.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaPublicacion())));
-        dateFin.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaTerminacion())));
-        cBoxProducto.setValue(anuncioDtoSelecionado.producto().nombre());
+        if (anuncioDtoSelecionado != null) {
+            txtDescripcion.setText(anuncioDtoSelecionado.descripcion());
+            txtValorInicial.setText(String.valueOf(anuncioDtoSelecionado.valorInicial()));
+            txtCodigo.setText(String.valueOf(anuncioDtoSelecionado.codigo()));
+            dateInicio.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaPublicacion())));
+            dateFin.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaTerminacion())));
+            cBoxProducto.setValue(anuncioDtoSelecionado.producto().nombre());
+        }
     }
 
     private AnuncioDto crearAnuncioDto(ProductoDto productoDtoAsociado) {

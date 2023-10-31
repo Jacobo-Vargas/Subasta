@@ -34,8 +34,8 @@ public interface ISubastaService {
     //-----------------------Crud Puja-----------------------
     List<Puja> obtenerLitaPuja();
     boolean realizarPuja(Puja puja) throws Exception;
-    boolean elimnarPuja(Puja puja) throws Exception;
-    boolean actulizarPuja(Puja puja) throws Exception;
+    boolean eliminarPuja(Puja puja) throws Exception;
+    boolean actualizarPuja(Puja puja) throws Exception;
     public List<Anuncio> obtenerListaAnuncio();
 
 
