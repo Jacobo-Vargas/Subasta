@@ -42,7 +42,6 @@ public class ProductoViewController {
     }
 
     private void initView() {
-
         llenarComboBox();
         obtenerProducto();
         initDataBinding();
@@ -50,11 +49,9 @@ public class ProductoViewController {
     }
 
     private void initDataBinding() {
-
         tcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcTipoArticulo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().tipoArticulo())));
         tcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
-
     }
 
     private void obtenerProducto() {

@@ -5,6 +5,7 @@ import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.model.Anunciante;
+import co.edu.uniquindio.subasta.model.Anuncio;
 
 import java.util.List;
 
@@ -38,5 +39,10 @@ public class PujaController implements IPujaControllerService {
     @Override
     public List<AnuncioDto> obtenerListaNuncio() {
         return modelFactoryController.obtenerListaNuncio();
+    }
+
+    @Override
+    public Anuncio salvarAnuncio(String nombre) {
+        return modelFactoryController.salvarAnuncio(nombre);
     }
 }

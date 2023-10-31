@@ -21,7 +21,7 @@ public class Anuncio implements Serializable {
     private float valorInicial;
     private String codigo ;
 
-    private ArrayList<Puja> listaPujas ;
+    private ArrayList<Puja> listaPujas=new ArrayList<>() ;
 
     public Anuncio() {
     }

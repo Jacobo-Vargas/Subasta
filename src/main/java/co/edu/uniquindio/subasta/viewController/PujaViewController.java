@@ -1,23 +1,28 @@
 package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.PujaController;
-import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
-import co.edu.uniquindio.subasta.model.Anunciante;
 import co.edu.uniquindio.subasta.model.Anuncio;
+import co.edu.uniquindio.subasta.model.Puja;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PujaViewController {
+
     PujaController pujaController;
     ObservableList<PujaDto> listaPuja = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnuncio = FXCollections.observableArrayList();
+    @FXML
+    public TextField textFieldCodigo;
     @FXML
     public ComboBox<String> comboBoxAnuncio;
     @FXML
@@ -27,7 +32,7 @@ public class PujaViewController {
     @FXML
     public Button botonPuja;
     @FXML
-    public TableView<PujaDto> TableViewTabla;
+    public TableView<PujaDto> tableViewTabla;
     @FXML
     public TableColumn<PujaDto, String> tableColumnCodigo;
     @FXML
@@ -38,13 +43,14 @@ public class PujaViewController {
     public TableColumn<PujaDto, String> tableColumnValorPuja;
     @FXML
     public TableColumn<PujaDto, String> tableColumnFecha;
-    @FXML
-    public TableColumn<PujaDto, String> tableColumnNumeroPujas;
+
 
     @FXML
     void initialize() {
         pujaController = new PujaController();
         obtenerlistas();
+        tableViewTabla.setItems(listaPuja);
+        initDataBinding();
     }
 
     public void obtenerlistas() {
@@ -53,6 +59,12 @@ public class PujaViewController {
         listaAnuncio.addAll(pujaController.obtenerListaNuncio());
         listaPuja.addAll(pujaController.obtenerLitaPuja());
         llenarCombox();
+    }
+    private void initDataBinding() {
+        tableColumnDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().direccion()));
+        tableColumnCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
+        tableColumnValorPuja.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().oferta())));
+        tableColumnFecha.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaPuja())));
     }
 
     public void llenarCombox() {
@@ -68,5 +80,19 @@ public class PujaViewController {
 
     public void updateCombo() {
         initialize();
+    }
+
+    public void relizarPuja(ActionEvent actionEvent) throws Exception {
+
+        String nombreAnuncio=comboBoxAnuncio.getValue();
+        String direccion=textFieldDireccion.getText();
+        String codigo=textFieldCodigo.getText();
+        float ofertaInicial=Float.valueOf(textFieldValorInicial.getText());
+        LocalDate fecha= LocalDate.now();
+        Anuncio anuncio=pujaController.salvarAnuncio(nombreAnuncio);
+        PujaDto pujaDto=new PujaDto(direccion,codigo,ofertaInicial,fecha,anuncio);
+        pujaController.realizarPuja(pujaDto);
+
+
     }
 }

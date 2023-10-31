@@ -349,6 +349,16 @@ public class ModelFactoryController implements IModelFactoryController {
         }
         return listaRetornar;
     }
+
+    @Override
+    public Anuncio salvarAnuncio(String nombre) {
+        for(Anuncio anuncio:getSubasta().obtenerListaAnuncio()){
+            if(anuncio.getNombre().equals(nombre)){
+                return anuncio;
+            }
+        }
+        return null;
+    }
     //---------------------------------Anunciante---------------------------
 
     public void setSubasta(Subasta subasta) {

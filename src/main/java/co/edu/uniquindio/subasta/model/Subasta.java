@@ -132,25 +132,22 @@ public class Subasta implements ISubastaService, Serializable {
     @Override
     public boolean realizarPuja(Puja puja) throws Exception {
         if (compradorLogueado.getListaPujas().add(puja)) {
+            System.out.println(compradorLogueado.getListaPujas().size());
             for (int i = 0; i < listaAnunciante.size(); i++) {
-
                 for (int j = 0; j < listaAnunciante.get(i).getListaAnucio().size(); j++) {
-
-                    for (int h = 0; h < listaAnunciante.get(i).getListaAnucio().get(i).getListaPujas().size(); h++) {
-
-                        if (listaAnunciante.get(i).getListaAnucio().get(i).getListaPujas().get(h).getCodigo().equals(puja.getCodigo())) {
-
-                            listaAnunciante.get(i).getListaAnucio().get(i).getListaPujas().add(puja);
+                    for (int h = 0; h < listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().size(); h++) {
+                        if (listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().get(h).getCodigo().equals(puja.getAnuncio().getCodigo())) {
+                            listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().add(puja);
+                            System.out.println(listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().size());
+                            return true;
                         }
                     }
                 }
-
             }
-            return true;
-        } else {
-            throw new Exception("No se puedo relizar la Puja");
-        }
+            }
+        throw new Exception("No se puedo relizar la Puja");
     }
+
 
     @Override
     public boolean elimnarPuja(Puja puja) throws Exception {

@@ -69,7 +69,7 @@ public  class SubastaUtil {
         usuario2.setContrasenia("1234567890");
         usuario2.setContrasenia("1234567890");
 
-        Comprador c2=new Comprador();
+        Comprador  c2=new Comprador();
         c2.setNombre("lisa");
         c2.setApellido("Maya");
         c2.setCedula("1234567890");
@@ -77,8 +77,27 @@ public  class SubastaUtil {
         c2.setTelefono("21312");
         c2.setDireccion("terranova");
         c2.setUsuario(usuario2);
+
         subasta.getListaCompradores().add(c);
         subasta.getListaCompradores().add(c2);
+
+        Anuncio anuncio=new Anuncio();
+        anuncio.setNombre("tv");
+        anuncio.setProducto(producto1);
+        anuncio.setFechaPublicacion("hola mundo");
+        anuncio.setDescripcion("tv en venta");
+        anuncio.setProducto(producto);
+
+        a1.getListaAnucio().add(anuncio);
+         Puja puja=new Puja();
+         puja.setDireccion("casa 20");
+         puja.setCodigo("1");
+         puja.setOfertaInicial(2);
+         puja.setAnuncio(anuncio);
+         //c.getListaPujas().add(puja);
+
+
+
         return subasta;
 
 

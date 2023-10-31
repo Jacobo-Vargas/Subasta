@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.controller.servicies;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.*;
+import co.edu.uniquindio.subasta.model.Anuncio;
 
 import java.util.List;
 
@@ -52,12 +53,14 @@ public interface IModelFactoryController {
     boolean elimnarPuja(PujaDto pujaDto) throws Exception;
 
     boolean actulizarPuja(PujaDto pujaDto) throws Exception;
-
-
-    //-----------------------anunciante---------------------------
+    Anuncio salvarAnuncio(String nombre);
     List<AnuncianteDto> obtenerListaAnunciante();
 
     List<AnuncioDto>obtenerListaNuncio();
+
+
+    //-----------------------anunciante---------------------------
+
 
 
 
