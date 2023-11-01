@@ -18,11 +18,6 @@ public class ModelFactoryController implements IModelFactoryController {
     MapperSubasta mapper = MapperSubasta.INSTANCE;
 
 
-    public Subasta getSubasta() {
-        return subasta;
-    }
-
-
     private static class SingletonHolder {
         private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
     }
@@ -40,7 +35,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        cargarDatosBase();
+       // cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -54,7 +49,7 @@ public class ModelFactoryController implements IModelFactoryController {
         //4 XML
 
         //guardarResourceXML();
-        //cargarResourceXML();
+        cargarResourceXML();
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
             cargarDatosBase();
@@ -65,6 +60,85 @@ public class ModelFactoryController implements IModelFactoryController {
     private void cargarDatosBase() {
         subasta = SubastaUtil.cargarDatos();
     }
+
+
+
+
+
+
+
+
+
+
+
+//  --------------------------------------- Registro ---------------------------
+
+    @Override
+    public boolean agregarAnunciante(AnuncianteDto anuncianteDto) {
+        try {
+
+            if (!(subasta.verificarExistenciaAnunciante(anuncianteDto.cedula()))) {
+                getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
+                registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
+                guardarResourceXML();
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean agregarComprador(CompradorDto compradorDto) {
+        try {
+            if (!(subasta.verificarExistenciaComprador(compradorDto.cedula()))) {
+                getSubasta().getListaCompradores().add(mapper.compradorDtoToComprador(compradorDto));
+                registrarAccionesSistema("Agregar Comprador", 1, "agregarComprador");
+                guardarResourceXML();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+//---------------------------------------Login ------------------------------------------
+
+    @Override
+    public boolean verificarAccesoComprador(String cedula, String contrasenia) {
+        boolean acceso = false;
+
+        for (Comprador c : getSubasta().getListaCompradores()) {
+            if (c.getCedula().equals(cedula) && c.getUsuario().getContrasenia().equals(contrasenia)) {
+                getSubasta().setCompradorLogueado(c);
+                registrarAccionesSistema( c.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
+                acceso = true;
+            }
+        }
+        return acceso;
+    }
+
+    @Override
+    public boolean verificarAccesoAnunciante(String cedula, String contrasenia) {
+        boolean acceso = false;
+
+        for (Anunciante a : getSubasta().getListaAnunciante()) {
+            if (a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)) {
+                getSubasta().setAnuncianteLogueado(a);
+                registrarAccionesSistema(a.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
+                acceso = true;
+            }
+        }
+        return acceso;
+    }
+
 
     public boolean restaurarLogueo() {
 
@@ -80,7 +154,52 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
-    //    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
+    //-------------------------------   PERSISTENCIA ------------------------------------
+
+    private void crearCopiaDeSeguridad() {
+        Persistencia.crearCopiaSeguridadXML();
+        registrarAccionesSistema("Copia de seguridad", 1, "crearCopiaSeguridad");
+    }
+
+    private void cargarResourceXML() {
+        subasta = Persistencia.cargarRecursoSubastaXML();
+    }
+
+    private void guardarResourceXML() {
+        Persistencia.guardarRecursoSubastaXML(subasta);
+    }
+
+    private void cargarResourceBinario() {
+        subasta = Persistencia.cargarRecursoSubastaBinario();
+    }
+
+    private void guardarResourceBinario() {
+        Persistencia.guardarRecursoBancoBinario(subasta);
+    }
+
+    public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
+        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
+    }
+
+    private void cargarDatosDesdeArchivos() {
+        subasta = new Subasta();
+        try {
+            Persistencia.cargarDatosArchivos(subasta);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void salvarDatosPrueba() {
+        try {
+            Persistencia.guardarCompradores(getSubasta().getListaCompradores());
+            Persistencia.guardarAnunciantes(getSubasta().getListaAnunciante());
+            // Persistencia.guardarProductos(getSubasta().getAnuncianteLogueado().getListaProducto());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+//    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
     @Override
     public List<ProductoDto> obtenerProducto() {
         ArrayList<Producto> lista = new ArrayList<>(getSubasta().obtenerProducto());
@@ -137,8 +256,6 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
 
-
-
 //    ---------------------------------------- CRUD ANUNCIO ----------------------------//
 
 
@@ -176,127 +293,6 @@ public class ModelFactoryController implements IModelFactoryController {
         return false;
     }
 
-
-//  --------------------------------------- Registro ---------------------------
-
-
-    @Override
-    public boolean agregarAnunciante(AnuncianteDto anuncianteDto) {
-        try {
-
-            if (!(subasta.verificarExistenciaAnunciante(anuncianteDto.cedula()))) {
-                getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
-                System.out.println(getSubasta().getListaAnunciante().size());
-                registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
-                guardarResourceXML();
-                return true;
-            } else {
-                System.out.println(getSubasta().getListaAnunciante().size());
-                return false;
-            }
-
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
-
-    @Override
-    public boolean agregarComprador(CompradorDto compradorDto) {
-        try {
-            if (!(subasta.verificarExistenciaComprador(compradorDto.cedula()))) {
-                Comprador c = mapper.compradorDtoToComprador(compradorDto);
-                getSubasta().getListaCompradores().add(c);
-                System.out.println(getSubasta().getListaCompradores().size());
-                registrarAccionesSistema("Agregar Comprador", 1, "agregarComprador");
-                guardarResourceXML();
-                return true;
-            } else {
-                System.out.println(getSubasta().getListaCompradores().size());
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-
-//---------------------------------------Login ------------------------------------------
-
-    @Override
-    public boolean verificarAccesoComprador(String cedula, String contrasenia) {
-        boolean acceso = false;
-
-        for (Comprador c : getSubasta().getListaCompradores()) {
-            if (c.getCedula().equals(cedula) && c.getUsuario().getContrasenia().equals(contrasenia)) {
-                getSubasta().setCompradorLogueado(c);
-                registrarAccionesSistema( c.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
-                acceso = true;
-            }
-        }
-        return acceso;
-    }
-
-    @Override
-    public boolean verificarAccesoAnunciante(String cedula, String contrasenia) {
-        boolean acceso = false;
-
-        for (Anunciante a : getSubasta().getListaAnunciante()) {
-            if (a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)) {
-                getSubasta().setAnuncianteLogueado(a);
-                registrarAccionesSistema(a.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
-                acceso = true;
-            }
-        }
-        return acceso;
-    }
-
-
-    //-------------------------------   PERSISTENCIA ------------------------------------
-
-    private void crearCopiaDeSeguridad() {
-        Persistencia.crearCopiaSeguridadXML();
-        registrarAccionesSistema("Copia de seguridad", 1, "crearCopiaSeguridad");
-    }
-
-    private void cargarResourceXML() {
-        subasta = Persistencia.cargarRecursoSubastaXML();
-    }
-
-    private void guardarResourceXML() {
-        Persistencia.guardarRecursoSubastaXML(subasta);
-    }
-
-    private void cargarResourceBinario() {
-        subasta = Persistencia.cargarRecursoSubastaBinario();
-    }
-
-    private void guardarResourceBinario() {
-        Persistencia.guardarRecursoBancoBinario(subasta);
-    }
-
-    public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
-        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
-    }
-
-    private void cargarDatosDesdeArchivos() {
-        subasta = new Subasta();
-        try {
-            Persistencia.cargarDatosArchivos(subasta);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void salvarDatosPrueba() {
-        try {
-            Persistencia.guardarCompradores(getSubasta().getListaCompradores());
-            Persistencia.guardarAnunciantes(getSubasta().getListaAnunciante());
-            // Persistencia.guardarProductos(getSubasta().getAnuncianteLogueado().getListaProducto());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 //----------------------------Crud Puja---------------------------------------------
 
 
@@ -358,11 +354,11 @@ public class ModelFactoryController implements IModelFactoryController {
         }
         return null;
     }
-    //---------------------------------Anunciante---------------------------
-
+//---------------------------- GETTERS Y SETTERS ------------------------------------
     public void setSubasta(Subasta subasta) {
         this.subasta = subasta;
     }
-
-    //-------------ojo-------------------------
+    public Subasta getSubasta() {
+        return subasta;
+    }
 }

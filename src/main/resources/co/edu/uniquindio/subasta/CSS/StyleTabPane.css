@@ -1,28 +1,3 @@
-/* Estilo para el TabPane */
-.tab-pane {
-    -fx-background-color: #f0f0f0; /* Color de fondo del TabPane */
-}
-
-/* Estilo para las pestañas */
-.tab {
-    -fx-background-color: rgba(56, 40, 100, 0.47); /* Color de fondo de las pestañas */
-    -fx-font-size: 12px; /* Tamaño de fuente de las pestañas */
-}
-
-/* Estilo para el contenido de las pestañas */
-.tab-content {
-    -fx-background-color: #ffffff; /* Color de fondo del contenido de las pestañas */
-}
-
-/* Estilo para las pestañas seleccionadas */
-.tab-pane .tab:selected .tab-label {
-    -fx-text-fill: #ffffff; /* Color del texto de la pestaña seleccionada */
-}
-
-/* Estilo para las pestañas no seleccionadas */
-.tab-pane .tab .tab-label {
-    -fx-text-fill: #000000; /* Color del texto de las pestañas no seleccionadas */
-}
 .check-box{
     -fx-text-fill: #ffffff;
 }

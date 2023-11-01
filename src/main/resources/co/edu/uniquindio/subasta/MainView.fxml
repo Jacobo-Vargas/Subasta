@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600" prefWidth="750" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" >
-   <children>
-      <TabPane prefHeight="600.0" prefWidth="750.0" stylesheets="@CSS/StyleTabPane.css" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Ver anuncios">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="774.0" />
-            </content>
-          </Tab>
-          <Tab text="Acceder">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="774.0" />
-                <fx:include source="LoginView.fxml"> </fx:include>
-            </content>
-          </Tab>
-            <Tab text="Registro">
-                <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="426.0" prefWidth="774.0" />
-                    <fx:include source="RegistroView.fxml"> </fx:include>
-                </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+<TabPane prefHeight="600.0" prefWidth="750.0" styleClass="root" stylesheets="@CSS/StyleTabPane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <tabs>
+      <Tab text="Ver anuncios" />
+      <Tab text="Acceder">
+         <content>
+            <fx:include source="LoginView.fxml" />
+         </content>
+      </Tab>
+      <Tab text="Registro">
+         <content>
+            <fx:include source="RegistroView.fxml" />
+         </content>
+      </Tab>
+   </tabs>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</TabPane>

@@ -122,7 +122,7 @@ public class Subasta implements ISubastaService, Serializable {
         return false;
     }
 
-    //----------------------------------Crud Puja------------------------
+//    ----------------------------------Crud Puja------------------------
 
     @Override
     public List<Puja> obtenerLitaPuja() {
@@ -150,7 +150,7 @@ public class Subasta implements ISubastaService, Serializable {
 
 
     @Override
-    public boolean elimnarPuja(Puja puja) throws Exception {
+    public boolean eliminarPuja(Puja puja) throws Exception {
         if (compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()))) {
             return true;
         } else {
@@ -159,7 +159,7 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
     @Override
-    public boolean actulizarPuja(Puja puja) throws Exception {
+    public boolean actualizarPuja(Puja puja) throws Exception {
         boolean actulizado = false;
         for (Puja p : compradorLogueado.getListaPujas()) {
             if (p.getCodigo().equals(puja.getCodigo())) {
