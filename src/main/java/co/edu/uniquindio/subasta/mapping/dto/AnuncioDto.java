@@ -1,9 +1,8 @@
 package co.edu.uniquindio.subasta.mapping.dto;
 
-import co.edu.uniquindio.subasta.model.Producto;
-import co.edu.uniquindio.subasta.model.Puja;
 import javafx.scene.image.Image;
-import java.time.LocalDate;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public record AnuncioDto(
@@ -12,15 +11,12 @@ public record AnuncioDto(
         String descripcion,
         String foto,
         String nombreAnunciante,
-
         String fechaPublicacion,
         String fechaTerminacion,
-        float valorInicial,
+        double valorInicial,
         String codigo,
 
         ArrayList<PujaDto> listaPujas
-
-
 ) {
 
 }

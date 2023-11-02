@@ -27,9 +27,9 @@ public interface ISubastaService {
 
     List<Anuncio> obtenerAnuncio();
 
-    boolean agregarAnuncio(Anuncio anuncio) throws AnuncioException;
-    boolean eliminarAnuncio(Anuncio anuncio);
-    boolean actuaizarAnuncio(Anuncio anuncio);
+    int agregarAnuncio(Anuncio anuncio) throws AnuncioException;
+    boolean eliminarAnuncio(Anuncio anuncio) throws AnuncioException;
+    boolean actualizarAnuncio(Anuncio anuncio) throws AnuncioException;
 
     //-----------------------Crud Puja-----------------------
     List<Puja> obtenerLitaPuja();

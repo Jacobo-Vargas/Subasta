@@ -7,8 +7,6 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -16,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane prefHeight="599.0" prefWidth="774" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.LoginViewController">
+<GridPane prefHeight="599.0" prefWidth="774" styleClass="gridFondo" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.LoginViewController">
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="400.0" prefWidth="400.0" />
     </columnConstraints>
@@ -24,14 +22,9 @@
         <RowConstraints minHeight="250.0" valignment="CENTER" vgrow="ALWAYS" />
     </rowConstraints>
     <children>
-      <ImageView fitHeight="601.0" fitWidth="776.0" pickOnBounds="true" styleClass="root">
-         <image>
-            <Image url="@Imagenes%20app/fondoLogin.jpg" />
-         </image>
-      </ImageView>
       <VBox alignment="CENTER" prefHeight="372.0" prefWidth="538.0" styleClass="root" stylesheets="@CSS/Style.css">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" wrappingWidth="240.9560546875">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="¡BIENVENIDO!" textAlignment="CENTER" wrappingWidth="240.9560546875">
                <font>
                   <Font size="32.0" />
                </font>
@@ -49,7 +42,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                </rowConstraints>
                <children>
-                  <FontAwesomeIconView glyphName="USER" selectionFill="BLACK" size="25" stroke="#515190" strokeLineJoin="ROUND" textAlignment="CENTER">
+                  <FontAwesomeIconView glyphName="USER" selectionFill="BLACK" size="25" stroke="WHITE" strokeLineJoin="ROUND" textAlignment="CENTER">
                      <GridPane.margin>
                         <Insets left="110.0" />
                      </GridPane.margin>
@@ -62,7 +55,7 @@
                         <Insets bottom="2.0" left="5.0" right="45.0" top="2.0" />
                      </GridPane.margin>
                   </TextField>
-                  <FontAwesomeIconView glyphName="LOCK" size="25" stroke="#515190" strokeLineJoin="ROUND" textAlignment="CENTER" wrappingWidth="22.071428298950195" GridPane.rowIndex="1">
+                  <FontAwesomeIconView glyphName="LOCK" size="25" stroke="WHITE" strokeLineJoin="ROUND" textAlignment="CENTER" wrappingWidth="22.071428298950195" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="110.0" />
                      </GridPane.margin>
@@ -93,7 +86,7 @@
                   <Insets left="55.0" right="55.0" />
                </VBox.margin>
             </Separator>
-            <JFXButton alignment="TOP_LEFT" onAction="#recuperarPass" prefHeight="25.0" prefWidth="178.0" styleClass="btnRecuperarPass" stylesheets="@CSS/Style.css" text="¿Olvidaste tu contraseña?" textAlignment="CENTER">
+            <JFXButton alignment="TOP_LEFT" onAction="#recuperarPass" prefHeight="25.0" prefWidth="178.0" styleClass="btnRecuperarPass" stylesheets="@CSS/Style.css" text="¿Olvidaste tu contraseña?" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Book Antiqua Bold" size="12.0" />
                </font>

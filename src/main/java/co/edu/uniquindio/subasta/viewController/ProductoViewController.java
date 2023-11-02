@@ -91,6 +91,8 @@ public class ProductoViewController {
             tvProducto.refresh();
             limpiarCampos();
 
+        }else{
+            AlertaUtil.mostrarMensajeError("No se pudo actualizar, intente más tarde.");
         }
     }
 

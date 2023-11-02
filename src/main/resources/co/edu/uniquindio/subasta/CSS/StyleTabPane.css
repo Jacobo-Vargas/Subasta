@@ -1,5 +1,12 @@
 .check-box{
     -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+}
+.check-box:selected {
+    -fx-background-color: transparent;
+}
+.checkbox:focused {
+    -fx-background-color: transparent;
 }
 .table-view {
     -fx-background-color: #f0f0f0; /* Color de fondo de la tabla */

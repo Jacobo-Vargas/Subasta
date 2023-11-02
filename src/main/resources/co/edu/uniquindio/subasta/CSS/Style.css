@@ -2,20 +2,23 @@
     -fx-background-radius: 10;
     -fx-background-color: rgba(255, 255, 255, 0.07);
 }
+.label {
+    -fx-text-fill: rgb(255, 255, 255);
+}
 
 .btn{
-    -fx-background-color: linear-gradient(to bottom, #516693, #204872);
+    -fx-background-color: linear-gradient(to bottom, #a29c9c, #ffffff);
     -fx-cursor: HAND;
     -fx-background-radius: 30;
     -fx-padding: 10 20 10 20;
 }
 .btn:hover{
-    -fx-background-color: rgba(192, 191, 194, 0.85);
+    -fx-background-color: linear-gradient(to bottom, #516693, #204872);
 
 }
 .btnRecuperarPass{
     -fx-background-color: rgba(0, 0, 0, 0);
-    -fx-text-fill: #000000;
+    -fx-text-fill: #ffffff;
 }
 .table-view{
     -fx-text-fill: #000000;
@@ -38,4 +41,10 @@
 .fondo {
     -fx-background-color: rgba(255, 255, 255, 0.15);
     -fx-border-radius: 10;
+}
+
+.gridFondo {
+    -fx-background-image: url("imagenes/fondoLogin.jpg");
+    -fx-background-size: cover; /* Ajustar el tamaño de la imagen para cubrir todo el GridPane */
+    -fx-background-repeat: no-repeat; /* Evitar la repetición de la imagen */
 }

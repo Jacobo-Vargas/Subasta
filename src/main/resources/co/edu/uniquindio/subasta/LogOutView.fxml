@@ -26,7 +26,7 @@
                   <Insets />
                </VBox.margin>
                <image>
-                  <Image url="@Imagenes app/logo.png" />
+                  <Image url="@../../../../imagenes/logo.png" />
                </image>
             </ImageView>
             <Label text="Vuelve pronto.">

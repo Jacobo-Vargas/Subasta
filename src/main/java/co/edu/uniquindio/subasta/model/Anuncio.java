@@ -1,10 +1,13 @@
 package co.edu.uniquindio.subasta.model;
 
+
+import javafx.scene.image.Image;
+
+import java.io.File;
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 
 public class Anuncio implements Serializable {
     @Serial
@@ -18,10 +21,10 @@ public class Anuncio implements Serializable {
     private String fechaPublicacion;
     private String fechaTerminacion;
 
-    private float valorInicial;
-    private String codigo ;
+    private double valorInicial;
+    private String codigo;
 
-    private ArrayList<Puja> listaPujas=new ArrayList<>() ;
+    private ArrayList<Puja> listaPujas = new ArrayList<>();
 
     public Anuncio() {
     }
@@ -82,11 +85,11 @@ public class Anuncio implements Serializable {
         this.fechaTerminacion = fechaTerminacion;
     }
 
-    public float getValorInicial() {
+    public double getValorInicial() {
         return valorInicial;
     }
 
-    public void setValorInicial(float valorInicial) {
+    public void setValorInicial(double valorInicial) {
         this.valorInicial = valorInicial;
     }
 
@@ -112,7 +115,7 @@ public class Anuncio implements Serializable {
                 "producto=" + producto +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", foto='" + foto + '\'' +
+                ", foto=" + foto +
                 ", nombreAnunciante='" + nombreAnunciante + '\'' +
                 ", fechaPublicacion='" + fechaPublicacion + '\'' +
                 ", fechaTerminacion='" + fechaTerminacion + '\'' +

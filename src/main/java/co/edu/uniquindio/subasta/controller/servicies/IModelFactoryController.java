@@ -23,11 +23,11 @@ public interface IModelFactoryController {
 
     String recuperarNombreAnunciante();
 
-    boolean agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
+    int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
 
-    boolean eliminarAnuncio(AnuncioDto anuncioDto);
+    boolean eliminarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
 
-    boolean actuaizarAnuncio(AnuncioDto anuncioDto);
+    boolean actualizarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
 
 //----------------------------Crud Puja--------------------
 

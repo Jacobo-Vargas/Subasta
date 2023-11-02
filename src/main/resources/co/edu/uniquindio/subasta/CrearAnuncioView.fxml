@@ -26,8 +26,8 @@
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="166.0" text="Seleccionar Imagen">
+                  <ImageView fx:id="imageViewFoto" fitHeight="183.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="seleccionarImagen" mnemonicParsing="false" onAction="#buscarFoto" prefHeight="24.0" prefWidth="166.0" text="Seleccionar Imagen">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>

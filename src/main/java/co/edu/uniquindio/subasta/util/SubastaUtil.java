@@ -86,6 +86,7 @@ public  class SubastaUtil {
         anuncio.setProducto(producto1);
         anuncio.setFechaPublicacion("hola mundo");
         anuncio.setDescripcion("tv en venta");
+        anuncio.setValorInicial(55000);
         anuncio.setProducto(producto);
 
         a1.getListaAnucio().add(anuncio);

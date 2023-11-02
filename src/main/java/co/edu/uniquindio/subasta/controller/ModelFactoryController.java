@@ -271,26 +271,40 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public boolean agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+    public int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
-        if(getSubasta().agregarAnuncio(anuncio)){
+        int opcion = getSubasta().agregarAnuncio(anuncio);
+        if( opcion ==  3){
             guardarResourceXML();
             registrarAccionesSistema("Se agrego un anuncio.",1,"AGREGAR ANUNCIO");
+        }
+        return opcion;
+
+    }
+
+    @Override
+    public boolean eliminarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+        Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
+        if(getSubasta().eliminarAnuncio(anuncio)){
+            guardarResourceXML();
+            registrarAccionesSistema("Se elimino un anuncio.",1,"ELIMINAR ANUNCIO");
             return true;
         }else{
             return false;
         }
-
     }
 
     @Override
-    public boolean eliminarAnuncio(AnuncioDto anuncioDto) {
-        return false;
-    }
+    public boolean actualizarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+        Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
+        if(getSubasta().actualizarAnuncio(anuncio)){
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " actualizó un anuncio.", 1, "ACTUALIZAR ANUNCIO");
+            guardarResourceXML();
+            return true;
 
-    @Override
-    public boolean actuaizarAnuncio(AnuncioDto anuncioDto) {
-        return false;
+        }else{
+            return false;
+        }
     }
 
 //----------------------------Crud Puja---------------------------------------------

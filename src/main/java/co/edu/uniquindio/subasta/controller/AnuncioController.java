@@ -31,17 +31,17 @@ public class AnuncioController implements IAnuncioControllerService {
     }
 
     @Override
-    public boolean agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+    public int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         return modelFactoryController.agregarAnuncio(anuncioDto);
     }
 
     @Override
-    public boolean eliminarAnuncio(AnuncioDto anuncioDto) {
-        return false;
+    public boolean eliminarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+        return modelFactoryController.eliminarAnuncio(anuncioDto);
     }
 
     @Override
-    public boolean actuaizarAnuncio(AnuncioDto anuncioDto) {
-        return false;
+    public boolean actualizarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
+        return modelFactoryController.actualizarAnuncio(anuncioDto);
     }
 }

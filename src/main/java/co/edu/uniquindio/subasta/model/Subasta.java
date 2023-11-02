@@ -5,6 +5,7 @@ import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
+import co.edu.uniquindio.subasta.util.Persistencia;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Subasta implements ISubastaService, Serializable {
     private Comprador compradorLogueado;
     private ArrayList<Anunciante> listaAnunciante = new ArrayList<>();
     private ArrayList<Comprador> listaCompradores = new ArrayList<>();
+    private ArrayList<Anuncio> listaAnuncios = new ArrayList<>();
 
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
@@ -54,6 +56,7 @@ public class Subasta implements ISubastaService, Serializable {
     //---------------------------------- CRUD  PRODUCTO --------------------------------//
     @Override
     public List<Producto> obtenerProducto() {
+
         return anuncianteLogueado.getListaProducto();
     }
 
@@ -86,6 +89,7 @@ public class Subasta implements ISubastaService, Serializable {
                 p.setNombre(producto.getNombre());
                 p.setTipoArticulo(producto.getTipoArticulo());
                 actualizado = true;
+                break;
 
             }
         }
@@ -104,23 +108,70 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
     @Override
-    public boolean agregarAnuncio(Anuncio anuncio) throws AnuncioException {
-        if (anuncianteLogueado.getListaAnucio().add(anuncio)) {
+    public int agregarAnuncio(Anuncio anuncio) throws AnuncioException {
+        int opcion = 0;
+        try{
+            if(listaAnuncios.stream().anyMatch(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))){
+                opcion = 1;
+                throw new AnuncioException("Ya existe el codigo.");
+            }else if(anuncianteLogueado.getListaAnucio().size() == 3){
+                opcion = 2;
+                throw new AnuncioException("Tiene 3 anuncios activos.");
+            }else{
+                opcion = 3;
+                anuncianteLogueado.getListaAnucio().add(anuncio);
+                listaAnuncios.add(anuncio);
+                return opcion;
+            }
+
+        }catch (AnuncioException e){
+            System.out.println(e.getMessage());
+            return opcion;
+
+        }
+    }
+
+
+    @Override
+    public boolean eliminarAnuncio(Anuncio anuncio) throws AnuncioException {
+        if(anuncianteLogueado.getListaAnucio().removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))
+                && listaAnuncios.removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))){
             return true;
-        } else {
-            throw new AnuncioException("No se pudo registrar el anuncio");
+        }else{
+            throw new AnuncioException("No se puedo eliminar el anuncio.");
         }
     }
 
     @Override
-    public boolean eliminarAnuncio(Anuncio anuncio) {
-        return false;
+    public boolean actualizarAnuncio(Anuncio anuncio) throws AnuncioException {
+
+        if(modificarAnuncio(listaAnuncios,anuncio) && modificarAnuncio(anuncianteLogueado.getListaAnucio(),anuncio)){
+            return true;
+        }else{
+            throw new AnuncioException("No se pudo actualizar.");
+        }
+
     }
 
-    @Override
-    public boolean actuaizarAnuncio(Anuncio anuncio) {
-        return false;
-    }
+    public boolean modificarAnuncio(ArrayList<Anuncio> lista,Anuncio anuncio){
+        boolean actualizado = false;
+        for (Anuncio a: lista) {
+            if(a.getCodigo().equals(anuncio.getCodigo())){
+                a.setValorInicial(anuncio.getValorInicial());
+                a.setProducto(anuncio.getProducto());
+                a.setDescripcion(anuncio.getDescripcion());
+                a.setFoto(anuncio.getFoto());
+                a.setFechaPublicacion(anuncio.getFechaPublicacion());
+                a.setFechaTerminacion(anuncio.getFechaTerminacion());
+                a.setNombre(anuncio.getNombre());
+                a.setFoto(anuncio.getFoto());
+                actualizado = true;
+                break;
+
+            }
+        }
+        return actualizado;
+    } // para modificar la lsta de el anunciante y la global
 
 //    ----------------------------------Crud Puja------------------------
 
@@ -144,7 +195,7 @@ public class Subasta implements ISubastaService, Serializable {
                     }
                 }
             }
-            }
+        }
         throw new Exception("No se puedo relizar la Puja");
     }
 
@@ -229,6 +280,14 @@ public class Subasta implements ISubastaService, Serializable {
 
     public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
+    }
+
+    public ArrayList<Anuncio> getListaAnuncios() {
+        return listaAnuncios;
+    }
+
+    public void setListaAnuncios(ArrayList<Anuncio> listaAnuncios) {
+        this.listaAnuncios = listaAnuncios;
     }
 
     @Override

@@ -14,7 +14,7 @@ public interface IAnuncioControllerService {
 
     String recuperarNombre();
 
-    boolean agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
-    boolean eliminarAnuncio(AnuncioDto anuncioDto);
-    boolean actuaizarAnuncio(AnuncioDto anuncioDto);
+    int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
+    boolean eliminarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
+    boolean actualizarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
 }
