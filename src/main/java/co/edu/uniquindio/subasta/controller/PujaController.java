@@ -22,8 +22,8 @@ public class PujaController implements IPujaControllerService {
     }
 
     @Override
-    public boolean realizarPuja(PujaDto pujaDto) throws Exception {
-        return modelFactoryController.realizarPuja(pujaDto);
+    public boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception {
+        return modelFactoryController.realizarPuja(pujaDto,codigo);
     }
 
     @Override

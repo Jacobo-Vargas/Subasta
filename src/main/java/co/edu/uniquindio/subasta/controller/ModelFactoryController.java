@@ -50,6 +50,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //guardarResourceXML();
         cargarResourceXML();
+        salvarDatosPrueba();
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
             cargarDatosBase();
@@ -318,9 +319,9 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public boolean realizarPuja(PujaDto pujaDto) throws Exception {
+    public boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception {
         Puja puja=mapper.pujaDtoToPuja(pujaDto);
-        if(getSubasta().realizarPuja(puja)){
+        if(getSubasta().realizarPuja(puja,codigo)){
             return true;
         }else{
             return false;
@@ -361,7 +362,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public Anuncio salvarAnuncio(String nombre) {
-        for(Anuncio anuncio:getSubasta().obtenerListaAnuncio()){
+        for(Anuncio anuncio:getSubasta().getListaAnuncios()){
             if(anuncio.getNombre().equals(nombre)){
                 return anuncio;
             }

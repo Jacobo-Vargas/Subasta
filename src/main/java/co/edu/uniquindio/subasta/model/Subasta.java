@@ -181,22 +181,24 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
     @Override
-    public boolean realizarPuja(Puja puja) throws Exception {
-        if (compradorLogueado.getListaPujas().add(puja)) {
-            System.out.println(compradorLogueado.getListaPujas().size());
-            for (int i = 0; i < listaAnunciante.size(); i++) {
-                for (int j = 0; j < listaAnunciante.get(i).getListaAnucio().size(); j++) {
-                    for (int h = 0; h < listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().size(); h++) {
-                        if (listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().get(h).getCodigo().equals(puja.getAnuncio().getCodigo())) {
-                            listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().add(puja);
-                            System.out.println(listaAnunciante.get(i).getListaAnucio().get(j).getListaPujas().size());
-                            return true;
-                        }
-                    }
-                }
+    public boolean realizarPuja(Puja puja, String codigo) throws Exception {
+        for(Puja pujaa:compradorLogueado.getListaPujas()){
+            if(pujaa.getCodigo().equals(puja.getCodigo())){
+                throw new Exception("la puja esta repetida");
             }
         }
-        throw new Exception("No se puedo relizar la Puja");
+        compradorLogueado.getListaPujas().add(puja);
+        System.out.println(compradorLogueado.getListaPujas().size());
+        System.out.println(compradorLogueado.getListaPujas().get(0));
+        for(Anuncio anuncio:listaAnuncios){
+            if(anuncio.getCodigo().equals(codigo)){
+                anuncio.getListaPujas().add(puja);
+                System.out.println(anuncio.getListaPujas().get(0));
+                System.out.println(anuncio.getListaPujas().size());
+                return true;
+            }
+        }
+        throw new Exception("la puja no se pudo agregar");
     }
 
 
@@ -230,14 +232,7 @@ public class Subasta implements ISubastaService, Serializable {
 
     @Override
     public List<Anuncio> obtenerListaAnuncio() {
-        List<Anuncio> listaAnuncio = new ArrayList<>();
-        for (int i = 0; i < listaAnunciante.size(); i++) {
-            for (int h = 0; h < listaAnunciante.get(i).getListaAnucio().size(); h++) {
-                listaAnuncio.add(listaAnunciante.get(i).getListaAnucio().get(h));
-                System.out.println(listaAnunciante.get(i).getListaAnucio().get(h));
-            }
-        }
-        return listaAnuncio;
+        return listaAnuncios;
 
     }
     //----------------------listas--------------------------------

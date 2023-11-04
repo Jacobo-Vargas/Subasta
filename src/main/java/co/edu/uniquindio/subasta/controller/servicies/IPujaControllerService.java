@@ -11,7 +11,7 @@ import java.util.List;
 public interface IPujaControllerService {
     List<PujaDto> obtenerLitaPuja();
     List<AnuncioDto>obtenerListaNuncio();
-    boolean realizarPuja(PujaDto pujaDto) throws Exception;
+    boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception;
     boolean elimnarPuja(PujaDto pujaDto) throws Exception;
     boolean actulizarPuja(PujaDto pujaDto) throws Exception;
     Anuncio salvarAnuncio(String nombre);

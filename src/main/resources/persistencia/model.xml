@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.8.1" class="java.beans.XMLDecoder">
+<java version="17.0.9" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.subasta.model.Subasta" id="Subasta0">
   <void property="anuncianteLogueado">
    <object class="co.edu.uniquindio.subasta.model.Anunciante" id="Anunciante0">
@@ -98,22 +98,19 @@
      <void method="add">
       <object class="co.edu.uniquindio.subasta.model.Anuncio" id="Anuncio2">
        <void property="codigo">
-        <string>3</string>
+        <string>123</string>
        </void>
        <void property="descripcion">
-        <string>balon autografiado por messi</string>
+        <string>asfd</string>
        </void>
        <void property="fechaPublicacion">
-        <string>2023-11-02</string>
+        <string>2023-11-04</string>
        </void>
        <void property="fechaTerminacion">
-        <string>2023-11-10</string>
-       </void>
-       <void property="foto">
-        <string>balon_20231102_160358.jpeg</string>
+        <string>2023-12-06</string>
        </void>
        <void property="nombre">
-        <string>Balon de futbol </string>
+        <string>hola munod</string>
        </void>
        <void property="nombreAnunciante">
         <string>juan</string>
@@ -135,7 +132,7 @@
         </object>
        </void>
        <void property="valorInicial">
-        <double>500000.0</double>
+        <double>1.0</double>
        </void>
       </object>
      </void>

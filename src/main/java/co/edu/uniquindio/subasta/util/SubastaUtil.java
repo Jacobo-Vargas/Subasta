@@ -88,6 +88,7 @@ public  class SubastaUtil {
         anuncio.setDescripcion("tv en venta");
         anuncio.setValorInicial(55000);
         anuncio.setProducto(producto);
+        anuncio.setCodigo("1");
 
         a1.getListaAnucio().add(anuncio);
          Puja puja=new Puja();

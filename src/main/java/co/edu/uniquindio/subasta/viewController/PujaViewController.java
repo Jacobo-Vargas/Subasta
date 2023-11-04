@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PujaViewController {
-
     PujaController pujaController;
     ObservableList<PujaDto> listaPuja = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnuncio = FXCollections.observableArrayList();
@@ -86,13 +85,11 @@ public class PujaViewController {
 
         String nombreAnuncio=comboBoxAnuncio.getValue();
         String direccion=textFieldDireccion.getText();
-        String codigo=textFieldCodigo.getText();
+        String codigoo=textFieldCodigo.getText();
         float ofertaInicial=Float.valueOf(textFieldValorInicial.getText());
         LocalDate fecha= LocalDate.now();
         Anuncio anuncio=pujaController.salvarAnuncio(nombreAnuncio);
-        PujaDto pujaDto=new PujaDto(direccion,codigo,ofertaInicial,fecha,anuncio);
-        pujaController.realizarPuja(pujaDto);
-
-
+        PujaDto pujaDto=new PujaDto(direccion,codigoo,ofertaInicial,fecha,anuncio);
+        pujaController.realizarPuja(pujaDto,anuncio.getCodigo());
     }
 }

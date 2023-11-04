@@ -1,2 +1,2 @@
-juan@@null@@123@@0@@null@@123@@123@@[Producto{nombre='Casa', codigo='0', tipoArticulo=DEPORTES}]
+juan@@null@@123@@0@@null@@123@@123@@[Producto{nombre='Portatil', codigo='0', tipoArticulo=TECNOLOGIA}, Producto{nombre='MAZDA 3', codigo='3', tipoArticulo=VEHICULO}, Producto{nombre='BALON', codigo='4', tipoArticulo=DEPORTES}]
 jose@@null@@321@@0@@null@@321@@321@@[Producto{nombre='tv', codigo='1', tipoArticulo=TECNOLOGIA}]

@@ -48,7 +48,7 @@ public interface IModelFactoryController {
     //--------------------------Crud Puja-------------------------------------
     List<PujaDto> obtenerLitaPuja();
 
-    boolean realizarPuja(PujaDto pujaDto) throws Exception;
+    boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception;
 
     boolean elimnarPuja(PujaDto pujaDto) throws Exception;
 
