@@ -5,12 +5,14 @@ import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
+import co.edu.uniquindio.subasta.util.AlertaUtil;
 import co.edu.uniquindio.subasta.util.Persistencia;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Subasta implements ISubastaService, Serializable {
     @Serial
@@ -110,21 +112,21 @@ public class Subasta implements ISubastaService, Serializable {
     @Override
     public int agregarAnuncio(Anuncio anuncio) throws AnuncioException {
         int opcion = 0;
-        try{
-            if(listaAnuncios.stream().anyMatch(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))){
+        try {
+            if (listaAnuncios.stream().anyMatch(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))) {
                 opcion = 1;
                 throw new AnuncioException("Ya existe el codigo.");
-            }else if(anuncianteLogueado.getListaAnucio().size() == 3){
+            } else if (anuncianteLogueado.getListaAnucio().size() == 3) {
                 opcion = 2;
                 throw new AnuncioException("Tiene 3 anuncios activos.");
-            }else{
+            } else {
                 opcion = 3;
                 anuncianteLogueado.getListaAnucio().add(anuncio);
                 listaAnuncios.add(anuncio);
                 return opcion;
             }
 
-        }catch (AnuncioException e){
+        } catch (AnuncioException e) {
             System.out.println(e.getMessage());
             return opcion;
 
@@ -134,10 +136,10 @@ public class Subasta implements ISubastaService, Serializable {
 
     @Override
     public boolean eliminarAnuncio(Anuncio anuncio) throws AnuncioException {
-        if(anuncianteLogueado.getListaAnucio().removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))
-                && listaAnuncios.removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))){
+        if (anuncianteLogueado.getListaAnucio().removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))
+                && listaAnuncios.removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))) {
             return true;
-        }else{
+        } else {
             throw new AnuncioException("No se puedo eliminar el anuncio.");
         }
     }
@@ -145,18 +147,18 @@ public class Subasta implements ISubastaService, Serializable {
     @Override
     public boolean actualizarAnuncio(Anuncio anuncio) throws AnuncioException {
 
-        if(modificarAnuncio(listaAnuncios,anuncio) && modificarAnuncio(anuncianteLogueado.getListaAnucio(),anuncio)){
+        if (modificarAnuncio(listaAnuncios, anuncio) && modificarAnuncio(anuncianteLogueado.getListaAnucio(), anuncio)) {
             return true;
-        }else{
+        } else {
             throw new AnuncioException("No se pudo actualizar.");
         }
 
     }
 
-    public boolean modificarAnuncio(ArrayList<Anuncio> lista,Anuncio anuncio){
+    public boolean modificarAnuncio(ArrayList<Anuncio> lista, Anuncio anuncio) {
         boolean actualizado = false;
-        for (Anuncio a: lista) {
-            if(a.getCodigo().equals(anuncio.getCodigo())){
+        for (Anuncio a : lista) {
+            if (a.getCodigo().equals(anuncio.getCodigo())) {
                 a.setValorInicial(anuncio.getValorInicial());
                 a.setProducto(anuncio.getProducto());
                 a.setDescripcion(anuncio.getDescripcion());
@@ -180,27 +182,39 @@ public class Subasta implements ISubastaService, Serializable {
         return compradorLogueado.getListaPujas();
     }
 
-    @Override
-    public boolean realizarPuja(Puja puja, String codigo) throws Exception {
-        for(Puja pujaa:compradorLogueado.getListaPujas()){
-            if(pujaa.getCodigo().equals(puja.getCodigo())){
-                throw new Exception("la puja esta repetida");
+    public boolean verificarPujaRepetida(Puja puja) {
+        for (Puja p : compradorLogueado.getListaPujas()) {
+            if (p.getCodigo().equals(puja.getCodigo())) {
+                return false;
             }
+
         }
-        compradorLogueado.getListaPujas().add(puja);
-        System.out.println(compradorLogueado.getListaPujas().size());
-        System.out.println(compradorLogueado.getListaPujas().get(0));
-        for(Anuncio anuncio:listaAnuncios){
-            if(anuncio.getCodigo().equals(codigo)){
-                anuncio.getListaPujas().add(puja);
-                System.out.println(anuncio.getListaPujas().get(0));
-                System.out.println(anuncio.getListaPujas().size());
-                return true;
-            }
-        }
-        throw new Exception("la puja no se pudo agregar");
+        return true;
     }
 
+    @Override
+    public boolean realizarPuja(Puja puja, String codigo) throws Exception {
+        if (verificarPujaRepetida(puja)) {
+            compradorLogueado.getListaPujas().add(puja);
+            System.out.println(compradorLogueado.getListaPujas().size());
+            System.out.println(compradorLogueado.getListaPujas().get(0));
+            for (Anuncio anuncio : listaAnuncios) {
+                if (anuncio.getCodigo().equals(codigo)) {
+                    anuncio.getListaPujas().add(puja);
+                    System.out.println(anuncio.getListaPujas().get(0));
+                    System.out.println(anuncio.getListaPujas().size());
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<Puja> listaPujasComprador(String codigo) {
+        List<Puja> listaPuja = compradorLogueado.getListaPujas().stream().filter(Puja -> Puja.getAnuncio().getCodigo().equals(codigo)).collect(Collectors.toList());
+        return listaPuja;
+    }
 
     @Override
     public boolean eliminarPuja(Puja puja) throws Exception {

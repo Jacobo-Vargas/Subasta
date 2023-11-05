@@ -37,6 +37,7 @@ public interface ISubastaService {
     boolean eliminarPuja(Puja puja) throws Exception;
     boolean actualizarPuja(Puja puja) throws Exception;
     public List<Anuncio> obtenerListaAnuncio();
+    List<Puja> listaPujasComprador(String codogo);
 
 
 }

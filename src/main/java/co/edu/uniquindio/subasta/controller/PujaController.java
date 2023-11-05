@@ -45,4 +45,9 @@ public class PujaController implements IPujaControllerService {
     public Anuncio salvarAnuncio(String nombre) {
         return modelFactoryController.salvarAnuncio(nombre);
     }
+
+    @Override
+    public List<PujaDto> listaPujaCompradorLogueado(String codigo) {
+       return modelFactoryController.listaAnuncioCompradorLogueado(codigo);
+    }
 }

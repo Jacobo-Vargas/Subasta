@@ -57,6 +57,7 @@ public interface IModelFactoryController {
     List<AnuncianteDto> obtenerListaAnunciante();
 
     List<AnuncioDto>obtenerListaNuncio();
+    List<PujaDto>listaAnuncioCompradorLogueado(String codigoAnunico);
 
 
     //-----------------------anunciante---------------------------
