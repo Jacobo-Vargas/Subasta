@@ -7,7 +7,7 @@
         @Serial
         private static final long serialVersionUID = 1L;
         private ArrayList<Producto> listaProducto = new ArrayList<>();
-        private ArrayList<Anuncio> listaAnucio = new ArrayList<>();
+        private ArrayList<Anuncio> listaAnuncio = new ArrayList<>();
         private Usuario usuario;
 
         public Anunciante() {
@@ -22,12 +22,12 @@
             this.listaProducto = listaProducto;
         }
 
-        public ArrayList<Anuncio> getListaAnucio() {
-            return listaAnucio;
+        public ArrayList<Anuncio> getListaAnuncio() {
+            return listaAnuncio;
         }
 
-        public void setListaAnucio(ArrayList<Anuncio> listaAnucio) {
-            this.listaAnucio = listaAnucio;
+        public void setListaAnuncio(ArrayList<Anuncio> listaAnuncio) {
+            this.listaAnuncio = listaAnuncio;
         }
 
         public Usuario getUsuario() {
@@ -42,7 +42,7 @@
         public String toString() {
             return "Anunciante{" +
                     "listaProducto=" + listaProducto +
-                    ", listaAnucio=" + listaAnucio +
+                    ", listaAnucio=" + listaAnuncio +
                     ", usuario=" + usuario +
                     '}';
         }

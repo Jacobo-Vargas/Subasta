@@ -1,12 +1,8 @@
 package co.edu.uniquindio.subasta.model;
 
-import co.edu.uniquindio.subasta.controller.servicies.IProductoService;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
-import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
-import co.edu.uniquindio.subasta.util.AlertaUtil;
-import co.edu.uniquindio.subasta.util.Persistencia;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -27,6 +23,7 @@ public class Subasta implements ISubastaService, Serializable {
 
 
     public Subasta() {
+
     }
 
 
@@ -45,6 +42,7 @@ public class Subasta implements ISubastaService, Serializable {
 
     @Override
     public boolean verificarExistenciaAnunciante(String cedula) {
+
         boolean existe = false;
         for (Anunciante a : getListaAnunciante()) {
             if (a.getCedula().equals(cedula)) {
@@ -58,7 +56,6 @@ public class Subasta implements ISubastaService, Serializable {
     //---------------------------------- CRUD  PRODUCTO --------------------------------//
     @Override
     public List<Producto> obtenerProducto() {
-
         return anuncianteLogueado.getListaProducto();
     }
 
@@ -106,7 +103,7 @@ public class Subasta implements ISubastaService, Serializable {
 
     @Override
     public List<Anuncio> obtenerAnuncio() {
-        return anuncianteLogueado.getListaAnucio();
+        return anuncianteLogueado.getListaAnuncio();
     }
 
     @Override
@@ -116,12 +113,12 @@ public class Subasta implements ISubastaService, Serializable {
             if (listaAnuncios.stream().anyMatch(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))) {
                 opcion = 1;
                 throw new AnuncioException("Ya existe el codigo.");
-            } else if (anuncianteLogueado.getListaAnucio().size() == 3) {
+            } else if (anuncianteLogueado.getListaAnuncio().size() == 3) {
                 opcion = 2;
                 throw new AnuncioException("Tiene 3 anuncios activos.");
             } else {
                 opcion = 3;
-                anuncianteLogueado.getListaAnucio().add(anuncio);
+                anuncianteLogueado.getListaAnuncio().add(anuncio);
                 listaAnuncios.add(anuncio);
                 return opcion;
             }
@@ -136,7 +133,7 @@ public class Subasta implements ISubastaService, Serializable {
 
     @Override
     public boolean eliminarAnuncio(Anuncio anuncio) throws AnuncioException {
-        if (anuncianteLogueado.getListaAnucio().removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))
+        if (anuncianteLogueado.getListaAnuncio().removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))
                 && listaAnuncios.removeIf(anuncio1 -> anuncio1.getCodigo().equals(anuncio.getCodigo()))) {
             return true;
         } else {
@@ -147,7 +144,7 @@ public class Subasta implements ISubastaService, Serializable {
     @Override
     public boolean actualizarAnuncio(Anuncio anuncio) throws AnuncioException {
 
-        if (modificarAnuncio(listaAnuncios, anuncio) && modificarAnuncio(anuncianteLogueado.getListaAnucio(), anuncio)) {
+        if (modificarAnuncio(listaAnuncios, anuncio) && modificarAnuncio(anuncianteLogueado.getListaAnuncio(), anuncio)) {
             return true;
         } else {
             throw new AnuncioException("No se pudo actualizar.");
@@ -231,7 +228,7 @@ public class Subasta implements ISubastaService, Serializable {
         for (Puja p : compradorLogueado.getListaPujas()) {
             if (p.getCodigo().equals(puja.getCodigo())) {
                 p.setDireccion(puja.getDireccion());
-                p.setOfertaInicial(puja.getOfertaInicial());
+                p.setOferta(puja.getOferta());
                 p.setFechaPuja(puja.getFechaPuja());
                 actulizado = true;
             }

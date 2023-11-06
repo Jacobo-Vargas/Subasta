@@ -77,10 +77,14 @@ public class VisorAnunciosViewController {
                 .map(PujaDto::oferta)
                 .max(Float::compare);
 
+        System.out.println(anuncioDto);
+
+        System.out.println(oferta);
+
         lblFin.setText(anuncioDto.fechaTerminacion());
         lblNumOfertas.setText(String.valueOf(anuncioDto.listaPujas().size()));
         lblOfertaMaxima.setText(String.valueOf(oferta));
-        lblPrecio.setText(String.format("%.2f", anuncioDto.valorInicial()));
+        lblPrecio.setText(String.format("%.1f", anuncioDto.valorInicial()));
         imagenAnuncio.setImage(mostrarFoto(anuncioDto.foto()));
         efecto();
     }

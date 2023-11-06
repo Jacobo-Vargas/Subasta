@@ -48,7 +48,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //4 XML
 
-        //guardarResourceXML();
+       //guardarResourceXML();
         cargarResourceXML();
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null

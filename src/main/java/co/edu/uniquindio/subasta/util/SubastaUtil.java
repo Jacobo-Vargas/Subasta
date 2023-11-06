@@ -1,12 +1,10 @@
 package co.edu.uniquindio.subasta.util;
 
 import co.edu.uniquindio.subasta.model.*;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
-import java.util.Optional;
+import java.util.ArrayList;
 
-public  class SubastaUtil {
+public class SubastaUtil {
     public SubastaUtil() {
     }
 
@@ -23,7 +21,7 @@ public  class SubastaUtil {
 
         Subasta subasta = new Subasta();
 
-        Anunciante a1= new Anunciante();
+        Anunciante a1 = new Anunciante();
         a1.setNombre("juan");
         a1.setCedula("123");
         a1.setUsuario(u1);
@@ -51,11 +49,11 @@ public  class SubastaUtil {
         subasta.getListaAnunciante().add(a2);
 
 
-        Usuario usuario=new Usuario();
+        Usuario usuario = new Usuario();
         usuario.setContrasenia("123456789");
         usuario.setContrasenia("123456789");
 
-        Comprador c=new Comprador();
+        Comprador c = new Comprador();
         c.setNombre("juan pablo");
         c.setApellido("buitrago");
         c.setCedula("123456789");
@@ -65,11 +63,11 @@ public  class SubastaUtil {
         c.setUsuario(usuario);
 
 
-        Usuario usuario2=new Usuario();
+        Usuario usuario2 = new Usuario();
         usuario2.setContrasenia("1234567890");
         usuario2.setContrasenia("1234567890");
 
-        Comprador  c2=new Comprador();
+        Comprador c2 = new Comprador();
         c2.setNombre("lisa");
         c2.setApellido("Maya");
         c2.setCedula("1234567890");
@@ -81,7 +79,8 @@ public  class SubastaUtil {
         subasta.getListaCompradores().add(c);
         subasta.getListaCompradores().add(c2);
 
-        Anuncio anuncio=new Anuncio();
+        Anuncio anuncio = new Anuncio();
+
         anuncio.setNombre("tv");
         anuncio.setProducto(producto1);
         anuncio.setFechaPublicacion("hola mundo");
@@ -90,18 +89,35 @@ public  class SubastaUtil {
         anuncio.setProducto(producto);
         anuncio.setCodigo("1");
 
-        a1.getListaAnucio().add(anuncio);
-         Puja puja=new Puja();
-         puja.setDireccion("casa 20");
-         puja.setCodigo("1");
-         puja.setOfertaInicial(2);
-         puja.setAnuncio(anuncio);
-         //c.getListaPujas().add(puja);
 
+        Puja puja = new Puja();
+        puja.setDireccion("casa 20");
+        puja.setCodigo("1");
+        puja.setOferta(25000);
+      //  puja.setAnuncio(anuncio);
 
+        Puja puja1 = new Puja();
+        puja1.setDireccion("casa 20");
+        puja1.setCodigo("2");
+        puja1.setOferta(17000);
+       //puja1.setAnuncio(anuncio);
+
+        Puja puja2 = new Puja();
+        puja2.setDireccion("casa 20");
+        puja2.setCodigo("3");
+        puja2.setOferta(35000);
+       // puja2.setAnuncio(anuncio);
+
+        ArrayList<Puja> list = new ArrayList<>();
+        list.add(puja);
+        list.add(puja1);
+        list.add(puja2);
+
+        anuncio.setListaPujas(list);
+
+        a1.getListaAnuncio().add(anuncio);
+        subasta.getListaAnuncios().add(anuncio);
 
         return subasta;
-
-
     }
 }
