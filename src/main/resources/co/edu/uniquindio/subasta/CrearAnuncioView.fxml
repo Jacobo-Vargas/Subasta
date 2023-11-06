@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,15 +20,18 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="743.0" spacing="20.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.CrearAnuncioViewController">
    <children>
-      <HBox alignment="CENTER" onMouseClicked="#actualizarBox" prefHeight="210.0" prefWidth="733.0" spacing="5.0">
+      <HBox alignment="CENTER" onMouseClicked="#actualizarBox" prefHeight="265.0" prefWidth="733.0" spacing="5.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="210.0" prefWidth="228.0">
+            <VBox alignment="CENTER" prefHeight="248.0" prefWidth="229.0">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
                <children>
-                  <ImageView fx:id="imageViewFoto" fitHeight="183.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button fx:id="seleccionarImagen" mnemonicParsing="false" onAction="#buscarFoto" prefHeight="24.0" prefWidth="166.0" text="Seleccionar Imagen">
+                  <ImageView fx:id="imageViewFoto" fitHeight="198.0" fitWidth="221.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../imagenes/logo.png" />
+                     </image></ImageView>
+                  <Button fx:id="seleccionarImagen" mnemonicParsing="false" onAction="#buscarFoto" prefHeight="24.0" prefWidth="166.0" text="Seleccionar Imagen...">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
@@ -36,7 +40,7 @@
             </VBox>
             <FontAwesomeIconView accessibleRole="BUTTON" glyphName="REPEAT" onMouseClicked="#actualizarBox" wrappingWidth="13.142857551574707">
                <HBox.margin>
-                  <Insets bottom="170.0" />
+                  <Insets bottom="170.0" top="12.0" />
                </HBox.margin>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -86,8 +90,11 @@
                            </GridPane.margin>
                         </TextField>
                      </children>
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
                   </GridPane>
-                  <TextArea fx:id="txtDescripcion" prefHeight="58.0" prefWidth="391.0" promptText="Decripción...">
+                  <TextArea fx:id="txtDescripcion" prefHeight="124.0" prefWidth="399.0" promptText="Decripción...">
                      <VBox.margin>
                         <Insets left="3.0" right="3.0" />
                      </VBox.margin>
@@ -118,6 +125,9 @@
             <Insets left="5.0" right="5.0" />
          </VBox.margin>
       </TableView>
-      <Button mnemonicParsing="false" onAction="#eliminarAnuncio" stylesheets="@CSS/Style.css" text="Eliminar" />
+      <Button mnemonicParsing="false" onAction="#eliminarAnuncio" stylesheets="@CSS/Style.css" text="Eliminar">
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin></Button>
    </children>
 </VBox>
