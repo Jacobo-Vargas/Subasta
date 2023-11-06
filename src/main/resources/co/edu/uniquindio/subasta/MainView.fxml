@@ -4,21 +4,18 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
-<TabPane prefHeight="600.0" prefWidth="750.0" styleClass="root" stylesheets="@CSS/StyleTabPane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <tabs>
-      <Tab text="Ver anuncios" />
-      <Tab text="Acceder">
-         <content>
-            <fx:include source="LoginView.fxml" />
-         </content>
-      </Tab>
-      <Tab text="Registro">
-         <content>
-            <fx:include source="RegistroView.fxml" />
-         </content>
-      </Tab>
-   </tabs>
+<TabPane prefHeight="600.0" prefWidth="750.0" styleClass="root" stylesheets="@CSS/StyleTabPane.css"
+         tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <cursor>
-      <Cursor fx:constant="HAND" />
+      <Cursor fx:constant="HAND"/>
    </cursor>
+   <Tab text="Ver anuncios">
+      <fx:include source="visorAnuncios.fxml"/>
+   </Tab>
+   <Tab text="Acceder">
+      <fx:include source="LoginView.fxml"/>
+   </Tab>
+   <Tab text="Registro">
+      <fx:include source="RegistroView.fxml"/>
+   </Tab>
 </TabPane>

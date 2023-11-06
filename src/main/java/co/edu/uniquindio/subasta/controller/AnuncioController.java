@@ -31,6 +31,11 @@ public class AnuncioController implements IAnuncioControllerService {
     }
 
     @Override
+    public List<AnuncioDto> obtenerAnunciosGlobales() {
+        return modelFactoryController.obtenerAnunciosGlobales();
+    }
+
+    @Override
     public int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         return modelFactoryController.agregarAnuncio(anuncioDto);
     }

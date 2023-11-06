@@ -265,6 +265,11 @@ public class ModelFactoryController implements IModelFactoryController {
         return mapper.getAnunciosDto(lista);
     }
 
+    public List<AnuncioDto> obtenerAnunciosGlobales(){
+        ArrayList<Anuncio> lista = new ArrayList<>(getSubasta().getListaAnuncios());
+        return mapper.getAnunciosDto(lista);
+    }
+
     @Override
     public String recuperarNombreAnunciante() {
         return getSubasta().getAnuncianteLogueado().getNombre();

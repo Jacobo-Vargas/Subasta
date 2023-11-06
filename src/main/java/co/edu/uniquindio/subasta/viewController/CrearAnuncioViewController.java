@@ -5,25 +5,21 @@ import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
-import co.edu.uniquindio.subasta.util.ArchivoUtil;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.paint.Color;
+
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.ByteBuffer;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,10 +29,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-public class CrearAnuncioViewController extends Exception {
+public class CrearAnuncioViewController{
 
     public static int codigo = 0;
 
@@ -233,7 +228,7 @@ public class CrearAnuncioViewController extends Exception {
     private void mostrarInformacionAnuncio(AnuncioDto anuncioDtoSelecionado) throws MalformedURLException {
         if (anuncioDtoSelecionado != null) {
             txtDescripcion.setText(anuncioDtoSelecionado.descripcion());
-            txtValorInicial.setText(String.valueOf(anuncioDtoSelecionado.valorInicial()));
+            txtValorInicial.setText(String.format("%.2f",anuncioDtoSelecionado.valorInicial()));
             txtCodigo.setText(String.valueOf(anuncioDtoSelecionado.codigo()));
             dateInicio.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaPublicacion())));
             dateFin.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaTerminacion())));

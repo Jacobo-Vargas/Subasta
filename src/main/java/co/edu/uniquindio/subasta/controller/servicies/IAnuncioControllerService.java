@@ -5,6 +5,7 @@ import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.Anuncio;
 
+import java.lang.reflect.AnnotatedArrayType;
 import java.util.List;
 
 public interface IAnuncioControllerService {
@@ -13,6 +14,8 @@ public interface IAnuncioControllerService {
     List<AnuncioDto> obtenerAnuncio();
 
     String recuperarNombre();
+
+    List<AnuncioDto> obtenerAnunciosGlobales();
 
     int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
     boolean eliminarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;

@@ -48,3 +48,7 @@
     -fx-background-size: cover; /* Ajustar el tamaño de la imagen para cubrir todo el GridPane */
     -fx-background-repeat: no-repeat; /* Evitar la repetición de la imagen */
 }
+.imageView {
+    -fx-background-radius: 10; /* Redondea los bordes */
+    -fx-border-radius: 10; /* Redondea los bordes del borde si lo tienes */
+}

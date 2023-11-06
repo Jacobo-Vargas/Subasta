@@ -22,6 +22,7 @@ public interface IModelFactoryController {
     List<AnuncioDto> obtenerAnuncio();
 
     String recuperarNombreAnunciante();
+    List<AnuncioDto> obtenerAnunciosGlobales();
 
     int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;
 
