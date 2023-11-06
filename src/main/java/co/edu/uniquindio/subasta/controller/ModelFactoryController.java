@@ -35,7 +35,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //1. inicializar datos y luego guardarlo en archivos
 
-       cargarDatosBase();
+       //cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -49,8 +49,7 @@ public class ModelFactoryController implements IModelFactoryController {
         //4 XML
 
         //guardarResourceXML();
-        //cargarResourceXML();
-        //salvarDatosPrueba();
+        cargarResourceXML();
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
             cargarDatosBase();

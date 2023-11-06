@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.9" class="java.beans.XMLDecoder">
+<java version="17.0.8.1" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.subasta.model.Subasta" id="Subasta0">
   <void property="anuncianteLogueado">
    <object class="co.edu.uniquindio.subasta.model.Anunciante" id="Anunciante0">
@@ -8,26 +8,35 @@
     </void>
     <void property="listaAnucio">
      <void method="add">
-      <object class="co.edu.uniquindio.subasta.model.Anuncio">
+      <object class="co.edu.uniquindio.subasta.model.Anuncio" id="Anuncio0">
        <void property="codigo">
         <string>1</string>
        </void>
        <void property="descripcion">
-        <string>tv en venta</string>
+        <string>autografiado por messi</string>
        </void>
        <void property="fechaPublicacion">
-        <string>hola mundo</string>
+        <string>2023-11-06</string>
+       </void>
+       <void property="fechaTerminacion">
+        <string>2023-11-15</string>
+       </void>
+       <void property="foto">
+        <string>balon_20231106_120255.jpeg</string>
        </void>
        <void property="nombre">
-        <string>tv</string>
+        <string>BALON DE ORO</string>
+       </void>
+       <void property="nombreAnunciante">
+        <string>juan</string>
        </void>
        <void property="producto">
-        <object class="co.edu.uniquindio.subasta.model.Producto" id="Producto0">
+        <object class="co.edu.uniquindio.subasta.model.Producto">
          <void property="codigo">
-          <string>0</string>
+          <string>3</string>
          </void>
          <void property="nombre">
-          <string>Casa</string>
+          <string>Balon</string>
          </void>
          <void property="tipoArticulo">
           <object class="java.lang.Enum" id="TipoArticulo0" method="valueOf">
@@ -38,52 +47,37 @@
         </object>
        </void>
        <void property="valorInicial">
-        <double>55000.0</double>
-       </void>
-      </object>
-     </void>
-     <void method="add">
-      <object class="co.edu.uniquindio.subasta.model.Anuncio" id="Anuncio0">
-       <void property="codigo">
-        <string>1</string>
-       </void>
-       <void property="descripcion">
-        <string>hola como estan todos estos hps sapos hijos de putas gonorreas</string>
-       </void>
-       <void property="fechaPublicacion">
-        <string>2023-11-05</string>
-       </void>
-       <void property="fechaTerminacion">
-        <string>2023-11-05</string>
-       </void>
-       <void property="nombre">
-        <string>hola munod </string>
-       </void>
-       <void property="nombreAnunciante">
-        <string>juan</string>
-       </void>
-       <void property="producto">
-        <object class="co.edu.uniquindio.subasta.model.Producto">
-         <void property="codigo">
-          <string>0</string>
-         </void>
-         <void property="nombre">
-          <string>Casa</string>
-         </void>
-         <void property="tipoArticulo">
-          <object idref="TipoArticulo0"/>
-         </void>
-        </object>
-       </void>
-       <void property="valorInicial">
-        <double>200.0</double>
+        <double>50000.0</double>
        </void>
       </object>
      </void>
     </void>
     <void property="listaProducto">
      <void method="add">
-      <object idref="Producto0"/>
+      <object class="co.edu.uniquindio.subasta.model.Producto">
+       <void property="codigo">
+        <string>0</string>
+       </void>
+       <void property="nombre">
+        <string>Casa</string>
+       </void>
+       <void property="tipoArticulo">
+        <object idref="TipoArticulo0"/>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="co.edu.uniquindio.subasta.model.Producto">
+       <void property="codigo">
+        <string>3</string>
+       </void>
+       <void property="nombre">
+        <string>Balon</string>
+       </void>
+       <void property="tipoArticulo">
+        <object idref="TipoArticulo0"/>
+       </void>
+      </object>
      </void>
     </void>
     <void property="nombre">
