@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.model;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
+import co.edu.uniquindio.subasta.util.Persistencia;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -200,6 +201,7 @@ public class Subasta implements ISubastaService, Serializable {
                     anuncio.getListaPujas().add(puja);
                     System.out.println(anuncio.getListaPujas().get(0));
                     System.out.println(anuncio.getListaPujas().size());
+                    Persistencia.guardarRecursoSubastaXML(this);
                     return true;
                 }
             }

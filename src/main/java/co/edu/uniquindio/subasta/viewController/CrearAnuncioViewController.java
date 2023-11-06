@@ -4,6 +4,7 @@ import co.edu.uniquindio.subasta.controller.AnuncioController;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
+import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -242,7 +243,7 @@ public class CrearAnuncioViewController{
         return new AnuncioDto(productoDtoAsociado, txtNombrePublicacion.getText(),
                 txtDescripcion.getText(), nombreFoto,
                 recuperarNombreAnunciante(), String.valueOf(dateInicio.getValue()), String.valueOf(dateFin.getValue()),
-                Float.parseFloat(txtValorInicial.getText()), txtCodigo.getText(), new ArrayList<>());
+                Float.parseFloat(txtValorInicial.getText()), txtCodigo.getText(), new ArrayList<PujaDto>());
     }
 
     private ProductoDto armarProductoAcosiado() {

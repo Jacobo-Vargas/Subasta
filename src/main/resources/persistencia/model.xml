@@ -24,6 +24,24 @@
        <void property="foto">
         <string>balon_20231106_174316.jpeg</string>
        </void>
+       <void property="listaPujas">
+        <void method="add">
+         <object class="co.edu.uniquindio.subasta.model.Puja">
+          <void property="anuncio">
+           <object idref="Anuncio0"/>
+          </void>
+          <void property="codigo">
+           <string>1</string>
+          </void>
+          <void property="direccion">
+           <string>La casa</string>
+          </void>
+          <void property="oferta">
+           <double>45000.0</double>
+          </void>
+         </object>
+        </void>
+       </void>
        <void property="nombre">
         <string>BALON</string>
        </void>
@@ -114,6 +132,35 @@
     </void>
    </object>
   </void>
+  <void property="compradorLogueado">
+   <object class="co.edu.uniquindio.subasta.model.Comprador" id="Comprador0">
+    <void property="apellido">
+     <string>buitrago</string>
+    </void>
+    <void property="cedula">
+     <string>123456789</string>
+    </void>
+    <void property="direccion">
+     <string>Barrio quinio</string>
+    </void>
+    <void property="edad">
+     <int>19</int>
+    </void>
+    <void property="nombre">
+     <string>juan pablo</string>
+    </void>
+    <void property="telefono">
+     <string>3128638699</string>
+    </void>
+    <void property="usuario">
+     <object class="co.edu.uniquindio.subasta.model.Usuario">
+      <void property="contrasenia">
+       <string>123456789</string>
+      </void>
+     </object>
+    </void>
+   </object>
+  </void>
   <void property="listaAnunciante">
    <void method="add">
     <object idref="Anunciante0"/>
@@ -161,33 +208,7 @@
   </void>
   <void property="listaCompradores">
    <void method="add">
-    <object class="co.edu.uniquindio.subasta.model.Comprador">
-     <void property="apellido">
-      <string>buitrago</string>
-     </void>
-     <void property="cedula">
-      <string>123456789</string>
-     </void>
-     <void property="direccion">
-      <string>Barrio quinio</string>
-     </void>
-     <void property="edad">
-      <int>19</int>
-     </void>
-     <void property="nombre">
-      <string>juan pablo</string>
-     </void>
-     <void property="telefono">
-      <string>3128638699</string>
-     </void>
-     <void property="usuario">
-      <object class="co.edu.uniquindio.subasta.model.Usuario">
-       <void property="contrasenia">
-        <string>123456789</string>
-       </void>
-      </object>
-     </void>
-    </object>
+    <object idref="Comprador0"/>
    </void>
    <void method="add">
     <object class="co.edu.uniquindio.subasta.model.Comprador">
