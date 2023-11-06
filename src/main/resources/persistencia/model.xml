@@ -41,6 +41,54 @@
           </void>
          </object>
         </void>
+        <void method="add">
+         <object class="co.edu.uniquindio.subasta.model.Puja">
+          <void property="anuncio">
+           <object idref="Anuncio0"/>
+          </void>
+          <void property="codigo">
+           <string>2</string>
+          </void>
+          <void property="direccion">
+           <string></string>
+          </void>
+          <void property="oferta">
+           <double>55000.0</double>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="co.edu.uniquindio.subasta.model.Puja">
+          <void property="anuncio">
+           <object idref="Anuncio0"/>
+          </void>
+          <void property="codigo">
+           <string>1</string>
+          </void>
+          <void property="direccion">
+           <string>34534534</string>
+          </void>
+          <void property="oferta">
+           <double>1.24242536E8</double>
+          </void>
+         </object>
+        </void>
+        <void method="add">
+         <object class="co.edu.uniquindio.subasta.model.Puja">
+          <void property="anuncio">
+           <object idref="Anuncio0"/>
+          </void>
+          <void property="codigo">
+           <string>15</string>
+          </void>
+          <void property="direccion">
+           <string>34534534</string>
+          </void>
+          <void property="oferta">
+           <double>1.24242536E8</double>
+          </void>
+         </object>
+        </void>
        </void>
        <void property="nombre">
         <string>BALON</string>

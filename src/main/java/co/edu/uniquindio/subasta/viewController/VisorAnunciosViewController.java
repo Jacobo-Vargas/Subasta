@@ -71,13 +71,13 @@ public class VisorAnunciosViewController {
         AnuncioDto anuncioDto = anunciosDto.get(posicion);
 
         // mapea la lista a ofertas y luego compara para obtener el mayor de esas ofertas
-        Optional<Float> oferta = anuncioDto
+        float oferta =anuncioDto
                 .listaPujas()
                 .stream()
                 .map(PujaDto::oferta)
-                .max(Float::compare);
+                .max(Float::compare)
+                .orElse(0F);
 
-        System.out.println(anuncioDto);
 
         System.out.println(oferta);
 
