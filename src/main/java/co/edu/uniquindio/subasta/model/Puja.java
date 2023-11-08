@@ -10,7 +10,7 @@ public class Puja implements Serializable {
 
     private String direccion ;
     private String codigo;
-    private double oferta;
+    private float oferta;
     private LocalDate fechaPuja;
     private Anuncio anuncio;
 
@@ -33,11 +33,11 @@ public class Puja implements Serializable {
         this.codigo = codigo;
     }
 
-    public double getOferta() {
+    public float getOferta() {
         return oferta;
     }
 
-    public void setOferta(double oferta) {
+    public void setOferta(float oferta) {
         this.oferta = oferta;
     }
 

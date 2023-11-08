@@ -74,7 +74,7 @@ public class VisorAnunciosViewController {
                 .stream()
                 .map(PujaDto::oferta)
                 .max(Float::compare)
-                .orElse(0F);
+                .orElse(0.0F);
 
 
         lblFin.setText(anuncioDto.fechaTerminacion());
