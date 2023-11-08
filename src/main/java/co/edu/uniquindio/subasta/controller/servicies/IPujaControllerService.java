@@ -13,6 +13,6 @@ public interface IPujaControllerService {
     boolean elimnarPuja(PujaDto pujaDto) throws Exception;
     boolean actulizarPuja(PujaDto pujaDto) throws Exception;
     Anuncio salvarAnuncio(String nombre);
-    List<PujaDto> listaPujaCompradorLogueado(String codigo);
+    List<PujaDto> listaPujaCompradorLogueado();
 
 }

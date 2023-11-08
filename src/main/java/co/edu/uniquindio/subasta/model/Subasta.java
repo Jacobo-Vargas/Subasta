@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.model;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
+import co.edu.uniquindio.subasta.util.AlertaUtil;
 import co.edu.uniquindio.subasta.util.Persistencia;
 
 import java.io.Serial;
@@ -198,35 +199,50 @@ public class Subasta implements ISubastaService, Serializable {
             if ((compradorLogueado.getListaPujas().size() < 3)) {
                 compradorLogueado.setListaPujas(list);
 
+
+
                 // metodo que agrega la puja a la lista global
                 for (Anuncio anuncio : listaAnuncios) {
                     if (anuncio.getCodigo().equals(codigo)) {
                         anuncio.getListaPujas().add(puja);
+                        System.out.println(anuncio);
                         break;
                     }
                 }
 
                 // metodo que agrega la puja a el anunciante
 
-                for (Anunciante a : listaAnunciante) {
-                    return a.getListaAnuncio().stream().anyMatch(anuncio -> {
-                        if(anuncio.getCodigo().equals(codigo)){
-                            anuncio.getListaPujas().add(puja);
+                for(Anunciante anunciante:listaAnunciante){
+                    for(Anuncio anunciooo:anunciante.getListaAnuncio()){
+                        if(anunciooo.getCodigo().equals(codigo)){
+                            anunciooo.getListaPujas().add(puja);
+                            System.out.println(anunciooo);
+
                         }
-                       return true;
-                   });
+                    }
                 }
+                return true;
+            }else{
+                AlertaUtil.mostrarMensajeOk("el comprador no puede hacer mas de tres pujas ");
+
             }
-            return true;
+
         } else {
-            return false;
+            AlertaUtil.mostrarMensajeOk("numero de codigo repetiodo.");
         }
+        return false;
 
     }
 
     @Override
     public List<Puja> listaPujasComprador(String codigo) {
-        return compradorLogueado.getListaPujas().stream().filter(Puja -> Puja.getAnuncio().getCodigo().equals(codigo)).collect(Collectors.toList());
+        List<Puja>lista=new ArrayList<>();
+        for(Puja puja:compradorLogueado.getListaPujas()){
+            if(puja.getAnuncio().getCodigo().equals(codigo)){
+                lista.add(puja);
+            }
+        }
+        return lista;
     }
 
     @Override

@@ -6,6 +6,7 @@ import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.mapping.dto.*;
 import co.edu.uniquindio.subasta.mapping.mappers.MapperSubasta;
 import co.edu.uniquindio.subasta.model.*;
+import co.edu.uniquindio.subasta.util.AlertaUtil;
 import co.edu.uniquindio.subasta.util.Persistencia;
 import co.edu.uniquindio.subasta.util.SubastaUtil;
 
@@ -321,8 +322,8 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public List<PujaDto> listaAnuncioCompradorLogueado(String codigo) {
-        ArrayList<Puja> lista = new ArrayList<>(getSubasta().listaPujasComprador(codigo));
+    public List<PujaDto> listaAnuncioCompradorLogueado() {
+        ArrayList<Puja> lista = new ArrayList<>(getSubasta().getCompradorLogueado().getListaPujas());
         return mapper.getListaPujas(lista);
     }
 

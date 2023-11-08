@@ -47,7 +47,7 @@ public class PujaController implements IPujaControllerService {
     }
 
     @Override
-    public List<PujaDto> listaPujaCompradorLogueado(String codigo) {
-       return modelFactoryController.listaAnuncioCompradorLogueado(codigo);
+    public List<PujaDto> listaPujaCompradorLogueado() {
+       return modelFactoryController.listaAnuncioCompradorLogueado();
     }
 }
