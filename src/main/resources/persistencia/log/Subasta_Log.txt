@@ -102,3 +102,13 @@ nov. 07, 2023 8:30:18 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarR
 INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-07
 nov. 07, 2023 8:30:21 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: CIERRE DE SESIÓN.,juan cerró sesión.,2023-11-07
+nov. 07, 2023 8:32:47 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-07
+nov. 07, 2023 8:32:58 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-07
+nov. 07, 2023 8:34:13 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-07
+nov. 07, 2023 8:34:26 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-07
+nov. 07, 2023 8:34:30 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: CIERRE DE SESIÓN.,juan pablo cerró sesion.,2023-11-07
