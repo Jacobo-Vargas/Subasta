@@ -4,6 +4,7 @@ import co.edu.uniquindio.subasta.controller.PujaController;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.model.Anuncio;
+import co.edu.uniquindio.subasta.model.Puja;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -20,6 +21,8 @@ public class PujaViewController {
     PujaController pujaController;
     ObservableList<PujaDto> listaPuja = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnuncio = FXCollections.observableArrayList();
+
+    String codigoAnuncio;
     @FXML
     public TextField textFieldCodigo;
     @FXML
@@ -46,33 +49,25 @@ public class PujaViewController {
     @FXML
     void initialize() {
         pujaController = new PujaController();
-        obtenerlistas();
-        tableViewTabla.setItems(listaPuja);
-        initDataBinding();
+        initView();
     }
-
-    public void obtenerlistas() {
-        listaPuja.clear();
-        listaAnuncio.clear();
-        listaAnuncio.addAll(pujaController.obtenerListaNuncio());
-        listaPuja.addAll(pujaController.obtenerLitaPuja());
+    void initView(){
         llenarCombox();
+        obtenerPujas();
+        initDataBinding();
     }
 
     private void initDataBinding() {
         tableColumnDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().direccion()));
         tableColumnCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
-
         tableColumnValorPuja.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().oferta())));
         tableColumnFecha.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaPuja())));
     }
 
     public void llenarCombox() {
-        List<AnuncioDto> combo = new ArrayList<>(pujaController.obtenerListaNuncio());
         List<String> nombre = new ArrayList<>();
         for (AnuncioDto anuncioDto : pujaController.obtenerListaNuncio()) {
             nombre.add(anuncioDto.nombre());
-
         }
         ObservableList<String> lista = FXCollections.observableArrayList(nombre);
         comboBoxAnuncio.setItems(lista);
@@ -82,41 +77,49 @@ public class PujaViewController {
         initialize();
     }
 
-    public void relizarPuja(ActionEvent actionEvent) throws Exception {
-        String nombreAnuncio = comboBoxAnuncio.getValue();
-        Anuncio anuncio = pujaController.salvarAnuncio(nombreAnuncio);
-        if ((pujaController.listaPujaCompradorLogueado(anuncio.getCodigo()).size()) == 3) {
-            AlertaUtil.mostrarMensajeError("Un comprador solo puede hacer 3 pujas a un anuncio");
+    public void relizarPuja() throws Exception {
+        PujaDto pujaDto = armarPujaDto();
+        obtenerPujas();
 
-        } else {
-            String direccion = textFieldDireccion.getText();
-            String codigoo = textFieldCodigo.getText();
-            float ofertaInicial = Float.valueOf(textFieldValorInicial.getText());
-            System.out.println(ofertaInicial);
-            LocalDate fecha = LocalDate.now();
+        boolean codigo = listaAnuncio.stream().anyMatch(anuncioDto -> {
+                if (anuncioDto.nombre().equals(comboBoxAnuncio.getValue())){
+                    codigoAnuncio = anuncioDto.codigo();
+                }
+            return true;
+        });
 
-            PujaDto pujaDto = new PujaDto(direccion, codigoo, ofertaInicial, fecha, anuncio);
-
+        if(pujaController.realizarPuja(pujaDto,codigoAnuncio)){
+            listaPuja.add(pujaDto);
             tableViewTabla.refresh();
-            if(pujaController.realizarPuja(pujaDto, anuncio.getCodigo())) {
-                AlertaUtil.mostrarMensajeConfirmacion("Puja reliazada con exito");
-            }else {
-                AlertaUtil.mostrarMensajeError("No se pudo relizar la puja");
-            }
+            AlertaUtil.mostrarMensajeOk("Se realizo con éxito.");
+        }else{
+            AlertaUtil.mostrarMensajeError("No se pudo realizar.");
         }
-
-
     }
 
 
-    public void mostarTabla(ActionEvent actionEvent) {
+    public void mostarTabla() {
         String nombre = comboBoxAnuncio.getValue();
         Anuncio anuncio = pujaController.salvarAnuncio(nombre);
         List<PujaDto> list = pujaController.listaPujaCompradorLogueado(anuncio.getCodigo());
-        ObservableList<PujaDto> listaConvertida = FXCollections.observableList(list);
 
-        listaPuja = listaConvertida;
+        listaPuja = FXCollections.observableList(list);
         tableViewTabla.setItems(listaPuja);
         tableViewTabla.refresh();
+    }
+
+    public void obtenerPujas(){
+        listaPuja.clear();
+        listaPuja.addAll(pujaController.obtenerLitaPuja());
+        tableViewTabla.setItems(listaPuja);
+        tableViewTabla.refresh();
+    }
+
+    public PujaDto armarPujaDto(){
+       return new PujaDto(textFieldDireccion.getText()
+               ,textFieldCodigo.getText()
+               ,Float.parseFloat(textFieldValorInicial.getText())
+               ,String.valueOf(LocalDate.now())
+               ,new Anuncio());
     }
 }

@@ -183,36 +183,50 @@ public class Subasta implements ISubastaService, Serializable {
     public boolean verificarPujaRepetida(Puja puja) {
         for (Puja p : compradorLogueado.getListaPujas()) {
             if (p.getCodigo().equals(puja.getCodigo())) {
-                return false;
+                return true;
             }
 
-        }
-        return true;
-    }
-
-    @Override
-    public boolean realizarPuja(Puja puja, String codigo) throws Exception {
-        if (verificarPujaRepetida(puja)) {
-            compradorLogueado.getListaPujas().add(puja);
-            System.out.println(compradorLogueado.getListaPujas().size());
-            System.out.println(compradorLogueado.getListaPujas().get(0));
-            for (Anuncio anuncio : listaAnuncios) {
-                if (anuncio.getCodigo().equals(codigo)) {
-                    anuncio.getListaPujas().add(puja);
-                    System.out.println(anuncio.getListaPujas().get(0));
-                    System.out.println(anuncio.getListaPujas().size());
-                    Persistencia.guardarRecursoSubastaXML(this);
-                    return true;
-                }
-            }
         }
         return false;
     }
 
     @Override
+    public boolean realizarPuja(Puja puja, String codigo) throws Exception {
+        if (!(verificarPujaRepetida(puja))) {
+            ArrayList<Puja> list = compradorLogueado.getListaPujas();
+            list.add(puja);
+            if ((compradorLogueado.getListaPujas().size() < 3)) {
+                compradorLogueado.setListaPujas(list);
+
+                // metodo que agrega la puja a la lista global
+                for (Anuncio anuncio : listaAnuncios) {
+                    if (anuncio.getCodigo().equals(codigo)) {
+                        anuncio.getListaPujas().add(puja);
+                        break;
+                    }
+                }
+
+                // metodo que agrega la puja a el anunciante
+
+                for (Anunciante a : listaAnunciante) {
+                    return a.getListaAnuncio().stream().anyMatch(anuncio -> {
+                        if(anuncio.getCodigo().equals(codigo)){
+                            anuncio.getListaPujas().add(puja);
+                        }
+                       return true;
+                   });
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
     public List<Puja> listaPujasComprador(String codigo) {
-        List<Puja> listaPuja = compradorLogueado.getListaPujas().stream().filter(Puja -> Puja.getAnuncio().getCodigo().equals(codigo)).collect(Collectors.toList());
-        return listaPuja;
+        return compradorLogueado.getListaPujas().stream().filter(Puja -> Puja.getAnuncio().getCodigo().equals(codigo)).collect(Collectors.toList());
     }
 
     @Override

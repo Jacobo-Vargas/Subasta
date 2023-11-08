@@ -8,7 +8,7 @@ public record PujaDto(
         String direccion,
         String codigo,
         float oferta,
-        LocalDate fechaPuja,
+        String fechaPuja,
         Anuncio anuncio
 ) {
 }

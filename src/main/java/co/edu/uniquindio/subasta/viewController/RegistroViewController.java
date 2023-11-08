@@ -5,6 +5,7 @@ import co.edu.uniquindio.subasta.controller.RegistroController;
 import co.edu.uniquindio.subasta.exceptions.RegistroException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
+import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.model.Usuario;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
 import javafx.event.ActionEvent;

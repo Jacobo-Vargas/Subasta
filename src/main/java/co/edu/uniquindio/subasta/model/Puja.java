@@ -11,7 +11,7 @@ public class Puja implements Serializable {
     private String direccion ;
     private String codigo;
     private float oferta;
-    private LocalDate fechaPuja;
+    private String fechaPuja;
     private Anuncio anuncio;
 
     public Puja() {
@@ -41,11 +41,11 @@ public class Puja implements Serializable {
         this.oferta = oferta;
     }
 
-    public LocalDate getFechaPuja() {
+    public String getFechaPuja() {
         return fechaPuja;
     }
 
-    public void setFechaPuja(LocalDate fechaPuja) {
+    public void setFechaPuja(String fechaPuja) {
         this.fechaPuja = fechaPuja;
     }
 

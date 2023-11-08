@@ -48,7 +48,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //4 XML
 
-       // guardarResourceXML();
+       //guardarResourceXML();
         cargarResourceXML();
 
 
@@ -133,6 +133,8 @@ public class ModelFactoryController implements IModelFactoryController {
 
 
     public boolean restaurarLogueo() {
+
+        guardarResourceXML();
 
         boolean logueado = false;
 
@@ -313,7 +315,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<PujaDto> obtenerLitaPuja() { //esta en Dto por es la lista que va mostrar
-        ArrayList<Puja> listaPuja = new ArrayList<>(getSubasta().obtenerLitaPuja());
+        ArrayList<Puja> listaPuja = new ArrayList<>(getSubasta().getCompradorLogueado().getListaPujas());
         return mapper.getPujaDto(listaPuja);
 
     }
@@ -328,6 +330,7 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception {
         Puja puja = mapper.pujaDtoToPuja(pujaDto);
         if (getSubasta().realizarPuja(puja, codigo)) {
+            guardarResourceXML();
             return true;
         } else {
             return false;
