@@ -77,8 +77,6 @@ public class VisorAnunciosViewController {
                 .orElse(0F);
 
 
-        System.out.println(oferta);
-
         lblFin.setText(anuncioDto.fechaTerminacion());
         lblNumOfertas.setText(String.valueOf(anuncioDto.listaPujas().size()));
         lblOfertaMaxima.setText(String.valueOf(oferta));

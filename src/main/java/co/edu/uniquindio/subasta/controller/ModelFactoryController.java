@@ -35,7 +35,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //1. inicializar datos y luego guardarlo en archivos
 
-       //cargarDatosBase();
+        //cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -48,8 +48,9 @@ public class ModelFactoryController implements IModelFactoryController {
 
         //4 XML
 
-       //guardarResourceXML();
+        //guardarResourceXML();
         cargarResourceXML();
+
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
             cargarDatosBase();
@@ -60,15 +61,6 @@ public class ModelFactoryController implements IModelFactoryController {
     private void cargarDatosBase() {
         subasta = SubastaUtil.cargarDatos();
     }
-
-
-
-
-
-
-
-
-
 
 
 //  --------------------------------------- Registro ---------------------------
@@ -118,7 +110,7 @@ public class ModelFactoryController implements IModelFactoryController {
         for (Comprador c : getSubasta().getListaCompradores()) {
             if (c.getCedula().equals(cedula) && c.getUsuario().getContrasenia().equals(contrasenia)) {
                 getSubasta().setCompradorLogueado(c);
-                registrarAccionesSistema( c.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
+                registrarAccionesSistema(c.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
             }
         }
@@ -132,7 +124,7 @@ public class ModelFactoryController implements IModelFactoryController {
         for (Anunciante a : getSubasta().getListaAnunciante()) {
             if (a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)) {
                 getSubasta().setAnuncianteLogueado(a);
-                registrarAccionesSistema(a.getNombre()+ " inicio sesión.", 1, "INICIO DE SESIÓN");
+                registrarAccionesSistema(a.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
             }
         }
@@ -142,15 +134,18 @@ public class ModelFactoryController implements IModelFactoryController {
 
     public boolean restaurarLogueo() {
 
-        if(getSubasta().getAnuncianteLogueado() != null){
-            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre()+" cerró sesión.",1,"CIERRE DE SESIÓN.");
+        boolean logueado = false;
+
+        if (getSubasta().getAnuncianteLogueado() != null) {
+            registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " cerró sesión.", 1, "CIERRE DE SESIÓN.");
             getSubasta().setAnuncianteLogueado(null);
-        }
-        if(getSubasta().getCompradorLogueado() != null){
-            registrarAccionesSistema(getSubasta().getCompradorLogueado().getNombre()+" cerró sesion.",1,"CIERRE DE SESIÓN.");
+            logueado = true;
+        }else if (getSubasta().getCompradorLogueado() != null) {
+            registrarAccionesSistema(getSubasta().getCompradorLogueado().getNombre() + " cerró sesion.", 1, "CIERRE DE SESIÓN.");
             getSubasta().setCompradorLogueado(null);
+            logueado = true;
         }
-        return getSubasta().getAnuncianteLogueado() == null && getSubasta().getCompradorLogueado() == null;
+        return logueado;
     }
 
 
@@ -199,7 +194,8 @@ public class ModelFactoryController implements IModelFactoryController {
             throw new RuntimeException(e);
         }
     }
-//    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
+
+    //    ------------------------------------------ CRUD PRODUCTO ---------------------------------------------
     @Override
     public List<ProductoDto> obtenerProducto() {
         ArrayList<Producto> lista = new ArrayList<>(getSubasta().obtenerProducto());
@@ -208,9 +204,9 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<AnuncianteDto> obtenerListaAnunciante() {
-        ArrayList<Anunciante>listaAnunciante= new ArrayList<>();
-        listaAnunciante=getSubasta().getListaAnunciante();
-        return  mapper.getListaAnunciante(listaAnunciante);
+        ArrayList<Anunciante> listaAnunciante = new ArrayList<>();
+        listaAnunciante = getSubasta().getListaAnunciante();
+        return mapper.getListaAnunciante(listaAnunciante);
 
     }
 
@@ -265,7 +261,7 @@ public class ModelFactoryController implements IModelFactoryController {
         return mapper.getAnunciosDto(lista);
     }
 
-    public List<AnuncioDto> obtenerAnunciosGlobales(){
+    public List<AnuncioDto> obtenerAnunciosGlobales() {
         ArrayList<Anuncio> lista = new ArrayList<>(getSubasta().getListaAnuncios());
         return mapper.getAnunciosDto(lista);
     }
@@ -279,9 +275,9 @@ public class ModelFactoryController implements IModelFactoryController {
     public int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
         int opcion = getSubasta().agregarAnuncio(anuncio);
-        if( opcion ==  3){
+        if (opcion == 3) {
             guardarResourceXML();
-            registrarAccionesSistema("Se agrego un anuncio.",1,"AGREGAR ANUNCIO");
+            registrarAccionesSistema("Se agrego un anuncio.", 1, "AGREGAR ANUNCIO");
         }
         return opcion;
 
@@ -290,11 +286,11 @@ public class ModelFactoryController implements IModelFactoryController {
     @Override
     public boolean eliminarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
-        if(getSubasta().eliminarAnuncio(anuncio)){
+        if (getSubasta().eliminarAnuncio(anuncio)) {
             guardarResourceXML();
-            registrarAccionesSistema("Se elimino un anuncio.",1,"ELIMINAR ANUNCIO");
+            registrarAccionesSistema("Se elimino un anuncio.", 1, "ELIMINAR ANUNCIO");
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -302,12 +298,12 @@ public class ModelFactoryController implements IModelFactoryController {
     @Override
     public boolean actualizarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
-        if(getSubasta().actualizarAnuncio(anuncio)){
+        if (getSubasta().actualizarAnuncio(anuncio)) {
             registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " actualizó un anuncio.", 1, "ACTUALIZAR ANUNCIO");
             guardarResourceXML();
             return true;
 
-        }else{
+        } else {
             return false;
         }
     }
@@ -317,54 +313,54 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<PujaDto> obtenerLitaPuja() { //esta en Dto por es la lista que va mostrar
-        ArrayList<Puja>listaPuja=new ArrayList<>(getSubasta().obtenerLitaPuja());
+        ArrayList<Puja> listaPuja = new ArrayList<>(getSubasta().obtenerLitaPuja());
         return mapper.getPujaDto(listaPuja);
 
     }
 
     @Override
     public List<PujaDto> listaAnuncioCompradorLogueado(String codigo) {
-        ArrayList<Puja>lista=new ArrayList<>(getSubasta().listaPujasComprador(codigo));
+        ArrayList<Puja> lista = new ArrayList<>(getSubasta().listaPujasComprador(codigo));
         return mapper.getListaPujas(lista);
     }
 
     @Override
     public boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception {
-        Puja puja=mapper.pujaDtoToPuja(pujaDto);
-        if(getSubasta().realizarPuja(puja,codigo)){
+        Puja puja = mapper.pujaDtoToPuja(pujaDto);
+        if (getSubasta().realizarPuja(puja, codigo)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     @Override
     public boolean elimnarPuja(PujaDto pujaDto) throws Exception {
-        Puja puja=mapper.pujaDtoToPuja(pujaDto);
-        if(getSubasta().eliminarPuja(puja)){
+        Puja puja = mapper.pujaDtoToPuja(pujaDto);
+        if (getSubasta().eliminarPuja(puja)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     @Override
     public boolean actulizarPuja(PujaDto pujaDto) throws Exception {
-        Puja puja=mapper.pujaDtoToPuja(pujaDto);
-        if(getSubasta().actualizarPuja(puja)){
+        Puja puja = mapper.pujaDtoToPuja(pujaDto);
+        if (getSubasta().actualizarPuja(puja)) {
             return true;
-        }else {
-            return  false;
+        } else {
+            return false;
         }
     }
 
     @Override
     public List<AnuncioDto> obtenerListaNuncio() {
-        List<Anuncio>lista=new ArrayList<>();
-        lista=getSubasta().obtenerListaAnuncio();
-        List<AnuncioDto>listaRetornar=new ArrayList<>();
-        for(int i=0;i<lista.size();i++){
-            Anuncio anuncio=lista.get(i);
+        List<Anuncio> lista = new ArrayList<>();
+        lista = getSubasta().obtenerListaAnuncio();
+        List<AnuncioDto> listaRetornar = new ArrayList<>();
+        for (int i = 0; i < lista.size(); i++) {
+            Anuncio anuncio = lista.get(i);
             listaRetornar.add(mapper.anuncioToAnuncioDto(anuncio));
         }
         return listaRetornar;
@@ -372,17 +368,19 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public Anuncio salvarAnuncio(String nombre) {
-        for(Anuncio anuncio:getSubasta().getListaAnuncios()){
-            if(anuncio.getNombre().equals(nombre)){
+        for (Anuncio anuncio : getSubasta().getListaAnuncios()) {
+            if (anuncio.getNombre().equals(nombre)) {
                 return anuncio;
             }
         }
         return null;
     }
-//---------------------------- GETTERS Y SETTERS ------------------------------------
+
+    //---------------------------- GETTERS Y SETTERS ------------------------------------
     public void setSubasta(Subasta subasta) {
         this.subasta = subasta;
     }
+
     public Subasta getSubasta() {
         return subasta;
     }
