@@ -8,12 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class VisorAnunciosViewController {
 
@@ -36,7 +34,7 @@ public class VisorAnunciosViewController {
     private ImageView imagenAnuncio;
 
     @FXML
-    void anteriorAnuncio(MouseEvent event) {
+    void anteriorAnuncio() {
         if (posicion == 0) {
             posicion = anunciosDto.size() - 1;
         } else {
@@ -46,7 +44,7 @@ public class VisorAnunciosViewController {
     }
 
     @FXML
-    void siguienteAnuncio(MouseEvent event) {
+    void siguienteAnuncio() {
         if (posicion == anunciosDto.size() - 1) {
             posicion = 0;
         } else {
