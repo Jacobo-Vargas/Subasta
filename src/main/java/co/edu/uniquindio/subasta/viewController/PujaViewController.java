@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class PujaViewController {
     ObservableList<PujaDto> listaPuja = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnuncio = FXCollections.observableArrayList();
 
-    String codigoAnuncio;
+    PujaDto pujaSelecionada;
     @FXML
     public TextField textFieldCodigo;
     @FXML
@@ -47,9 +48,10 @@ public class PujaViewController {
 
 
     @FXML
-    void initialize() {
+    void initialize() throws MalformedURLException {
         pujaController = new PujaController();
         initView();
+        listenerSelection();
     }
     void initView(){
         llenarCombox();
@@ -73,7 +75,7 @@ public class PujaViewController {
         comboBoxAnuncio.setItems(lista);
     }
 
-    public void updateCombo() {
+    public void updateCombo() throws MalformedURLException {
         initialize();
     }
 
@@ -135,4 +137,26 @@ public class PujaViewController {
                ,String.valueOf(LocalDate.now())
                ,anuncio);
     }
+
+    public void borrar(ActionEvent actionEvent) {
+    }
+
+    private void listenerSelection() throws MalformedURLException {
+        tableViewTabla.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            pujaSelecionada = newSelection;
+
+                mostrarInformacionAnuncio(pujaSelecionada);
+
+        });
+    }
+
+    private void mostrarInformacionAnuncio(PujaDto pujaSelecionada) {
+        if(pujaSelecionada!=null){
+            textFieldCodigo.setText(pujaSelecionada.codigo());
+            textFieldDireccion.setText(pujaSelecionada.direccion());
+            textFieldValorInicial.setText(String.valueOf(pujaSelecionada.oferta()));
+        }
+    }
+
+
 }
