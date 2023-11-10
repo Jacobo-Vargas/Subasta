@@ -506,3 +506,131 @@ nov. 09, 2023 3:36:54 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarR
 INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-09
 nov. 09, 2023 3:37:07 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-09
+nov. 10, 2023 2:44:46 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 2:45:04 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:21:30 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:21:44 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:23:19 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:23:33 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:31:56 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:32:34 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:32:55 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGO PUJA,juan pablo Realizo una puja.,2023-11-10
+nov. 10, 2023 3:33:22 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: ELIMINAR PUJA,juan pablo Elimino puja.,2023-11-10
+nov. 10, 2023 3:37:25 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:37:42 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:39:38 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:39:52 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:41:05 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:42:14 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:42:34 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:44:02 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:44:44 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:45:59 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:46:22 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:46:37 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:47:57 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:48:12 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:50:00 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:50:16 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:51:31 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:51:48 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:54:26 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:54:51 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:55:08 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 3:57:44 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 3:57:56 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 4:05:57 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:06:09 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 4:15:48 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:16:00 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 4:17:11 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:17:20 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 4:17:40 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGO PUJA,juan pablo Realizo una puja.,2023-11-10
+nov. 10, 2023 4:21:22 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:21:36 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 4:21:47 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: ELIMINAR PUJA,juan pablo Elimino puja.,2023-11-10
+nov. 10, 2023 4:22:00 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGO PUJA,juan pablo Realizo una puja.,2023-11-10
+nov. 10, 2023 4:22:55 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:23:24 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 4:23:48 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: ELIMINAR PUJA,juan pablo Elimino puja.,2023-11-10
+nov. 10, 2023 4:24:38 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:24:59 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:25:44 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:26:18 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:26:31 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-10
+nov. 10, 2023 4:26:35 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:27:03 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:27:34 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-10
+nov. 10, 2023 4:27:43 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: ELIMINAR ANUNCIO,Se elimino un anuncio.,2023-11-10
+nov. 10, 2023 4:28:11 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGAR ANUNCIO,Se agrego un anuncio.,2023-11-10
+nov. 10, 2023 4:28:20 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGAR ANUNCIO,Se agrego un anuncio.,2023-11-10
+nov. 10, 2023 4:28:27 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGAR ANUNCIO,Se agrego un anuncio.,2023-11-10
+nov. 10, 2023 4:28:30 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: CIERRE DE SESIÓN.,juan cerró sesión.,2023-11-10
+nov. 10, 2023 4:28:40 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan pablo inicio sesión.,2023-11-10
+nov. 10, 2023 4:30:56 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGO PUJA,juan pablo Realizo una puja.,2023-11-10
+nov. 10, 2023 4:32:41 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10
+nov. 10, 2023 4:33:27 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-10

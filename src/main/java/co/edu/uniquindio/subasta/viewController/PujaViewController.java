@@ -84,17 +84,10 @@ public class PujaViewController {
         obtenerPujas();
         Anuncio anuncio=pujaController.salvarAnuncio(comboBoxAnuncio.getValue());
         Float valor= Float.valueOf(textFieldValorInicial.getText());
-        int numeroPujas=0;
         PujaDto pujaDtoo=new PujaDto(textFieldDireccion.getText(),textFieldCodigo.getText(),valor,String.valueOf(LocalDate.now()),anuncio);
-        for(PujaDto pujaDto:pujaController.obtenerLitaPuja()){
-            if(pujaDtoo.anuncio().getCodigo().equals(pujaDto.anuncio().getCodigo())){
-                numeroPujas++;
-            }
-        }
-        if(numeroPujas==3){
-            AlertaUtil.mostrarMensajeOk("el comprador solo peude hacer 3 pujas");
-        }else {
-            pujaController.realizarPuja(pujaDtoo, anuncio.getCodigo());
+
+         if(pujaController.realizarPuja(pujaDtoo, anuncio.getCodigo()) ) {
+            AlertaUtil.mostrarMensajeOk("Se realizo la puja con exito");
         }
 
 
@@ -138,8 +131,6 @@ public class PujaViewController {
                ,anuncio);
     }
 
-    public void borrar(ActionEvent actionEvent) {
-    }
 
     private void listenerSelection() throws MalformedURLException {
         tableViewTabla.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -159,4 +150,20 @@ public class PujaViewController {
     }
 
 
+    public void eliminarPuja(ActionEvent actionEvent) throws Exception {
+        if(pujaController.elimnarPuja(pujaSelecionada)){
+            listaPuja.remove(pujaSelecionada);
+            tableViewTabla.refresh();
+            pujaSelecionada=null;
+            tableViewTabla.getSelectionModel().clearSelection();
+            textFieldDireccion.setText("");
+            textFieldCodigo.setText("");
+            textFieldValorInicial.setText("");
+            comboBoxAnuncio.setPromptText("null");
+            AlertaUtil.mostrarMensajeOk("Se elmino la puja con exito.");
+        }else{
+            AlertaUtil.mostrarMensajeError("No se pudo eliminar la puja");
+        }
+
+    }
 }

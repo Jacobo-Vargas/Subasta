@@ -186,21 +186,60 @@ public class Subasta implements ISubastaService, Serializable {
             if (p.getCodigo().equals(puja.getCodigo())) {
                 return true;
             }
-
         }
         return false;
     }
 
     @Override
+    public boolean eliminarPuja(Puja puja) throws Exception {
+
+        if (compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo() ))) {
+            System.out.println(compradorLogueado.getListaPujas());
+
+            //for para quitarlo a la lista de anuncios
+            for (Anuncio anuncio : listaAnuncios) {
+                for (Puja puja1 : anuncio.getListaPujas()) {
+                    if (puja.getCodigo().equals(puja1.getCodigo())) {
+                        System.out.println(anuncio);
+                        anuncio.getListaPujas().remove(puja);
+                        System.out.println(anuncio);
+                    }
+                }
+            }
+            System.out.println();
+            System.out.println();
+            for (Anunciante anunciante : listaAnunciante) {
+
+                for (Anuncio anuncio : anunciante.getListaAnuncio()) {
+
+                    for (Puja puja1 : anuncio.getListaPujas()) {
+                        if (puja.getCodigo().equals(puja1.getCodigo())) {
+                            System.out.println(anuncio);
+                            anuncio.getListaPujas().remove(puja);
+                            System.out.println(anuncio);
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+         else {
+            AlertaUtil.mostrarMensajeError("Codigo puja repetido");
+        }
+        throw new Exception("No se puede realizar puja");
+    }
+
+    @Override
     public boolean realizarPuja(Puja puja, String codigo) throws Exception {
         if (!(verificarPujaRepetida(puja))) {
-            ArrayList<Puja> list = compradorLogueado.getListaPujas();
-            list.add(puja);
-            if ((compradorLogueado.getListaPujas().size() < 3)) {
+            List<Puja>lista=compradorLogueado.getListaPujas().stream().filter(Puja->Puja.getCodigo().equals(puja.getCodigo())).collect(Collectors.toList());
+            if(lista.size()==3){
+                AlertaUtil.mostrarMensajeOk("el comprador solo puede hacer 3 pujas.");
+            }else {
+
+                ArrayList<Puja> list = compradorLogueado.getListaPujas();
+                list.add(puja);
                 compradorLogueado.setListaPujas(list);
-
-
-
                 // metodo que agrega la puja a la lista global
                 for (Anuncio anuncio : listaAnuncios) {
                     if (anuncio.getCodigo().equals(codigo)) {
@@ -212,9 +251,9 @@ public class Subasta implements ISubastaService, Serializable {
 
                 // metodo que agrega la puja a el anunciante
 
-                for(Anunciante anunciante:listaAnunciante){
-                    for(Anuncio anunciooo:anunciante.getListaAnuncio()){
-                        if(anunciooo.getCodigo().equals(codigo)){
+                for (Anunciante anunciante : listaAnunciante) {
+                    for (Anuncio anunciooo : anunciante.getListaAnuncio()) {
+                        if (anunciooo.getCodigo().equals(codigo)) {
                             anunciooo.getListaPujas().add(puja);
                             System.out.println(anunciooo);
 
@@ -222,11 +261,8 @@ public class Subasta implements ISubastaService, Serializable {
                     }
                 }
                 return true;
-            }else{
-                AlertaUtil.mostrarMensajeOk("el comprador no puede hacer mas de tres pujas ");
 
             }
-
         } else {
             AlertaUtil.mostrarMensajeOk("numero de codigo repetiodo.");
         }
@@ -244,34 +280,6 @@ public class Subasta implements ISubastaService, Serializable {
         }
         return lista;
     }
-
-    @Override
-    public boolean eliminarPuja(Puja puja) throws Exception {
-        if (compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()))) {
-            return true;
-        } else {
-            throw new Exception("No se puedo elimanar la puja");
-        }
-    }
-
-    @Override
-    public boolean actualizarPuja(Puja puja) throws Exception {
-        boolean actulizado = false;
-        for (Puja p : compradorLogueado.getListaPujas()) {
-            if (p.getCodigo().equals(puja.getCodigo())) {
-                p.setDireccion(puja.getDireccion());
-                p.setOferta(puja.getOferta());
-                p.setFechaPuja(puja.getFechaPuja());
-                actulizado = true;
-            }
-        }
-        if (actulizado) {
-            return actulizado;
-        } else {
-            throw new Exception("No se pudo actulizar la puja");
-        }
-    }
-
 
     @Override
     public List<Anuncio> obtenerListaAnuncio() {

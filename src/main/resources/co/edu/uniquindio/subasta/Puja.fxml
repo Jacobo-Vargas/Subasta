@@ -24,6 +24,6 @@
       <Button fx:id="actulizar" layoutY="50.0" mnemonicParsing="false" onAction="#updateCombo" text="actulizar" />
       <TextField fx:id="textFieldCodigo" layoutX="245.0" layoutY="50.0" prefHeight="24.0" prefWidth="150.0" promptText="Codigo" />
       <Button layoutX="289.0" layoutY="83.0" mnemonicParsing="false" onAction="#mostarTabla" text="Buscar" />
-      <Button fx:id="bottonBorrar" onAction="#borrar" layoutX="290.0" layoutY="149.0" mnemonicParsing="false" text="Borrar" />
+      <Button fx:id="bottonBorrar" onAction="#eliminarPuja" layoutX="290.0" layoutY="149.0" mnemonicParsing="false" text="Borrar" />
    </children>
 </AnchorPane>

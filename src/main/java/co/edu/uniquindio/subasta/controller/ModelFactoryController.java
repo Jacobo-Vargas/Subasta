@@ -45,7 +45,7 @@ public class ModelFactoryController implements IModelFactoryController {
         //3 binario
 
         //guardarResourceBinario();
-        //cargarResourceBinario();
+        cargarResourceBinario();
 
         //4 XML
 
@@ -332,6 +332,7 @@ public class ModelFactoryController implements IModelFactoryController {
         Puja puja = mapper.pujaDtoToPuja(pujaDto);
         if (getSubasta().realizarPuja(puja, codigo)) {
             guardarResourceXML();
+            registrarAccionesSistema(getSubasta().getCompradorLogueado().getNombre() + " Realizo una puja.", 1, "AGREGO PUJA");
             return true;
         } else {
             return false;
@@ -342,21 +343,15 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean elimnarPuja(PujaDto pujaDto) throws Exception {
         Puja puja = mapper.pujaDtoToPuja(pujaDto);
         if (getSubasta().eliminarPuja(puja)) {
+            guardarResourceXML();
+            registrarAccionesSistema(getSubasta().getCompradorLogueado().getNombre() + " Elimino puja.", 1, "ELIMINAR PUJA");
             return true;
         } else {
             return false;
         }
     }
 
-    @Override
-    public boolean actulizarPuja(PujaDto pujaDto) throws Exception {
-        Puja puja = mapper.pujaDtoToPuja(pujaDto);
-        if (getSubasta().actualizarPuja(puja)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
     @Override
     public List<AnuncioDto> obtenerListaNuncio() {

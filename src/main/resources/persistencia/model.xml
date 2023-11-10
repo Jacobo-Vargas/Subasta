@@ -24,10 +24,10 @@
           <string>1</string>
          </void>
          <void property="descripcion">
-          <string>osdfj</string>
+          <string>hola</string>
          </void>
          <void property="fechaPublicacion">
-          <string>2023-11-08</string>
+          <string>2023-11-10</string>
          </void>
          <void property="fechaTerminacion">
           <string>2023-11-29</string>
@@ -39,31 +39,9 @@
           <void method="add">
            <object idref="Puja0"/>
           </void>
-          <void method="add">
-           <object class="co.edu.uniquindio.subasta.model.Puja" id="Puja1">
-            <void property="anuncio">
-             <object idref="Anuncio0"/>
-            </void>
-            <void property="codigo">
-             <string>2</string>
-            </void>
-            <void property="direccion">
-             <string>1</string>
-            </void>
-            <void property="fechaPuja">
-             <string>2023-11-08</string>
-            </void>
-            <void property="oferta">
-             <float>1.0</float>
-            </void>
-           </object>
-          </void>
-          <void method="add">
-           <object idref="Puja1"/>
-          </void>
          </void>
          <void property="nombre">
-          <string>hola</string>
+          <string>suco</string>
          </void>
          <void property="nombreAnunciante">
           <string>juan</string>
@@ -96,15 +74,12 @@
         <string>1</string>
        </void>
        <void property="fechaPuja">
-        <string>2023-11-08</string>
+        <string>2023-11-10</string>
        </void>
        <void property="oferta">
         <float>1.0</float>
        </void>
       </object>
-     </void>
-     <void method="add">
-      <object idref="Puja1"/>
      </void>
     </void>
     <void property="nombre">
@@ -138,16 +113,16 @@
          <string>2</string>
         </void>
         <void property="descripcion">
-         <string>osdfj</string>
+         <string>hola</string>
         </void>
         <void property="fechaPublicacion">
-         <string>2023-11-08</string>
+         <string>2023-11-10</string>
         </void>
         <void property="fechaTerminacion">
          <string>2023-11-29</string>
         </void>
         <void property="nombre">
-         <string>suco</string>
+         <string>limon</string>
         </void>
         <void property="nombreAnunciante">
          <string>juan</string>
@@ -176,16 +151,16 @@
          <string>3</string>
         </void>
         <void property="descripcion">
-         <string>osdfj</string>
+         <string>hola</string>
         </void>
         <void property="fechaPublicacion">
-         <string>2023-11-08</string>
+         <string>2023-11-10</string>
         </void>
         <void property="fechaTerminacion">
          <string>2023-11-29</string>
         </void>
         <void property="nombre">
-         <string>perico</string>
+         <string>queso</string>
         </void>
         <void property="nombreAnunciante">
          <string>juan</string>
