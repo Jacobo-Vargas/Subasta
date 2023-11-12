@@ -229,7 +229,7 @@ public class CrearAnuncioViewController{
     private void mostrarInformacionAnuncio(AnuncioDto anuncioDtoSelecionado) throws MalformedURLException {
         if (anuncioDtoSelecionado != null) {
             txtDescripcion.setText(anuncioDtoSelecionado.descripcion());
-            txtValorInicial.setText(String.format("%.2f",anuncioDtoSelecionado.valorInicial()));
+            txtValorInicial.setText(String.format("%.0f",anuncioDtoSelecionado.valorInicial()));
             txtCodigo.setText(String.valueOf(anuncioDtoSelecionado.codigo()));
             dateInicio.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaPublicacion())));
             dateFin.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaTerminacion())));

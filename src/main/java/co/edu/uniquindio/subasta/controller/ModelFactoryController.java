@@ -259,7 +259,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<AnuncioDto> obtenerAnuncio() {
-        ArrayList<Anuncio> lista = new ArrayList<>(getSubasta().obtenerAnuncio());
+        ArrayList<Anuncio> lista = new ArrayList<>(getSubasta().getListaAnuncios());
         return mapper.getAnunciosDto(lista);
     }
 
@@ -320,11 +320,6 @@ public class ModelFactoryController implements IModelFactoryController {
 
     }
 
-    @Override
-    public List<PujaDto> listaAnuncioCompradorLogueado(String codigo) {
-        ArrayList<Puja> lista = new ArrayList<>(getSubasta().listaPujasComprador(codigo));
-        return mapper.getListaPujas(lista);
-    }
 
     @Override
     public boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception {
@@ -359,7 +354,7 @@ public class ModelFactoryController implements IModelFactoryController {
 
     @Override
     public List<AnuncioDto> obtenerListaNuncio() {
-        List<Anuncio> lista = new ArrayList<>();
+        List<Anuncio> lista;
         lista = getSubasta().obtenerListaAnuncio();
         List<AnuncioDto> listaRetornar = new ArrayList<>();
         for (int i = 0; i < lista.size(); i++) {

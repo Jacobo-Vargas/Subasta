@@ -38,7 +38,7 @@ public class PujaController implements IPujaControllerService {
 
     @Override
     public List<AnuncioDto> obtenerListaNuncio() {
-        return modelFactoryController.obtenerListaNuncio();
+        return modelFactoryController.obtenerAnuncio();
     }
 
     @Override
@@ -46,8 +46,4 @@ public class PujaController implements IPujaControllerService {
         return modelFactoryController.salvarAnuncio(nombre);
     }
 
-    @Override
-    public List<PujaDto> listaPujaCompradorLogueado(String codigo) {
-       return modelFactoryController.listaAnuncioCompradorLogueado(codigo);
-    }
 }

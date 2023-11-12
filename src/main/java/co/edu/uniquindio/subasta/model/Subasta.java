@@ -225,17 +225,25 @@ public class Subasta implements ISubastaService, Serializable {
     }
 
     @Override
-    public List<Puja> listaPujasComprador(String codigo) {
-        return compradorLogueado.getListaPujas().stream().filter(Puja -> Puja.getAnuncio().getCodigo().equals(codigo)).collect(Collectors.toList());
-    }
-
-    @Override
     public boolean eliminarPuja(Puja puja) throws Exception {
-        if (compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()))) {
-            return true;
-        } else {
-            throw new Exception("No se puedo elimanar la puja");
+
+        for (Anunciante a : listaAnunciante) {
+            a.getListaAnuncio().stream().anyMatch(anuncio -> {
+                if (anuncio.getCodigo().equals(puja.getCodigoAnuncio())) {
+                    anuncio.getListaPujas().remove(puja);
+                    compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()));
+                    for (Anuncio ag: listaAnuncios) {
+                        ag.getListaPujas().removeIf(puja1 -> puja1.getCodigo().equals(puja.getCodigo()));
+                        break;
+                    }
+                    return true;
+
+                } else {
+                    return false;
+                }
+            });
         }
+        return false;
     }
 
     @Override

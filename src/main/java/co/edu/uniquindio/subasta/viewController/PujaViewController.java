@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.viewController;
 import co.edu.uniquindio.subasta.controller.PujaController;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
+import co.edu.uniquindio.subasta.model.Anunciante;
 import co.edu.uniquindio.subasta.model.Anuncio;
 import co.edu.uniquindio.subasta.model.Puja;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
@@ -51,9 +52,11 @@ public class PujaViewController {
         pujaController = new PujaController();
         initView();
     }
-    void initView(){
+
+    void initView() {
         llenarCombox();
         obtenerPujas();
+        obtenerAnuncios();
         initDataBinding();
     }
 
@@ -78,48 +81,45 @@ public class PujaViewController {
     }
 
     public void relizarPuja() throws Exception {
+
         PujaDto pujaDto = armarPujaDto();
-        obtenerPujas();
 
-        boolean codigo = listaAnuncio.stream().anyMatch(anuncioDto -> {
-                if (anuncioDto.nombre().equals(comboBoxAnuncio.getValue())){
-                    codigoAnuncio = anuncioDto.codigo();
-                }
-            return true;
-        });
-
-        if(pujaController.realizarPuja(pujaDto,codigoAnuncio)){
+        if (pujaController.realizarPuja(pujaDto, codigoAnuncio)) {
             listaPuja.add(pujaDto);
             tableViewTabla.refresh();
             AlertaUtil.mostrarMensajeOk("Se realizo con éxito.");
-        }else{
+        } else {
             AlertaUtil.mostrarMensajeError("No se pudo realizar.");
         }
     }
 
 
     public void mostarTabla() {
-        String nombre = comboBoxAnuncio.getValue();
-        Anuncio anuncio = pujaController.salvarAnuncio(nombre);
-        List<PujaDto> list = pujaController.listaPujaCompradorLogueado(anuncio.getCodigo());
 
-        listaPuja = FXCollections.observableList(list);
-        tableViewTabla.setItems(listaPuja);
-        tableViewTabla.refresh();
     }
 
-    public void obtenerPujas(){
+    public void obtenerPujas() {
         listaPuja.clear();
         listaPuja.addAll(pujaController.obtenerLitaPuja());
         tableViewTabla.setItems(listaPuja);
         tableViewTabla.refresh();
     }
 
-    public PujaDto armarPujaDto(){
-       return new PujaDto(textFieldDireccion.getText()
-               ,textFieldCodigo.getText()
-               ,Float.parseFloat(textFieldValorInicial.getText())
-               ,String.valueOf(LocalDate.now())
-               ,new Anuncio());
+    public PujaDto armarPujaDto() {
+        AnuncioDto anuncioDto = listaAnuncio.stream().filter(anuncioDto1 -> anuncioDto1.nombre().equals(comboBoxAnuncio.getValue())).findFirst().orElse(null);
+        if(anuncioDto != null){
+            codigoAnuncio = anuncioDto.codigo();
+        }else{
+            AlertaUtil.mostrarMensajeError("No se encontro el codigo de anuncio");
+        }
+        return new PujaDto(textFieldDireccion.getText()
+                , textFieldCodigo.getText()
+                , Float.parseFloat(textFieldValorInicial.getText())
+                , String.valueOf(LocalDate.now())
+                , codigoAnuncio);
+    }
+
+    public void obtenerAnuncios (){
+        listaAnuncio.addAll(pujaController.obtenerListaNuncio());
     }
 }

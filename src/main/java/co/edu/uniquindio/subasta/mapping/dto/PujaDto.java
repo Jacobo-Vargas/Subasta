@@ -9,6 +9,6 @@ public record PujaDto(
         String codigo,
         float oferta,
         String fechaPuja,
-        Anuncio anuncio
+        String codigoAnuncio
 ) {
 }

@@ -12,7 +12,7 @@ public class Puja implements Serializable {
     private String codigo;
     private float oferta;
     private String fechaPuja;
-    private Anuncio anuncio;
+    private String codigoAnuncio;
 
     public Puja() {
     }
@@ -49,12 +49,12 @@ public class Puja implements Serializable {
         this.fechaPuja = fechaPuja;
     }
 
-    public co.edu.uniquindio.subasta.model.Anuncio getAnuncio() {
-        return anuncio;
+    public String getCodigoAnuncio() {
+        return codigoAnuncio;
     }
 
-    public void setAnuncio(Anuncio anuncio) {
-        this.anuncio = anuncio;
+    public void setCodigoAnuncio(String codigoAnuncio) {
+        this.codigoAnuncio = codigoAnuncio;
     }
 
     @Override
@@ -62,8 +62,9 @@ public class Puja implements Serializable {
         return "Puja{" +
                 "direccion='" + direccion + '\'' +
                 ", codigo='" + codigo + '\'' +
-                ", ofertaInicial=" + oferta +
-                ", fechaPuja=" + fechaPuja +
+                ", oferta=" + oferta +
+                ", fechaPuja='" + fechaPuja + '\'' +
+                ", codigoAnuncio='" + codigoAnuncio + '\'' +
                 '}';
     }
 }

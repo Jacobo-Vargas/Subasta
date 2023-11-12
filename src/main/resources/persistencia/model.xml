@@ -10,68 +10,46 @@
      <void method="add">
       <object class="co.edu.uniquindio.subasta.model.Anuncio" id="Anuncio0">
        <void property="codigo">
-        <string>1</string>
+        <string>0</string>
        </void>
        <void property="descripcion">
-        <string>pc de segunda un mes de uso</string>
+        <string>nuevo</string>
        </void>
        <void property="fechaPublicacion">
-        <string>2023-11-08</string>
+        <string>2023-11-12</string>
        </void>
        <void property="fechaTerminacion">
-        <string>2023-11-30</string>
+        <string>2023-11-14</string>
        </void>
        <void property="foto">
-        <string>portatil_20231108_014453.jpeg</string>
+        <string>mazda_20231112_105149.jpeg</string>
        </void>
        <void property="listaPujas">
         <void method="add">
          <object class="co.edu.uniquindio.subasta.model.Puja" id="Puja0">
-          <void property="anuncio">
-           <object class="co.edu.uniquindio.subasta.model.Anuncio"/>
-          </void>
           <void property="codigo">
            <string>1</string>
+          </void>
+          <void property="codigoAnuncio">
+           <string>0</string>
           </void>
           <void property="direccion">
            <string>nada</string>
           </void>
           <void property="fechaPuja">
-           <string>2023-11-08</string>
+           <string>2023-11-12</string>
           </void>
           <void property="oferta">
-           <float>325000.0</float>
+           <float>250000.0</float>
           </void>
          </object>
         </void>
         <void method="add">
          <object idref="Puja0"/>
         </void>
-        <void method="add">
-         <object class="co.edu.uniquindio.subasta.model.Puja" id="Puja1">
-          <void property="anuncio">
-           <object class="co.edu.uniquindio.subasta.model.Anuncio"/>
-          </void>
-          <void property="codigo">
-           <string>2</string>
-          </void>
-          <void property="direccion">
-           <string>nada</string>
-          </void>
-          <void property="fechaPuja">
-           <string>2023-11-08</string>
-          </void>
-          <void property="oferta">
-           <float>324000.0</float>
-          </void>
-         </object>
-        </void>
-        <void method="add">
-         <object idref="Puja1"/>
-        </void>
        </void>
        <void property="nombre">
-        <string>PC ACER</string>
+        <string>Mazda</string>
        </void>
        <void property="nombreAnunciante">
         <string>juan</string>
@@ -82,18 +60,18 @@
           <string>0</string>
          </void>
          <void property="nombre">
-          <string>Portatil</string>
+          <string>Carro</string>
          </void>
          <void property="tipoArticulo">
           <object class="java.lang.Enum" id="TipoArticulo0" method="valueOf">
            <class>co.edu.uniquindio.subasta.model.TipoArticulo</class>
-           <string>TECNOLOGIA</string>
+           <string>VEHICULO</string>
           </object>
          </void>
         </object>
        </void>
        <void property="valorInicial">
-        <double>250000.0</double>
+        <double>5.5E7</double>
        </void>
       </object>
      </void>
@@ -105,7 +83,7 @@
         <string>0</string>
        </void>
        <void property="nombre">
-        <string>Portatil</string>
+        <string>Carro</string>
        </void>
        <void property="tipoArticulo">
         <object idref="TipoArticulo0"/>
@@ -146,28 +124,6 @@
      <void method="add">
       <object idref="Puja0"/>
      </void>
-     <void method="add">
-      <object idref="Puja1"/>
-     </void>
-     <void method="add">
-      <object class="co.edu.uniquindio.subasta.model.Puja">
-       <void property="anuncio">
-        <object class="co.edu.uniquindio.subasta.model.Anuncio"/>
-       </void>
-       <void property="codigo">
-        <string>3</string>
-       </void>
-       <void property="direccion">
-        <string>nada</string>
-       </void>
-       <void property="fechaPuja">
-        <string>2023-11-08</string>
-       </void>
-       <void property="oferta">
-        <float>255000.0</float>
-       </void>
-      </object>
-     </void>
     </void>
     <void property="nombre">
      <string>juan pablo</string>
@@ -203,7 +159,10 @@
          <string>tv</string>
         </void>
         <void property="tipoArticulo">
-         <object idref="TipoArticulo0"/>
+         <object class="java.lang.Enum" method="valueOf">
+          <class>co.edu.uniquindio.subasta.model.TipoArticulo</class>
+          <string>TECNOLOGIA</string>
+         </object>
         </void>
        </object>
       </void>
