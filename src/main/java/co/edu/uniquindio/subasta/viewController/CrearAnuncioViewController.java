@@ -105,7 +105,7 @@ public class CrearAnuncioViewController{
     }
 
     @FXML
-    void actualizarAnuncio() throws AnuncioException, MalformedURLException, FileNotFoundException {
+    void actualizarAnuncio() throws AnuncioException, FileNotFoundException {
         AnuncioDto anuncioDto = new AnuncioDto(anuncioDtoSelecionado.producto(), txtNombrePublicacion.getText(),
                 txtDescripcion.getText(), nombreFoto, recuperarNombreAnunciante(), String.valueOf(dateInicio.getValue()), String.valueOf(dateFin.getValue()),
                 Double.parseDouble(txtValorInicial.getText()), txtCodigo.getText(), new ArrayList<>());
@@ -141,7 +141,7 @@ public class CrearAnuncioViewController{
     }
 
     @FXML
-    void anuncioNuevo() throws MalformedURLException, FileNotFoundException {
+    void anuncioNuevo() throws FileNotFoundException {
         limpiarCampos();
     }
 

@@ -31,7 +31,7 @@
                      <image>
                         <Image url="@../../../../imagenes/logo.png" />
                      </image></ImageView>
-                  <Button fx:id="seleccionarImagen" mnemonicParsing="false" onAction="#buscarFoto" prefHeight="24.0" prefWidth="166.0" text="Seleccionar Imagen...">
+                  <Button mnemonicParsing="false" onAction="#buscarFoto" prefHeight="24.0" prefWidth="166.0" text="Seleccionar Imagen...">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
