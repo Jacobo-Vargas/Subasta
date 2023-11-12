@@ -7,12 +7,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.PujaViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.subasta.viewController.PujaViewController">
    <children>
       <ComboBox fx:id="comboBoxAnuncio" layoutX="76.0" layoutY="50.0" prefWidth="150.0" promptText="Anuncio" />
       <TextField fx:id="textFieldValorInicial" layoutX="76.0" layoutY="95.0" prefHeight="24.0" prefWidth="150.0" promptText="Valor inicial" />
       <TextField fx:id="textFieldDireccion" layoutX="76.0" layoutY="137.0" prefHeight="24.0" prefWidth="150.0" promptText="Direccion " />
-      <Button fx:id="botonPuja" layoutX="269.0" layoutY="137.0" mnemonicParsing="false" onAction="#relizarPuja" text="Realizar puja" />
+      <Button fx:id="botonPuja" layoutX="269.0" layoutY="119.0" mnemonicParsing="false" onAction="#relizarPuja" text="Realizar puja" />
       <TableView fx:id="tableViewTabla" layoutX="14.0" layoutY="200.0" prefHeight="200.0" prefWidth="580.0">
         <columns>
           <TableColumn fx:id="tableColumnCodigo" prefWidth="75.0" text="Codigo " />
@@ -21,8 +21,9 @@
             <TableColumn fx:id="tableColumnFecha" prefWidth="75.0" text="Fecha" />
         </columns>
       </TableView>
-      <Button fx:id="actulizar" layoutX="425.0" layoutY="137.0" mnemonicParsing="false" onAction="#updateCombo" text="actulizar" />
+      <Button fx:id="actulizar" layoutY="50.0" mnemonicParsing="false" onAction="#updateCombo" text="actulizar" />
       <TextField fx:id="textFieldCodigo" layoutX="245.0" layoutY="50.0" prefHeight="24.0" prefWidth="150.0" promptText="Codigo" />
-      <Button layoutX="364.0" layoutY="95.0" mnemonicParsing="false" onAction="#mostarTabla" text="Buscar" />
+      <Button layoutX="289.0" layoutY="83.0" mnemonicParsing="false" onAction="#mostarTabla" text="Buscar" />
+      <Button fx:id="bottonBorrar" onAction="#eliminarPuja" layoutX="290.0" layoutY="149.0" mnemonicParsing="false" text="Borrar" />
    </children>
 </AnchorPane>
