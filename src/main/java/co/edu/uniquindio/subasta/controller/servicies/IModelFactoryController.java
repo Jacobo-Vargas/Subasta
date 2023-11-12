@@ -53,7 +53,7 @@ public interface IModelFactoryController {
 
     boolean elimnarPuja(PujaDto pujaDto) throws Exception;
 
-    Anuncio salvarAnuncio(String nombre);
+    AnuncioDto salvarAnuncio(String nombre);
     List<AnuncianteDto> obtenerListaAnunciante();
 
     //-----------------------anunciante---------------------------

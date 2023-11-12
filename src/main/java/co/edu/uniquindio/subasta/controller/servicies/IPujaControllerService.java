@@ -11,6 +11,6 @@ public interface IPujaControllerService {
     List<AnuncioDto>obtenerListaNuncio();
     boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception;
     boolean elimnarPuja(PujaDto pujaDto) throws Exception;
-    Anuncio salvarAnuncio(String nombre);
+    AnuncioDto salvarAnuncio(String nombre);
 
 }

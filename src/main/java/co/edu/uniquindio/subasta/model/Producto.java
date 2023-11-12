@@ -3,7 +3,7 @@ package co.edu.uniquindio.subasta.model;
 import java.io.Serial;
 import java.io.Serializable;
 
-public class Producto implements Serializable {
+public class    Producto implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     private String nombre;

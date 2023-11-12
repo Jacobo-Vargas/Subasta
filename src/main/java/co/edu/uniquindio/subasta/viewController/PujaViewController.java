@@ -2,6 +2,7 @@ package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.PujaController;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
+import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.model.Anunciante;
 import co.edu.uniquindio.subasta.model.Anuncio;
@@ -19,8 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PujaViewController {
+
     PujaController pujaController;
     ObservableList<PujaDto> listaPuja = FXCollections.observableArrayList();
+
     ObservableList<AnuncioDto> listaAnuncio = FXCollections.observableArrayList();
 
     String codigoAnuncio;
@@ -41,10 +44,17 @@ public class PujaViewController {
 
     @FXML
     public TableColumn<PujaDto, String> tableColumnDireccion;
+
     @FXML
     public TableColumn<PujaDto, String> tableColumnValorPuja;
     @FXML
     public TableColumn<PujaDto, String> tableColumnFecha;
+    @FXML
+    public TableColumn<AnuncioDto, String> tableColumnValorInicial;
+    @FXML
+    public TableColumn<AnuncioDto, String> tableColumnCodigoAnuncio;
+    @FXML
+    public TableColumn<ProductoDto, String> tableColumnTipoArticulo;
 
 
     @FXML
@@ -65,6 +75,9 @@ public class PujaViewController {
         tableColumnCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
         tableColumnValorPuja.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().oferta())));
         tableColumnFecha.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaPuja())));
+        //tableColumnValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
+        //tableColumnCodigoAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
+        //tableColumnTipoArticulo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().tipoArticulo())));
     }
 
     public void llenarCombox() {
@@ -95,6 +108,18 @@ public class PujaViewController {
 
 
     public void mostarTabla() {
+        String nombreAnuncio=comboBoxAnuncio.getValue();
+        AnuncioDto anuncioDto=pujaController.salvarAnuncio(nombreAnuncio);
+        List<PujaDto>list=pujaController.obtenerLitaPuja();
+        List<PujaDto>listaMostrar=new ArrayList<>();
+        for(PujaDto pujaDto:list){
+            if(pujaDto.codigoAnuncio().equals(anuncioDto.codigo())){
+                listaMostrar.add(pujaDto);
+            }
+        }
+        listaPuja.clear();
+        listaPuja.addAll(listaMostrar);
+        tableViewTabla.refresh();
 
     }
 

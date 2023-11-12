@@ -343,10 +343,10 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public Anuncio salvarAnuncio(String nombre) {
+    public AnuncioDto salvarAnuncio(String nombre) {
         for (Anuncio anuncio : getSubasta().getListaAnuncios()) {
             if (anuncio.getNombre().equals(nombre)) {
-                return anuncio;
+                return mapper.anuncioToAnuncioDto(anuncio);
             }
         }
         return null;
