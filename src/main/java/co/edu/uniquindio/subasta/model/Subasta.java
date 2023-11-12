@@ -245,26 +245,6 @@ public class Subasta implements ISubastaService, Serializable {
         }
         return false;
     }
-
-    @Override
-    public boolean actualizarPuja(Puja puja) throws Exception {
-        boolean actulizado = false;
-        for (Puja p : compradorLogueado.getListaPujas()) {
-            if (p.getCodigo().equals(puja.getCodigo())) {
-                p.setDireccion(puja.getDireccion());
-                p.setOferta(puja.getOferta());
-                p.setFechaPuja(puja.getFechaPuja());
-                actulizado = true;
-            }
-        }
-        if (actulizado) {
-            return actulizado;
-        } else {
-            throw new Exception("No se pudo actulizar la puja");
-        }
-    }
-
-
     @Override
     public List<Anuncio> obtenerListaAnuncio() {
         return listaAnuncios;

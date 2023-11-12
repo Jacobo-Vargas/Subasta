@@ -343,28 +343,6 @@ public class ModelFactoryController implements IModelFactoryController {
     }
 
     @Override
-    public boolean actulizarPuja(PujaDto pujaDto) throws Exception {
-        Puja puja = mapper.pujaDtoToPuja(pujaDto);
-        if (getSubasta().actualizarPuja(puja)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public List<AnuncioDto> obtenerListaNuncio() {
-        List<Anuncio> lista;
-        lista = getSubasta().obtenerListaAnuncio();
-        List<AnuncioDto> listaRetornar = new ArrayList<>();
-        for (int i = 0; i < lista.size(); i++) {
-            Anuncio anuncio = lista.get(i);
-            listaRetornar.add(mapper.anuncioToAnuncioDto(anuncio));
-        }
-        return listaRetornar;
-    }
-
-    @Override
     public Anuncio salvarAnuncio(String nombre) {
         for (Anuncio anuncio : getSubasta().getListaAnuncios()) {
             if (anuncio.getNombre().equals(nombre)) {

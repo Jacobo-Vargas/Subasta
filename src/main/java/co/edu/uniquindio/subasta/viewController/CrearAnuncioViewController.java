@@ -21,6 +21,7 @@ import java.io.*;
 
 import java.net.MalformedURLException;
 
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -104,7 +105,7 @@ public class CrearAnuncioViewController{
     }
 
     @FXML
-    void actualizarAnuncio() throws AnuncioException {
+    void actualizarAnuncio() throws AnuncioException, MalformedURLException, FileNotFoundException {
         AnuncioDto anuncioDto = new AnuncioDto(anuncioDtoSelecionado.producto(), txtNombrePublicacion.getText(),
                 txtDescripcion.getText(), nombreFoto, recuperarNombreAnunciante(), String.valueOf(dateInicio.getValue()), String.valueOf(dateFin.getValue()),
                 Double.parseDouble(txtValorInicial.getText()), txtCodigo.getText(), new ArrayList<>());
@@ -140,12 +141,12 @@ public class CrearAnuncioViewController{
     }
 
     @FXML
-    void anuncioNuevo() {
+    void anuncioNuevo() throws MalformedURLException, FileNotFoundException {
         limpiarCampos();
     }
 
     @FXML
-    void eliminarAnuncio() throws AnuncioException {
+    void eliminarAnuncio() throws AnuncioException, MalformedURLException, FileNotFoundException {
         if (anuncioController.eliminarAnuncio(anuncioDtoSelecionado)) {
             AlertaUtil.mostrarMensajeOk("Se elimino con éxito.");
             listaAnuncioDto.remove(anuncioDtoSelecionado);
@@ -205,7 +206,7 @@ public class CrearAnuncioViewController{
         tvAnuncios.refresh();
     }
 
-    private void limpiarCampos() {
+    private void limpiarCampos() throws FileNotFoundException {
         txtDescripcion.setText("");
         txtValorInicial.setText("");
         dateFin.setValue(null);
@@ -213,6 +214,10 @@ public class CrearAnuncioViewController{
         cBoxProducto.setValue("Producto");
         txtCodigo.setText("");
         txtNombrePublicacion.setText("");
+
+
+        Image image = new Image(new FileInputStream("src/main/resources/imagenes/logo.png"));
+        imageViewFoto.setImage(image);
     }
 
     private void listenerSelection() {

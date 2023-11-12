@@ -122,4 +122,7 @@ public class PujaViewController {
     public void obtenerAnuncios (){
         listaAnuncio.addAll(pujaController.obtenerListaNuncio());
     }
+
+    public void eliminarPuja(ActionEvent actionEvent) {
+    }
 }

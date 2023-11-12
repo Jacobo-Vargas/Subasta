@@ -31,10 +31,6 @@ public class PujaController implements IPujaControllerService {
         return modelFactoryController.elimnarPuja(pujaDto);
     }
 
-    @Override
-    public boolean actulizarPuja(PujaDto pujaDto) throws Exception {
-        return modelFactoryController.actulizarPuja(pujaDto);
-    }
 
     @Override
     public List<AnuncioDto> obtenerListaNuncio() {
