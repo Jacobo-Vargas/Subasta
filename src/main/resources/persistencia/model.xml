@@ -19,44 +19,6 @@
      <void method="add">
       <object class="co.edu.uniquindio.subasta.model.Puja">
        <void property="codigo">
-        <string>1</string>
-       </void>
-       <void property="codigoAnuncio">
-        <string>0</string>
-       </void>
-       <void property="direccion">
-        <string>nada</string>
-       </void>
-       <void property="fechaPuja">
-        <string>2023-11-12</string>
-       </void>
-       <void property="oferta">
-        <float>250000.0</float>
-       </void>
-      </object>
-     </void>
-     <void method="add">
-      <object class="co.edu.uniquindio.subasta.model.Puja">
-       <void property="codigo">
-        <string>2</string>
-       </void>
-       <void property="codigoAnuncio">
-        <string>0</string>
-       </void>
-       <void property="direccion">
-        <string>nada</string>
-       </void>
-       <void property="fechaPuja">
-        <string>2023-11-12</string>
-       </void>
-       <void property="oferta">
-        <float>2500000.0</float>
-       </void>
-      </object>
-     </void>
-     <void method="add">
-      <object class="co.edu.uniquindio.subasta.model.Puja">
-       <void property="codigo">
         <string>5</string>
        </void>
        <void property="codigoAnuncio">
@@ -127,6 +89,25 @@
        </void>
        <void property="oferta">
         <float>1.0</float>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="co.edu.uniquindio.subasta.model.Puja">
+       <void property="codigo">
+        <string>1</string>
+       </void>
+       <void property="codigoAnuncio">
+        <string>1</string>
+       </void>
+       <void property="direccion">
+        <string>indefinido</string>
+       </void>
+       <void property="fechaPuja">
+        <string>2023-11-13</string>
+       </void>
+       <void property="oferta">
+        <float>10000.0</float>
        </void>
       </object>
      </void>

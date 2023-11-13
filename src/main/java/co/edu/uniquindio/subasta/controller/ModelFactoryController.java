@@ -336,6 +336,7 @@ public class ModelFactoryController implements IModelFactoryController {
     public boolean elimnarPuja(PujaDto pujaDto) throws Exception {
         Puja puja = mapper.pujaDtoToPuja(pujaDto);
         if (getSubasta().eliminarPuja(puja)) {
+            guardarResourceXML();
             return true;
         } else {
             return false;

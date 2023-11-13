@@ -227,23 +227,50 @@ public class Subasta implements ISubastaService, Serializable {
     @Override
     public boolean eliminarPuja(Puja puja) throws Exception {
 
-        for (Anunciante a : listaAnunciante) {
-            a.getListaAnuncio().stream().anyMatch(anuncio -> {
-                if (anuncio.getCodigo().equals(puja.getCodigoAnuncio())) {
-                    anuncio.getListaPujas().remove(puja);
-                    compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()));
-                    for (Anuncio ag: listaAnuncios) {
-                        ag.getListaPujas().removeIf(puja1 -> puja1.getCodigo().equals(puja.getCodigo()));
-                        break;
-                    }
-                    return true;
+        //se quita del comprador
+        if(compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()))){
+            for(Anunciante anunciante:listaAnunciante){
+                // se que quita de la lista de anunicantes
+                for(Anuncio anuncio:anunciante.getListaAnuncio()){
 
-                } else {
-                    return false;
+                    for(Puja puja1:anuncio.getListaPujas()){
+                        if(puja1.getCodigo().equals(puja.getCodigo())){
+                            anuncio.getListaPujas().remove(puja);
+                        }
+                    }
+
                 }
-            });
+            }
+            // se quita de la lista de anuncios globales
+            for(Anuncio anuncio:listaAnuncios){
+                for(Puja puja1:anuncio.getListaPujas()){
+                    if(puja1.getCodigo().equals(puja.getCodigo())){
+                        anuncio.getListaPujas().remove(puja);
+                    }
+                }
+            }
+            return true;
+        }else{
+            return false;
         }
-        return false;
+
+        //for (Anunciante a : listaAnunciante) {
+            //a.getListaAnuncio().stream().anyMatch(anuncio -> {
+                //if (anuncio.getCodigo().equals(puja.getCodigoAnuncio())) {
+                    //anuncio.getListaPujas().remove(puja);
+                    //compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()));
+                    //for (Anuncio ag: listaAnuncios) {
+                        //ag.getListaPujas().removeIf(puja1 -> puja1.getCodigo().equals(puja.getCodigo()));
+                      //  break;
+                    //}
+                  //  return true;
+
+                //} else {
+              //      return false;
+            //    }
+          //  });
+        //}
+
     }
     @Override
     public List<Anuncio> obtenerListaAnuncio() {
