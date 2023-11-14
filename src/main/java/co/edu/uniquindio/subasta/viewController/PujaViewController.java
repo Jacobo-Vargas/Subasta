@@ -14,10 +14,23 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,6 +79,18 @@ public class PujaViewController {
     public TableColumn<PujaDto, String> tableColumnFecha;
     PujaDto pujaDtoSelecionado;
 
+    ////////para mostrar la foto
+    @FXML
+    File fileGlobal;
+    @FXML
+    String nombreFoto;
+
+    @FXML
+    public ImageView imagenView;
+
+
+
+
 
     @FXML
     void initialize() {
@@ -75,8 +100,8 @@ public class PujaViewController {
 
     void initView() {
         llenarCombox();
-        obtenerPujas();
         obtenerAnuncios();
+        obtenerPujas();
         initDataBinding();
         listenerSelection();
     }
@@ -88,15 +113,81 @@ public class PujaViewController {
         });
 
     }
+    //para mostrar la foto
+    public void buscarFoto(){
+        FileChooser fileChooser =new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
+        fileGlobal =fileChooser.showOpenDialog(new Stage());
+        if(fileGlobal!=null){
+            copiarArchivo(fileGlobal.toPath());
+            Image image=new Image(fileGlobal.toURI().toString());
+            imagenView.setImage(image);
+        }
+    }
+
+    private Image mostrarFoto(String nombreArchivo) {
+        Image imagen = null;
+        File carpeta = new File("src/main/resources/imagenesAnuncios/");
+
+        File[] archivos = carpeta.listFiles();
+
+        if (archivos != null) {
+            for (File archivo : archivos) {
+                if (archivo.isFile() && archivo.getName().equals(nombreArchivo)) {
+                    String rutaImagen = archivo.toURI().toString();
+                    imagen = new Image(rutaImagen);
+                }
+            }
+        }
+        return imagen;
+    }
+
+    private void copiarArchivo(Path source) {
+        nombreFoto=generarNombre();
+        try{
+            Path destinoPath = Paths.get("src/main/resources/imagenesAnuncios/", nombreFoto );
+            Files.createFile(destinoPath);
+            Files.copy(source, destinoPath, StandardCopyOption.REPLACE_EXISTING);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public String generarNombre(){
+        SimpleDateFormat dateFoarmat= new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String fechaActual= dateFoarmat.format(new Date());
+        return fileGlobal.getName().replace(".", "_" + fechaActual + ".");
+
+    }
 
     private void mostrarInformacionAnuncio(PujaDto pujaDtoSelecionado) {
-        if(pujaDtoSelecionado!=null){
-            String  nombre=listaAnuncio.stream().filter(Anuncio->Anuncio.codigo().equals(pujaDtoSelecionado.
-                    codigoAnuncio())).map(AnuncioDto::nombre).findFirst().orElse(null);// esta lamba filtar el anuncio y deja de nombre del combbox
+        if (pujaDtoSelecionado != null) {
+            AnuncioDto anuncio = listaAnuncio.stream()
+                    .filter(an -> an.codigo().equals(pujaDtoSelecionado.codigoAnuncio()))
+                    .findFirst().orElse(null);
 
-            textFieldValorInicial.setText(String.valueOf(pujaDtoSelecionado.oferta()));
-            textFieldCodigo.setText(pujaDtoSelecionado.codigo());
-            comboBoxAnuncio.setValue(nombre);
+            if (anuncio != null) {
+                textFieldValorInicial.setText(String.valueOf(pujaDtoSelecionado.oferta()));
+                textFieldCodigo.setText(pujaDtoSelecionado.codigo());
+                comboBoxAnuncio.setValue(anuncio.nombre());
+
+                Image imagen = mostrarFoto(anuncio.foto());
+                if (imagen != null ) {
+                    imagenView.setImage(imagen);
+                }else if(imagen==null){
+                    //preguntar a jacobo
+                } else {
+                    // La imagen es nula o imageViewFoto es nulo
+                    // Puedes mostrar un mensaje de error o manejar la situación según sea necesario
+                    System.out.println("La imagen es nula o imageViewFoto no está inicializado.");
+                }
+            } else {
+                // anuncio es nulo
+                // Puedes mostrar un mensaje de error o manejar la situación según sea necesario
+                System.out.println("Anuncio no encontrado.");
+            }
         }
     }
 
@@ -130,6 +221,8 @@ public class PujaViewController {
         if (pujaController.realizarPuja(pujaDto, codigoAnuncio)) {
             listaPuja.add(pujaDto);
             tableViewTabla.refresh();
+            AnuncioDto anuncioDto=listaAnuncio.stream().filter(anuncioDto1 ->anuncioDto1.codigo().equals(pujaDto.codigoAnuncio())).findFirst().orElse(null);
+            anunciosMostrar.add(anuncioDto);
             AlertaUtil.mostrarMensajeOk("Se realizo con éxito.");
         } else {
             AlertaUtil.mostrarMensajeError("No se pudo realizar.");
@@ -164,8 +257,22 @@ public class PujaViewController {
     public void obtenerPujas() {
         listaPuja.clear();
         listaPuja.addAll(pujaController.obtenerLitaPuja());
+
         tableViewTabla.setItems(listaPuja);
         tableViewTabla.refresh();
+        List<AnuncioDto>listamostrar=new ArrayList<>();
+        for(AnuncioDto anuncioDto:listaAnuncio){
+            for(PujaDto pujaDto:listaPuja){
+                if(pujaDto.codigoAnuncio().equals(anuncioDto.codigo())){
+                    listamostrar.add(anuncioDto);
+
+                }
+            }
+        }
+        anunciosMostrar.clear();
+        anunciosMostrar.addAll(listamostrar);
+        TablaInformacioAnunioc.setItems(anunciosMostrar);// al table view se el asocia una lista
+        TablaInformacioAnunioc.refresh();
         ///////////////////////////////
 
     }
@@ -186,13 +293,20 @@ public class PujaViewController {
 
     public void obtenerAnuncios() {
         listaAnuncio.addAll(pujaController.obtenerListaNuncio());
+
     }
 
     public void eliminarPuja(ActionEvent actionEvent) throws Exception {
         if(pujaController.elimnarPuja(pujaDtoSelecionado)){
             AlertaUtil.mostrarMensajeOk("Se elimino con éxito.");
             listaPuja.remove(pujaDtoSelecionado);
+            for(int i=0;i<anunciosMostrar.size();i++){
+                if(anunciosMostrar.get(i).codigo().equals(pujaDtoSelecionado.codigoAnuncio())){
+                    anunciosMostrar.remove(i);
+                }
+            }
             tableViewTabla.refresh();
+
             pujaDtoSelecionado=null;
             tableViewTabla.getSelectionModel().clearSelection();
             textFieldCodigo.clear();
