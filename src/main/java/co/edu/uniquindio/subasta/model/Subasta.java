@@ -175,9 +175,14 @@ public class Subasta implements ISubastaService, Serializable {
 
 //    ----------------------------------Crud Puja------------------------
 
+
     @Override
     public List<Puja> obtenerLitaPuja() {
         return compradorLogueado.getListaPujas();
+    }
+    public  Anuncio buscarAnuncioCodigo(String codigo){
+        Anuncio anuncio= listaAnuncios.stream().filter(Anuncio->Anuncio.getCodigo().equals(codigo)).findFirst().orElse(null);
+        return anuncio;
     }
 
     public boolean verificarPujaRepetida(Puja puja) {

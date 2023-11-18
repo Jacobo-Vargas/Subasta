@@ -83,8 +83,8 @@
                                 <Insets left="90.0" />
                             </GridPane.margin>
                         </Label>
-                  <Button fx:id="buttonPujar" mnemonicParsing="false" prefHeight="24.0" prefWidth="86.0"   text="Pujar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="buttonNumeroPujas" mnemonicParsing="false" text="Numero puja" GridPane.rowIndex="2" />
+                  <Button fx:id="buttonPujar" mnemonicParsing="false" prefHeight="24.0" prefWidth="86.0" onAction="#realizarPuja"   text="Pujar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="buttonNumeroPujas" mnemonicParsing="false" text="Numero pujas" onAction="#numeroPujas" GridPane.rowIndex="2" />
                     </children>
                     <opaqueInsets>
                         <Insets />

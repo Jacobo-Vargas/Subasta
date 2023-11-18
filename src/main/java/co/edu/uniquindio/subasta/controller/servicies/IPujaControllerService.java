@@ -13,4 +13,6 @@ public interface IPujaControllerService {
     boolean elimnarPuja(PujaDto pujaDto) throws Exception;
     AnuncioDto salvarAnuncio(String nombre);
 
+    AnuncioDto salvarAnuncioCodigo(String codigo);
+
 }

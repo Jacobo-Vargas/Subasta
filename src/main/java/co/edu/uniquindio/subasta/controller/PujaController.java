@@ -42,4 +42,9 @@ public class PujaController implements IPujaControllerService {
         return modelFactoryController.salvarAnuncio(nombre);
     }
 
+    @Override
+    public AnuncioDto salvarAnuncioCodigo(String codigo) {
+        return modelFactoryController.salvarAnuncioCodigo(codigo);
+    }
 }
+

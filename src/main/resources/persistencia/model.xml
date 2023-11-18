@@ -73,6 +73,25 @@
        </void>
       </object>
      </void>
+     <void method="add">
+      <object class="co.edu.uniquindio.subasta.model.Puja">
+       <void property="codigo">
+        <string>40</string>
+       </void>
+       <void property="codigoAnuncio">
+        <string>1</string>
+       </void>
+       <void property="direccion">
+        <string>indefinido</string>
+       </void>
+       <void property="fechaPuja">
+        <string>2023-11-18</string>
+       </void>
+       <void property="oferta">
+        <float>40.0</float>
+       </void>
+      </object>
+     </void>
     </void>
     <void property="nombre">
      <string>juan pablo</string>

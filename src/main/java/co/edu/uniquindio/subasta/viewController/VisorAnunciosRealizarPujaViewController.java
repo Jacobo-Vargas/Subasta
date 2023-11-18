@@ -1,23 +1,27 @@
 package co.edu.uniquindio.subasta.viewController;
 
-import co.edu.uniquindio.subasta.SubastaCompradorApp;
 import co.edu.uniquindio.subasta.controller.AnuncioController;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class VisorAnunciosRealizarPujaViewController {
+
 
     ArrayList<AnuncioDto> anunciosDto = new ArrayList<>();
     AnuncioController anuncioController;
@@ -119,4 +123,63 @@ public class VisorAnunciosRealizarPujaViewController {
     }
 
 
+    public void realizarPuja(ActionEvent actionEvent) {
+        abrirVentanaUno("/co/edu/uniquindio/subasta/VentanaEmergenteUno.fxml","Pujar");
+    }
+
+
+    private void abrirVentanaUno(String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root;
+
+            try {
+                root= loader.load() ;
+                VentanaEmergenteUnoController ventanaEmergenteUnoController =loader.getController();
+                ventanaEmergenteUnoController.recibirCodigo(anunciosDto.get(posicion).codigo());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            Stage newStage = new Stage();
+            newStage.setTitle(title);
+            newStage.initModality(Modality.APPLICATION_MODAL); // Para que sea modal
+
+            Scene scene = new Scene(root);
+            newStage.setScene(scene);
+            newStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void abrirVentanaDos(String fxmlPath, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root;
+
+            try {
+                root= loader.load() ;
+                VentanaEmergenteDosController ventanaEmergenteDosController =loader.getController();
+                ventanaEmergenteDosController.recibirCodigo(anunciosDto.get(posicion).codigo());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+            Stage newStage = new Stage();
+            newStage.setTitle(title);
+            newStage.initModality(Modality.APPLICATION_MODAL); // Para que sea modal
+
+            Scene scene = new Scene(root);
+            newStage.setScene(scene);
+            newStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void numeroPujas() {
+        abrirVentanaDos("/co/edu/uniquindio/subasta/VentanaEmergenteDos.fxml","Ver pujas");
+    }
 }
+

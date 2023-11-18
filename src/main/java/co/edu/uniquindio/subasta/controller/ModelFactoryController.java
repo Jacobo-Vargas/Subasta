@@ -322,6 +322,10 @@ public class ModelFactoryController implements IModelFactoryController {
 
     }
 
+    @Override
+    public AnuncioDto salvarAnuncioCodigo(String codigo) {
+        return mapper.anuncioToAnuncioDto(getSubasta().buscarAnuncioCodigo(codigo));
+    }
 
     @Override
     public boolean realizarPuja(PujaDto pujaDto, String codigo) throws Exception {
