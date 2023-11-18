@@ -73,6 +73,8 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
                 registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
                 guardarResourceXML();
+                
+
                 return true;
             } else {
                 return false;
