@@ -2,7 +2,9 @@ package co.edu.uniquindio.subasta.controller;
 
 import co.edu.uniquindio.subasta.controller.servicies.IAnuncioControllerService;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
+import co.edu.uniquindio.subasta.exceptions.CompradorException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
+import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.Producto;
 
@@ -48,5 +50,9 @@ public class AnuncioController implements IAnuncioControllerService {
     @Override
     public boolean actualizarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         return modelFactoryController.actualizarAnuncio(anuncioDto);
+    }
+    @Override
+    public List<CompradorDto> obtenerCompradores() throws CompradorException{
+        return modelFactoryController.obtenerCompradores();
     }
 }

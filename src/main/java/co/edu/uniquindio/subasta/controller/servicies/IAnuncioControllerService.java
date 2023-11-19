@@ -1,7 +1,9 @@
 package co.edu.uniquindio.subasta.controller.servicies;
 
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
+import co.edu.uniquindio.subasta.exceptions.CompradorException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
+import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.model.Anuncio;
 
@@ -11,10 +13,9 @@ import java.util.List;
 public interface IAnuncioControllerService {
 
     List<ProductoDto> obtenerProducto();
+    List<CompradorDto> obtenerCompradores() throws CompradorException;
     List<AnuncioDto> obtenerAnuncio();
-
     String recuperarNombre();
-
     List<AnuncioDto> obtenerAnunciosGlobales();
 
     int agregarAnuncio(AnuncioDto anuncioDto) throws AnuncioException;

@@ -1,7 +1,10 @@
 package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.AnuncioController;
+import co.edu.uniquindio.subasta.controller.PujaController;
+import co.edu.uniquindio.subasta.exceptions.CompradorException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
+import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import javafx.beans.property.SimpleStringProperty;
@@ -25,14 +28,15 @@ import java.util.stream.Collectors;
 
 public class GestionAnunciosViewController {
 
+    PujaDto pujaDtoSelecionado;
+    CompradorDto compradorDtoSeleccionado;
     AnuncioController anuncioController;
+    ArrayList<CompradorDto> listaCompradores = new ArrayList<>();
     ObservableList<AnuncioDto> listaAnuncioDto = FXCollections.observableArrayList();
     ObservableList<PujaDto> listaPujasDto = FXCollections.observableArrayList();
-    PujaDto pujaDtoSelecionado;
-    AnuncioDto anuncioDtoSeleccionado;
 
 
-    public TableColumn<PujaDto, String> tcNombreComprador;
+    public TableColumn<CompradorDto, String> tcNombreComprador;
     public TableColumn<PujaDto, String> tcFechaOferta;
     public TableColumn<PujaDto, String> tcCodigo;
     public TableColumn<PujaDto, String> tcOferta;
@@ -40,10 +44,14 @@ public class GestionAnunciosViewController {
     public Label lblDireccionComprador;
     public Label lblTelefonoComprador;
     public Label lblNombreComprador;
+    public Label lblCedula;
     public ComboBox<String> cBoxAnuncios;
     public ImageView imageViewFoto;
 
-    public void initialize(){
+    public GestionAnunciosViewController() throws CompradorException {
+    }
+
+    public void initialize() {
         anuncioController = new AnuncioController();
         initView();
     }
@@ -61,17 +69,28 @@ public class GestionAnunciosViewController {
     }
 
     public void elegirPuja() {
+        pujaDtoSelecionado = null;
     }
 
     private void obtenerAnuncios() {
         listaAnuncioDto.clear();
         listaAnuncioDto.addAll(anuncioController.obtenerAnuncio());
     }
-    private void obtenerPujas(ArrayList<PujaDto> listPujaDto){
+
+    private void obtenerPujas(ArrayList<PujaDto> listPujaDto) {
         listaPujasDto.clear();
         listaPujasDto.addAll(listPujaDto);
         tvPujas.setItems(listaPujasDto);
         tvPujas.refresh();
+    }
+
+    private void obtenerCompradores() {
+        try {
+            listaCompradores.clear();
+            listaCompradores.addAll(anuncioController.obtenerCompradores());
+        } catch (CompradorException e) {
+            System.out.println("Error obteniendo compradores.");
+        }
     }
 
 
@@ -85,8 +104,6 @@ public class GestionAnunciosViewController {
 
 
     private void initDataBinding() {
-
-       // tcNombreComprador.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()));
         tcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
         tcFechaOferta.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaPuja())));
         tcOferta.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().oferta())));
@@ -115,36 +132,49 @@ public class GestionAnunciosViewController {
 
     private void listenerSelectionPuja() {
         tvPujas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            pujaDtoSelecionado = newSelection;
             try {
-                mostrarInformacionComprador(pujaDtoSelecionado);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
+                pujaDtoSelecionado = newSelection;
+                if (pujaDtoSelecionado != null) {
+                    obtenerCompradores();
+                    for (CompradorDto c : listaCompradores) {
+                        if (c.cedula().equals(pujaDtoSelecionado.cedulaComprador())) {
+                            mostrarInformacionComprador(c);
+                            compradorDtoSeleccionado = c;
+                            break;
+                        }
+
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error en listener puja");
+
             }
         });
     }
+
     private void listenerSelectionAnuncio() {
         cBoxAnuncios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 
             for (AnuncioDto a : listaAnuncioDto) {
-                if(a.nombre().equals(cBoxAnuncios.getValue())){
+                if (a.nombre().equals(cBoxAnuncios.getValue())) {
                     imageViewFoto.setImage(mostrarFoto(a.foto()));
                     obtenerPujas(a.listaPujas());
+                    break;
                 }
+
             }
         });
     }
-    private void mostrarInformacionComprador(PujaDto pujaDtoSeleccionada) throws MalformedURLException {
-        if (pujaDtoSeleccionada != null) {
 
-//            txtDescripcion.setText(pujaDtoSeleccionada.descripcion());
-//            txtValorInicial.setText(String.format("%.0f",pujaDtoSeleccionada.valorInicial()));
-//            txtCodigo.setText(String.valueOf(pujaDtoSeleccionada.codigo()));
-//            dateInicio.setValue(LocalDate.parse(String.valueOf(pujaDtoSeleccionada.fechaPublicacion())));
-//            dateFin.setValue(LocalDate.parse(String.valueOf(pujaDtoSeleccionada.fechaTerminacion())));
-//            cBoxProducto.setValue(pujaDtoSeleccionada.producto().nombre());
-//            txtNombrePublicacion.setText(pujaDtoSeleccionada.nombre());
-//            imageViewFoto.setImage(mostrarFoto(pujaDtoSeleccionada.foto()));
+    private void mostrarInformacionComprador(CompradorDto compradorDto) {
+        if (compradorDto != null) {
+            lblDireccionComprador.setText(compradorDto.direccion());
+            lblNombreComprador.setText(compradorDto.nombre());
+            lblTelefonoComprador.setText(compradorDto.telefono());
+            lblCedula.setText(compradorDto.cedula());
+
+        } else {
+            System.out.println();
         }
     }
 }

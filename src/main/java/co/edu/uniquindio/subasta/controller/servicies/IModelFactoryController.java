@@ -20,7 +20,7 @@ public interface IModelFactoryController {
 
     //    ----------------------- CRUD ANUNCIO ---------------------------------------
     List<AnuncioDto> obtenerAnuncio();
-
+    List<CompradorDto> obtenerCompradores();
     String recuperarNombreAnunciante();
     List<AnuncioDto> obtenerAnunciosGlobales();
 
@@ -57,13 +57,4 @@ public interface IModelFactoryController {
     List<AnuncianteDto> obtenerListaAnunciante();
     AnuncioDto salvarAnuncioCodigo(String codigo);
     CompradorDto salvarCompradorLogueado();
-
-    //-----------------------anunciante---------------------------
-
-
-
-
-    //------------------ojo-------------
-
-
 }

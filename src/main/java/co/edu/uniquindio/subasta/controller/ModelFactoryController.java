@@ -35,6 +35,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
     public static ModelFactoryController getInstance() {
         return SingletonHolder.eINSTANCE;
     }
+
     public ModelFactoryController() {
 
         initRabbitConnection(); //-----------------crea conexion
@@ -44,7 +45,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        cargarDatosBase();
+        //cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -57,8 +58,8 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //4 XML
 
-          guardarResourceXML();
-        //cargarResourceXML();
+        //guardarResourceXML();
+        cargarResourceXML();
 
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
@@ -66,8 +67,6 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         }
         registrarAccionesSistema("Inicio de sistema", 1, "INICIOAPP");
     }
-
-
 
 
 //    ---------------------------------------  Rabbit -----------------------------------
@@ -90,13 +89,13 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         }
     }
 
-    public void consumirMensajesServicio1(){
+    public void consumirMensajesServicio1() {
         hiloServicioConsumer1 = new Thread(this);
         hiloServicioConsumer1.start();
     }
 
-    public void consumirProducto(){
-        hiloConsumirPRODUCTO=new Thread(this);
+    public void consumirProducto() {
+        hiloConsumirPRODUCTO = new Thread(this);
         hiloConsumirPRODUCTO.start();
     }
 
@@ -104,10 +103,10 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
     @Override
     public void run() {
         Thread currentThread = Thread.currentThread();
-        if(currentThread == hiloServicioConsumer1){
+        if (currentThread == hiloServicioConsumer1) {
             consumirMensajes();
         }
-        if(currentThread == hiloConsumirPRODUCTO){
+        if (currentThread == hiloConsumirPRODUCTO) {
             consumirProducto();
         }
     }
@@ -124,7 +123,8 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
                 //actualizarEstado(message);
             };
             while (true) {
-                channel.basicConsume(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, true, deliverCallback, consumerTag -> { });
+                channel.basicConsume(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, true, deliverCallback, consumerTag -> {
+                });
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,7 +200,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
                 getSubasta().setAnuncianteLogueado(a);
                 registrarAccionesSistema(a.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
-                producirMensaje(UtilsRabbit.QUEUE_NUEVA_PUBLICACION,"Acceso exitoso");
+                producirMensaje(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, "Acceso exitoso");
             }
         }
         return acceso;
@@ -217,7 +217,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
             registrarAccionesSistema(getSubasta().getAnuncianteLogueado().getNombre() + " cerró sesión.", 1, "CIERRE DE SESIÓN.");
             getSubasta().setAnuncianteLogueado(null);
             logueado = true;
-        }else if (getSubasta().getCompradorLogueado() != null) {
+        } else if (getSubasta().getCompradorLogueado() != null) {
             registrarAccionesSistema(getSubasta().getCompradorLogueado().getNombre() + " cerró sesion.", 1, "CIERRE DE SESIÓN.");
             getSubasta().setCompradorLogueado(null);
             logueado = true;
@@ -331,6 +331,11 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
 //    ---------------------------------------- CRUD ANUNCIO ----------------------------//
 
+    @Override
+    public List<CompradorDto> obtenerCompradores() {
+        ArrayList<Comprador> lista = new ArrayList<>(getSubasta().getListaCompradores());
+        return mapper.getListaComprador(lista);
+    }
 
     @Override
     public List<AnuncioDto> obtenerAnuncio() {

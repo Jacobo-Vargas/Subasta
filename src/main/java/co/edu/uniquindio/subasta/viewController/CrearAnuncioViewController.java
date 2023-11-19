@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 public class CrearAnuncioViewController{
 
     public static int codigo = 0;
-
     AnuncioController anuncioController;
     File fileGlobal;
 
@@ -55,6 +54,8 @@ public class CrearAnuncioViewController{
 
     @FXML
     private DatePicker dateInicio;
+    @FXML
+    private TableColumn<AnuncioDto, String> tcNombreAnuncio;
 
     @FXML
     private TableColumn<AnuncioDto, String> tcCodigo;
@@ -177,6 +178,7 @@ public class CrearAnuncioViewController{
     }
     private void initDataBinding() {
 
+        tcNombreAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
         tcFechaFin.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaTerminacion())));
         tcFechaInicio.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaPublicacion())));
@@ -223,7 +225,9 @@ public class CrearAnuncioViewController{
         tvAnuncios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             anuncioDtoSelecionado = newSelection;
             try {
-                mostrarInformacionAnuncio(anuncioDtoSelecionado);
+                if(anuncioDtoSelecionado != null){
+                    mostrarInformacionAnuncio(anuncioDtoSelecionado);
+                }
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
