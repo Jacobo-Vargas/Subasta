@@ -1292,3 +1292,35 @@ nov. 19, 2023 5:12:24 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarR
 INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19
 nov. 19, 2023 5:13:05 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-19
+nov. 19, 2023 5:15:43 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19
+nov. 19, 2023 5:15:50 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-19
+nov. 19, 2023 5:18:24 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19
+nov. 19, 2023 5:18:33 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-19
+nov. 19, 2023 5:18:50 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: CIERRE DE SESIÓN.,juan cerró sesión.,2023-11-19
+nov. 19, 2023 5:29:40 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19
+nov. 19, 2023 5:29:51 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-19
+nov. 19, 2023 5:32:17 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19
+nov. 19, 2023 5:32:25 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-19
+nov. 19, 2023 5:32:42 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGAR PRODUCTO,juan agregó un producto.,2023-11-19
+nov. 19, 2023 5:33:24 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: AGREGAR ANUNCIO,Se agrego un anuncio.,2023-11-19
+nov. 19, 2023 5:37:01 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19
+nov. 19, 2023 5:37:26 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19
+nov. 19, 2023 5:37:32 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-19
+nov. 19, 2023 5:37:45 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: ELIMINAR ANUNCIO,Se elimino un anuncio.,2023-11-19
+nov. 19, 2023 5:42:47 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-19

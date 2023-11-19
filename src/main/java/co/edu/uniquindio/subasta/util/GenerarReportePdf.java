@@ -1,4 +1,4 @@
-package co.edu.uniquindio.subasta.model;
+package co.edu.uniquindio.subasta.util;
 
 import java.io.IOException;
 

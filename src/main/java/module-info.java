@@ -24,4 +24,6 @@ module com.example.ejemplodto {
 
     exports co.edu.uniquindio.subasta.viewController;
     opens co.edu.uniquindio.subasta.viewController to javafx.fxml;
+    exports co.edu.uniquindio.subasta.util;
+    opens co.edu.uniquindio.subasta.util to javafx.graphics;
 }

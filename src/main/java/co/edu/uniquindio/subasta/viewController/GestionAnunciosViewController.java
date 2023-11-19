@@ -2,11 +2,14 @@ package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.AnuncioController;
 import co.edu.uniquindio.subasta.controller.PujaController;
+import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.CompradorException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
+import co.edu.uniquindio.subasta.util.AlertaUtil;
+import co.edu.uniquindio.subasta.util.GenerarReportePdf;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,6 +34,7 @@ public class GestionAnunciosViewController {
 
     PujaDto pujaDtoSelecionado;
     CompradorDto compradorDtoSeleccionado;
+    AnuncioDto anuncioDtoSeleccionado;
     AnuncioController anuncioController;
     ArrayList<CompradorDto> listaCompradores = new ArrayList<>();
     ObservableList<AnuncioDto> listaAnuncioDto = FXCollections.observableArrayList();
@@ -47,9 +52,6 @@ public class GestionAnunciosViewController {
     public Label lblCedula;
     public ComboBox<String> cBoxAnuncios;
     public ImageView imageViewFoto;
-
-    public GestionAnunciosViewController() throws CompradorException {
-    }
 
     public void initialize() {
         anuncioController = new AnuncioController();
@@ -69,7 +71,26 @@ public class GestionAnunciosViewController {
     }
 
     public void elegirPuja() {
-        pujaDtoSelecionado = null;
+        boolean  bandera = false;
+        for (AnuncioDto a: listaAnuncioDto) {
+            if(a.codigo().equals(anuncioDtoSeleccionado.codigo())){
+                try {
+                    if(anuncioController.eliminarAnuncio(a)){
+                        GenerarReportePdf.generarPDFVenta(pujaDtoSelecionado,a,compradorDtoSeleccionado);
+                        AlertaUtil.mostrarMensajeOk("Se ha generado reporte\n se ha elegido con exito.");
+                        bandera = true;
+                        break;
+                    }
+                } catch (AnuncioException e) {
+                    AlertaUtil.mostrarMensajeError("No se pudo escoger la puja");
+                } catch (IOException e) {
+                    System.out.println("Error generando pdf.");
+                }
+            }
+        }
+        if(!bandera){
+            AlertaUtil.mostrarMensajeError("No se pudo escoger la puja, intente más tarde.");
+        }
     }
 
     private void obtenerAnuncios() {
@@ -142,12 +163,10 @@ public class GestionAnunciosViewController {
                             compradorDtoSeleccionado = c;
                             break;
                         }
-
                     }
                 }
             } catch (Exception e) {
                 System.out.println("Error en listener puja");
-
             }
         });
     }
@@ -157,6 +176,7 @@ public class GestionAnunciosViewController {
 
             for (AnuncioDto a : listaAnuncioDto) {
                 if (a.nombre().equals(cBoxAnuncios.getValue())) {
+                    anuncioDtoSeleccionado = a;
                     imageViewFoto.setImage(mostrarFoto(a.foto()));
                     obtenerPujas(a.listaPujas());
                     break;
