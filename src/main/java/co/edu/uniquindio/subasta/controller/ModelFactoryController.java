@@ -43,7 +43,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        //cargarDatosBase();
+        cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -55,13 +55,8 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         //cargarResourceBinario();
 
         //4 XML
-        //  guardarResourceXML();
-        cargarResourceXML();
-        System.out.println(getSubasta().getListaAnuncios().get(0).getListaPujas().size());
-
-        System.out.println(getSubasta().getListaAnuncios().get(0).getListaPujas());
-        System.out.println(getSubasta().getListaAnunciante().get(0).getListaAnuncio().get(0).getListaPujas());
-
+          guardarResourceXML();
+        //cargarResourceXML();
 
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
