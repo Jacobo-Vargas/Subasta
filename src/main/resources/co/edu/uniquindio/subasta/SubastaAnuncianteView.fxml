@@ -3,24 +3,30 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="750.0" stylesheets="@CSS/StyleTabPane.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <tabs>
-    <Tab text="Gestionar anuncios" />
-      <Tab text="Crear anuncio">
-          <content>
-              <fx:include source="CrearAnuncioView.fxml"> </fx:include>
-          </content>
-      </Tab>
-    <Tab text="Registrar producto">
-        <content>
-            
-            <fx:include source="ProductoView.fxml"> </fx:include>
-        </content>
-    </Tab>
-      <Tab text="Salir">
-          <content>
-              <fx:include source="LogOutView.fxml"> </fx:include>
-          </content>
-      </Tab>
-  </tabs>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+         prefWidth="750.0" stylesheets="@CSS/StyleTabPane.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <tabs>
+        <Tab text="Gestionar anuncios">
+            <content>
+                <fx:include source="GestionAnunciosView.fxml"></fx:include>
+            </content>
+        </Tab>
+        <Tab text="Crear anuncio">
+            <content>
+                <fx:include source="CrearAnuncioView.fxml"></fx:include>
+            </content>
+        </Tab>
+        <Tab text="Registrar producto">
+            <content>
+
+                <fx:include source="ProductoView.fxml"></fx:include>
+            </content>
+        </Tab>
+        <Tab text="Salir">
+            <content>
+                <fx:include source="LogOutView.fxml"></fx:include>
+            </content>
+        </Tab>
+    </tabs>
 </TabPane>

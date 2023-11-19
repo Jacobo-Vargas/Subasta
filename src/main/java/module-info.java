@@ -10,6 +10,8 @@ module com.example.ejemplodto {
     requires com.rabbitmq.client;
     requires com.sun.xml.bind.core;
     requires java.xml.bind;
+    requires kernel;
+    requires layout;
 
     opens co.edu.uniquindio.subasta to javafx.fxml;
     opens co.edu.uniquindio.subasta.model to javafx.graphics;

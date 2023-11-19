@@ -45,8 +45,6 @@ public class LoginViewController extends Component {
         try {
             SubastaCompradorApp compardorApp = new SubastaCompradorApp();
             compardorApp.start(new Stage());
-//            Stage stage = (Stage) Stage.getWindows();
-//            stage.hide();
         }catch (IOException e) {
             e.printStackTrace();
         }

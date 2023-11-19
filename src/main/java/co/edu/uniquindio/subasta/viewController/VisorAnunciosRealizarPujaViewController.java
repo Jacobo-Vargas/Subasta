@@ -116,6 +116,7 @@ public class VisorAnunciosRealizarPujaViewController {
     }
 
     public void efecto() {
+
         FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), imagenAnuncio);
         fadeTransition.setFromValue(0.0);
         fadeTransition.setToValue(1.0);
