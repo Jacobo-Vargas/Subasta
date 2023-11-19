@@ -192,7 +192,6 @@ public class ArchivoUtil {
 
 
 
-
     public static Object cargarRecursoSerializadoXML(String rutaArchivo) throws IOException {
 
         XMLDecoder decodificadorXML;

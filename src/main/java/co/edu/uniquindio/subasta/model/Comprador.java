@@ -8,9 +8,7 @@ public class Comprador extends Persona{
     private static final long serialVersionUID = 1L;
     private String direccion;
     private ArrayList<Puja> listaPujas = new ArrayList<>();
-
     private Usuario usuario;
-
     public Comprador() {
     }
 
@@ -29,7 +27,6 @@ public class Comprador extends Persona{
     public void setListaPujas(ArrayList<Puja> listaPujas) {
         this.listaPujas = listaPujas;
     }
-
     public Usuario getUsuario() {
         return usuario;
     }
