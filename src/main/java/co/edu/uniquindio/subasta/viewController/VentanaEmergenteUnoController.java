@@ -23,7 +23,7 @@ public class VentanaEmergenteUnoController {
 
     public void pujar() throws Exception {
         String codigo=textFieldCodigo.getText();
-        float oferta= Float.parseFloat(textFieldCodigo.getText());
+        float oferta= Float.parseFloat(texFieldOferta.getText());
         PujaDto pujaDto=new PujaDto("indefinido",codigo,oferta, String.valueOf(LocalDate.now()),codigoAnuncio,pujaController.salvarCompradorLogueado().cedula());
         if(pujaController.realizarPuja(pujaDto,codigoAnuncio)){
             System.out.println("se guardo en");
