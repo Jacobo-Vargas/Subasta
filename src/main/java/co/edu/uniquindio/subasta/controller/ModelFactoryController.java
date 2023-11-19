@@ -44,7 +44,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        //cargarDatosBase();
+        cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -57,8 +57,8 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //4 XML
 
-       //guardarResourceXML();
-        cargarResourceXML();
+          guardarResourceXML();
+        //cargarResourceXML();
 
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
@@ -393,6 +393,11 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         ArrayList<Puja> listaPuja = new ArrayList<>(getSubasta().getCompradorLogueado().getListaPujas());
         return mapper.getPujaDto(listaPuja);
 
+    }
+
+    @Override
+    public CompradorDto salvarCompradorLogueado() {
+        return mapper.compradorToCompradorDto(getSubasta().getCompradorLogueado());
     }
 
     @Override

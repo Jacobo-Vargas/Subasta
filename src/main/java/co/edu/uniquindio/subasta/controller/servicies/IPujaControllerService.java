@@ -1,6 +1,7 @@
 package co.edu.uniquindio.subasta.controller.servicies;
 
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
+import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.model.Anuncio;
 
@@ -14,5 +15,6 @@ public interface IPujaControllerService {
     AnuncioDto salvarAnuncio(String nombre);
 
     AnuncioDto salvarAnuncioCodigo(String codigo);
+    CompradorDto salvarCompradorLogueado();
 
 }

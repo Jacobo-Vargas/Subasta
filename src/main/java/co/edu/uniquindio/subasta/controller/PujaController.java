@@ -3,6 +3,7 @@ package co.edu.uniquindio.subasta.controller;
 import co.edu.uniquindio.subasta.controller.servicies.IPujaControllerService;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
+import co.edu.uniquindio.subasta.mapping.dto.CompradorDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.model.Anunciante;
 import co.edu.uniquindio.subasta.model.Anuncio;
@@ -45,6 +46,11 @@ public class PujaController implements IPujaControllerService {
     @Override
     public AnuncioDto salvarAnuncioCodigo(String codigo) {
         return modelFactoryController.salvarAnuncioCodigo(codigo);
+    }
+
+    @Override
+    public CompradorDto salvarCompradorLogueado() {
+        return modelFactoryController.salvarCompradorLogueado();
     }
 }
 

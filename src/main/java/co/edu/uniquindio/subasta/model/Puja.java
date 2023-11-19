@@ -7,12 +7,12 @@ import java.time.LocalDate;
 public class Puja implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-
     private String direccion ;
     private String codigo;
     private float oferta;
     private String fechaPuja;
     private String codigoAnuncio;
+    private String cedulaComprador;
 
     public Puja() {
     }
@@ -55,6 +55,14 @@ public class Puja implements Serializable {
 
     public void setCodigoAnuncio(String codigoAnuncio) {
         this.codigoAnuncio = codigoAnuncio;
+    }
+
+    public String getCedulaComprador() {
+        return cedulaComprador;
+    }
+
+    public void setCedulaComprador(String cedulaComprador) {
+        this.cedulaComprador = cedulaComprador;
     }
 
     @Override
