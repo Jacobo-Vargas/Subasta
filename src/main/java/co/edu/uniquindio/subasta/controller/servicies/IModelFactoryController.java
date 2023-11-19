@@ -56,6 +56,7 @@ public interface IModelFactoryController {
     AnuncioDto salvarAnuncio(String nombre);
     List<AnuncianteDto> obtenerListaAnunciante();
     AnuncioDto salvarAnuncioCodigo(String codigo);
+    CompradorDto salvarCompradorLogueado();
 
     //-----------------------anunciante---------------------------
 

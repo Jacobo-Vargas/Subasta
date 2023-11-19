@@ -200,7 +200,7 @@ public class Subasta implements ISubastaService, Serializable {
         if (!(verificarPujaRepetida(puja))) {
             ArrayList<Puja> list = compradorLogueado.getListaPujas();
             list.add(puja);
-            if ((compradorLogueado.getListaPujas().size() < 3)) {
+            if ((compradorLogueado.getListaPujas().size() <= 3)) {
                 compradorLogueado.setListaPujas(list);
 
                 // metodo que agrega la puja a la lista global
@@ -213,13 +213,13 @@ public class Subasta implements ISubastaService, Serializable {
 
                 // metodo que agrega la puja a el anunciante
 
-                for (Anunciante a : listaAnunciante) {
-                    return a.getListaAnuncio().stream().anyMatch(anuncio -> {
+                for(Anunciante anunciante:listaAnunciante){
+                    for(Anuncio anuncio:anunciante.getListaAnuncio()){
                         if(anuncio.getCodigo().equals(codigo)){
                             anuncio.getListaPujas().add(puja);
+                            break;
                         }
-                       return true;
-                   });
+                    }
                 }
             }
             return true;

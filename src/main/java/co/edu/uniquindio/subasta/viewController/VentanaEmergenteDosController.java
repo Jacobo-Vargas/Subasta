@@ -15,6 +15,7 @@ import java.util.List;
 public class VentanaEmergenteDosController {
 
 
+
     ObservableList<PujaDto> listaPujaDto = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnuncioDto = FXCollections.observableArrayList();
     //////////////////////////////////////////////////////////////////7
@@ -30,6 +31,7 @@ public class VentanaEmergenteDosController {
     public TableColumn<PujaDto, String> tableColumnFecha;
     @FXML
     public TableColumn<PujaDto, String> tableColumnCodigoAnuncio;
+    public TableColumn<PujaDto, String> tableColumnCodigo;
     /////////////////////////////////////////////////////////////////////////////
     @FXML
     public TableView<AnuncioDto> tablaInformacioAnunio;
@@ -58,6 +60,7 @@ public class VentanaEmergenteDosController {
         tableColumnValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
         tableColumnTipoProducto.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().producto().tipoArticulo())));
         tableColumnNombreAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().producto().nombre())));
+        tableColumnCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
     }
     public List<PujaDto> buscarPujas(){
         List<PujaDto>listaPuja=FXCollections.observableArrayList();

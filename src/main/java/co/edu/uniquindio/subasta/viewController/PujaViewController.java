@@ -288,7 +288,7 @@ public class PujaViewController {
                 , textFieldCodigo.getText()
                 , Float.parseFloat(textFieldValorInicial.getText())
                 , String.valueOf(LocalDate.now())
-                , codigoAnuncio);
+                , codigoAnuncio,pujaController.salvarCompradorLogueado().cedula());
     }
 
     public void obtenerAnuncios() {
