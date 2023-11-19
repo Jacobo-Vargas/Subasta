@@ -8,15 +8,24 @@ import co.edu.uniquindio.subasta.mapping.mappers.MapperSubasta;
 import co.edu.uniquindio.subasta.model.*;
 import co.edu.uniquindio.subasta.util.Persistencia;
 import co.edu.uniquindio.subasta.util.SubastaUtil;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelFactoryController implements IModelFactoryController {
+public class ModelFactoryController implements IModelFactoryController, Runnable {
     Subasta subasta;
     MapperSubasta mapper = MapperSubasta.INSTANCE;
 
+    RabbitFactory rabbitFactory;
+    ConnectionFactory connectionFactory;
+    Thread hiloServicioConsumer1;
+    Thread hiloConsumirPRODUCTO;
 
     private static class SingletonHolder {
         private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
@@ -26,9 +35,9 @@ public class ModelFactoryController implements IModelFactoryController {
     public static ModelFactoryController getInstance() {
         return SingletonHolder.eINSTANCE;
     }
-
     public ModelFactoryController() {
 
+        initRabbitConnection(); //-----------------crea conexion
         System.out.println("invocación clase singleton");
 
         // crearCopiaDeSeguridad(); // se crea copia del xml una vez inicia el sistema
@@ -58,6 +67,70 @@ public class ModelFactoryController implements IModelFactoryController {
         registrarAccionesSistema("Inicio de sistema", 1, "INICIOAPP");
     }
 
+
+
+
+//    ---------------------------------------  Rabbit -----------------------------------
+
+
+    private void initRabbitConnection() {
+        rabbitFactory = new RabbitFactory();
+        connectionFactory = rabbitFactory.getConnectionFactory();
+        System.out.println("conexion establecidad");
+    }
+
+    public void producirMensaje(String queue, String message) {
+        try (Connection connection = connectionFactory.newConnection();
+             Channel channel = connection.createChannel()) {
+            channel.queueDeclare(queue, false, false, false, null);
+            channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println(" [x] Sent '" + message + "'");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void consumirMensajesServicio1(){
+        hiloServicioConsumer1 = new Thread(this);
+        hiloServicioConsumer1.start();
+    }
+
+    public void consumirProducto(){
+        hiloConsumirPRODUCTO=new Thread(this);
+        hiloConsumirPRODUCTO.start();
+    }
+
+
+    @Override
+    public void run() {
+        Thread currentThread = Thread.currentThread();
+        if(currentThread == hiloServicioConsumer1){
+            consumirMensajes();
+        }
+        if(currentThread == hiloConsumirPRODUCTO){
+            consumirProducto();
+        }
+    }
+
+    private void consumirMensajes() {
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.queueDeclare(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, false, false, false, null);
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody());
+                System.out.println("Mensaje recibido: " + message);
+                //actualizarEstado(message);
+            };
+            while (true) {
+                channel.basicConsume(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, true, deliverCallback, consumerTag -> { });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void cargarDatosBase() {
         subasta = SubastaUtil.cargarDatos();
     }
@@ -73,8 +146,6 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
                 registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
                 guardarResourceXML();
-                
-
                 return true;
             } else {
                 return false;
@@ -114,6 +185,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().setCompradorLogueado(c);
                 registrarAccionesSistema(c.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
+
             }
         }
         return acceso;
@@ -128,6 +200,7 @@ public class ModelFactoryController implements IModelFactoryController {
                 getSubasta().setAnuncianteLogueado(a);
                 registrarAccionesSistema(a.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
+                producirMensaje(UtilsRabbit.QUEUE_NUEVA_PUBLICACION,"Acceso exitoso");
             }
         }
         return acceso;

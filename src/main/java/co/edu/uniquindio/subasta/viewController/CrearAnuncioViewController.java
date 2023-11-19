@@ -175,7 +175,6 @@ public class CrearAnuncioViewController{
         initDataBinding();
         listenerSelection();
     }
-
     private void initDataBinding() {
 
         tcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().codigo())));
@@ -249,6 +248,8 @@ public class CrearAnuncioViewController{
                 txtDescripcion.getText(), nombreFoto,
                 recuperarNombreAnunciante(), String.valueOf(dateInicio.getValue()), String.valueOf(dateFin.getValue()),
                 Float.parseFloat(txtValorInicial.getText()), txtCodigo.getText(), new ArrayList<PujaDto>());
+
+
     }
 
     private ProductoDto armarProductoAcosiado() {

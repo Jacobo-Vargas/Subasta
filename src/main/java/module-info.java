@@ -7,6 +7,9 @@ module com.example.ejemplodto {
     requires com.jfoenix;
     requires java.desktop;
     requires java.logging;
+    requires com.rabbitmq.client;
+    requires com.sun.xml.bind.core;
+    requires java.xml.bind;
 
     opens co.edu.uniquindio.subasta to javafx.fxml;
     opens co.edu.uniquindio.subasta.model to javafx.graphics;
@@ -17,9 +20,6 @@ module com.example.ejemplodto {
     exports co.edu.uniquindio.subasta.exceptions;
     exports co.edu.uniquindio.subasta to javafx.graphics;
 
-
     exports co.edu.uniquindio.subasta.viewController;
     opens co.edu.uniquindio.subasta.viewController to javafx.fxml;
-
-
 }
