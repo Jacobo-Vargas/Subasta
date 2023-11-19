@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class Subasta implements ISubastaService, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
     private Anunciante anuncianteLogueado;
     private Comprador compradorLogueado;
     private ArrayList<Anunciante> listaAnunciante = new ArrayList<>();
@@ -200,35 +201,41 @@ public class Subasta implements ISubastaService, Serializable {
         if (!(verificarPujaRepetida(puja))) {
             ArrayList<Puja> list = compradorLogueado.getListaPujas();
             list.add(puja);
+
+
             if ((compradorLogueado.getListaPujas().size() <= 3)) {
                 compradorLogueado.setListaPujas(list);
-
-                // metodo que agrega la puja a la lista global
                 for (Anuncio anuncio : listaAnuncios) {
                     if (anuncio.getCodigo().equals(codigo)) {
-                        anuncio.getListaPujas().add(puja);
+                        if (!anuncio.getListaPujas().contains(puja)) {
+                            anuncio.getListaPujas().add(puja); // Agregar la puja a la lista global de anuncios
+                        }
                         break;
                     }
                 }
 
-                // metodo que agrega la puja a el anunciante
-
-                for(Anunciante anunciante:listaAnunciante){
-                    for(Anuncio anuncio:anunciante.getListaAnuncio()){
-                        if(anuncio.getCodigo().equals(codigo)){
-                            anuncio.getListaPujas().add(puja);
+// Método que agrega la puja a los anuncios del anunciante
+                for (Anunciante anunciante : listaAnunciante) {
+                    for (Anuncio anuncio : anunciante.getListaAnuncio()) {
+                        if (anuncio.getCodigo().equals(codigo)) {
+                            if (!anuncio.getListaPujas().contains(puja)) {
+                                anuncio.getListaPujas().add(puja); // Agregar la puja a los anuncios del anunciante
+                            }
                             break;
                         }
                     }
                 }
+
+
+
+                return true;
+            } else {
+                return false;
             }
-            return true;
         } else {
             return false;
         }
-
     }
-
     @Override
     public boolean eliminarPuja(Puja puja) throws Exception {
 

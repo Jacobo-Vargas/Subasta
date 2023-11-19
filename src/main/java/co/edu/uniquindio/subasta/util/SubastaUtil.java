@@ -90,30 +90,7 @@ public class SubastaUtil {
         anuncio.setCodigo("1");
 
 
-        Puja puja = new Puja();
-        puja.setDireccion("casa 20");
-        puja.setCodigo("1");
-        puja.setOferta(25000);
-      //  puja.setAnuncio(anuncio);
 
-        Puja puja1 = new Puja();
-        puja1.setDireccion("casa 20");
-        puja1.setCodigo("2");
-        puja1.setOferta(17000);
-       //puja1.setAnuncio(anuncio);
-
-        Puja puja2 = new Puja();
-        puja2.setDireccion("casa 20");
-        puja2.setCodigo("3");
-        puja2.setOferta(35000);
-       // puja2.setAnuncio(anuncio);
-
-        ArrayList<Puja> list = new ArrayList<>();
-        list.add(puja);
-        list.add(puja1);
-        list.add(puja2);
-
-        anuncio.setListaPujas(list);
 
         a1.getListaAnuncio().add(anuncio);
         subasta.getListaAnuncios().add(anuncio);

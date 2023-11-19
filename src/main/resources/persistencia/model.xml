@@ -34,7 +34,7 @@
         <string>2023-11-19</string>
        </void>
        <void property="oferta">
-        <float>1000.0</float>
+        <float>11.0</float>
        </void>
       </object>
      </void>
@@ -56,7 +56,7 @@
         <string>2023-11-19</string>
        </void>
        <void property="oferta">
-        <float>1000000.0</float>
+        <float>200.0</float>
        </void>
       </object>
      </void>
@@ -96,52 +96,7 @@
         </void>
         <void property="listaPujas">
          <void method="add">
-          <object class="co.edu.uniquindio.subasta.model.Puja">
-           <void property="codigo">
-            <string>1</string>
-           </void>
-           <void property="direccion">
-            <string>casa 20</string>
-           </void>
-           <void property="oferta">
-            <float>25000.0</float>
-           </void>
-          </object>
-         </void>
-         <void method="add">
-          <object class="co.edu.uniquindio.subasta.model.Puja">
-           <void property="codigo">
-            <string>2</string>
-           </void>
-           <void property="direccion">
-            <string>casa 20</string>
-           </void>
-           <void property="oferta">
-            <float>17000.0</float>
-           </void>
-          </object>
-         </void>
-         <void method="add">
-          <object class="co.edu.uniquindio.subasta.model.Puja">
-           <void property="codigo">
-            <string>3</string>
-           </void>
-           <void property="direccion">
-            <string>casa 20</string>
-           </void>
-           <void property="oferta">
-            <float>35000.0</float>
-           </void>
-          </object>
-         </void>
-         <void method="add">
           <object idref="Puja0"/>
-         </void>
-         <void method="add">
-          <object idref="Puja0"/>
-         </void>
-         <void method="add">
-          <object idref="Puja1"/>
          </void>
          <void method="add">
           <object idref="Puja1"/>

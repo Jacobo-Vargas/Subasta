@@ -39,12 +39,11 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         initRabbitConnection(); //-----------------crea conexion
         System.out.println("invocación clase singleton");
-
         // crearCopiaDeSeguridad(); // se crea copia del xml una vez inicia el sistema
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        cargarDatosBase();
+        //cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -56,9 +55,13 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         //cargarResourceBinario();
 
         //4 XML
+        //  guardarResourceXML();
+        cargarResourceXML();
+        System.out.println(getSubasta().getListaAnuncios().get(0).getListaPujas().size());
 
-          guardarResourceXML();
-        //cargarResourceXML();
+        System.out.println(getSubasta().getListaAnuncios().get(0).getListaPujas());
+        System.out.println(getSubasta().getListaAnunciante().get(0).getListaAnuncio().get(0).getListaPujas());
+
 
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
