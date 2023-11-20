@@ -2,6 +2,7 @@ package co.edu.uniquindio.subasta.viewController;
 
 import co.edu.uniquindio.subasta.controller.AnuncioController;
 import co.edu.uniquindio.subasta.controller.PujaController;
+import co.edu.uniquindio.subasta.controller.RabbitController;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.CompradorException;
 import co.edu.uniquindio.subasta.mapping.dto.AnuncioDto;
@@ -33,6 +34,8 @@ import java.util.stream.Collectors;
 
 public class GestionAnunciosViewController {
 
+    RabbitController rabbitController;
+
     PujaDto pujaDtoSelecionado;
     CompradorDto compradorDtoSeleccionado;
     AnuncioDto anuncioDtoSeleccionado;
@@ -56,6 +59,7 @@ public class GestionAnunciosViewController {
 
     public void initialize() {
         anuncioController = new AnuncioController();
+        rabbitController = new RabbitController();
         initView();
     }
 
@@ -80,6 +84,7 @@ public class GestionAnunciosViewController {
                         if(anuncioController.eliminarAnuncio(a)){
                             GenerarReportePdf.generarPDFVenta(pujaDtoSelecionado,a,compradorDtoSeleccionado);
                             AlertaUtil.mostrarMensajeOk("Se ha generado reporte\n se ha elegido con exito.");
+                            rabbitController.enviarMensajeRabbit(compradorDtoSeleccionado.cedula(),anuncioDtoSeleccionado.toString());
                             bandera = true;
                             break;
                         }

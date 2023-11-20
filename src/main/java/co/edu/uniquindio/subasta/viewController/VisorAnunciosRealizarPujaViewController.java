@@ -125,7 +125,7 @@ public class VisorAnunciosRealizarPujaViewController {
 
 
     public void realizarPuja(ActionEvent actionEvent) {
-        abrirVentanaUno("/co/edu/uniquindio/subasta/VentanaEmergenteUno.fxml","Pujar");
+        abrirVentanaUno("src/main/resources/co/edu/uniquindio/subasta/VentanaEmergenteUno.fxml","Pujar");
     }
 
 
@@ -180,7 +180,7 @@ public class VisorAnunciosRealizarPujaViewController {
 
 
     public void numeroPujas() {
-        abrirVentanaDos("/co/edu/uniquindio/subasta/VentanaEmergenteDos.fxml","Ver pujas");
+        abrirVentanaDos("src/main/resources/co/edu/uniquindio/subasta/VentanaEmergenteDos.fxml","Ver pujas");
     }
 }
 

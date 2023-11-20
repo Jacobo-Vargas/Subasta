@@ -44,7 +44,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        cargarDatosBase();
+        //cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -57,8 +57,8 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //4 XML
 
-        guardarResourceXML();
-        //cargarResourceXML();
+        //guardarResourceXML();
+        cargarResourceXML();
 
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
@@ -77,18 +77,22 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         System.out.println("conexion establecidad");
     }
 
-    public void producirMensaje(String queue, String message) { // este es el que se utiliza para producir el mensaje
+    public boolean producirMensaje(String queue, String message) { // este es el que se utiliza para producir el mensaje
+
+        boolean bandera = true;
         try (Connection connection = connectionFactory.newConnection();
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(queue, false, false, false, null);
             channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
-            System.out.println(" [x] Sent '" + message + "'");
+           // System.out.println(" [x] Sent '" + message + "'");
         } catch (Exception e) {
             System.out.println("Error al iniciar conexion con rabbit.");
+            bandera = false;
         }
+        return bandera;
     }
 
-    public void consumirMensajesServicio1() {
+    public void consumirMensajesServicio() {
         hiloServicioConsumer1 = new Thread(this);
         hiloServicioConsumer1.start();
     }
@@ -181,7 +185,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
                 getSubasta().setCompradorLogueado(c);
                 registrarAccionesSistema(c.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
-
+                RabbitController.hiloCompras(cedula);
             }
         }
         return acceso;
@@ -228,12 +232,17 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         registrarAccionesSistema("Copia de seguridad", 1, "crearCopiaSeguridad");
     }
 
+
+
     private void cargarResourceXML() {
         subasta = Persistencia.cargarRecursoSubastaXML();
     }
 
     private void guardarResourceXML() {
-        Persistencia.guardarRecursoSubastaXML(subasta);
+        Thread hiloPersistencia = new Thread(() -> {
+            Persistencia.guardarRecursoSubastaXML(subasta);
+        });
+        hiloPersistencia.start();
     }
 
     private void cargarResourceBinario() {
