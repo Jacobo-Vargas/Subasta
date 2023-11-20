@@ -25,7 +25,6 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
     RabbitFactory rabbitFactory;
     ConnectionFactory connectionFactory;
     Thread hiloServicioConsumer1;
-    Thread hiloConsumirPRODUCTO;
 
     private static class SingletonHolder {
         private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
@@ -45,7 +44,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //1. inicializar datos y luego guardarlo en archivos
 
-        //cargarDatosBase();
+        cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -58,8 +57,8 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
 
         //4 XML
 
-        //guardarResourceXML();
-        cargarResourceXML();
+        guardarResourceXML();
+        //cargarResourceXML();
 
 
         if (subasta == null) { //Siempre se debe verificar si la raiz del recurso es null
@@ -78,14 +77,14 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         System.out.println("conexion establecidad");
     }
 
-    public void producirMensaje(String queue, String message) {
+    public void producirMensaje(String queue, String message) { // este es el que se utiliza para producir el mensaje
         try (Connection connection = connectionFactory.newConnection();
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(queue, false, false, false, null);
             channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
             System.out.println(" [x] Sent '" + message + "'");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error al iniciar conexion con rabbit.");
         }
     }
 
@@ -94,20 +93,12 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         hiloServicioConsumer1.start();
     }
 
-    public void consumirProducto() {
-        hiloConsumirPRODUCTO = new Thread(this);
-        hiloConsumirPRODUCTO.start();
-    }
-
 
     @Override
     public void run() {
         Thread currentThread = Thread.currentThread();
         if (currentThread == hiloServicioConsumer1) {
             consumirMensajes();
-        }
-        if (currentThread == hiloConsumirPRODUCTO) {
-            consumirProducto();
         }
     }
 
@@ -120,14 +111,13 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 String message = new String(delivery.getBody());
                 System.out.println("Mensaje recibido: " + message);
-                //actualizarEstado(message);
             };
             while (true) {
                 channel.basicConsume(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, true, deliverCallback, consumerTag -> {
                 });
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error al consumir mensaje.");
         }
     }
 
@@ -164,6 +154,12 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
                 getSubasta().getListaCompradores().add(mapper.compradorDtoToComprador(compradorDto));
                 registrarAccionesSistema("Agregar Comprador", 1, "agregarComprador");
                 guardarResourceXML();
+                try {
+                    producirMensaje(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, UtilsRabbit.convertXmlFileToString());
+                } catch (IOException e) {
+                    System.out.println("Error al producir mensaje");
+                }
+
                 return true;
             } else {
                 return false;
@@ -200,7 +196,6 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
                 getSubasta().setAnuncianteLogueado(a);
                 registrarAccionesSistema(a.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
                 acceso = true;
-                producirMensaje(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, "Acceso exitoso");
             }
         }
         return acceso;

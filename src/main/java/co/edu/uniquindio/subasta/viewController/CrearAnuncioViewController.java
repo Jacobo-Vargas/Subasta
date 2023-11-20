@@ -7,21 +7,29 @@ import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
 
+import co.edu.uniquindio.subasta.util.Persistencia;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
+import com.opencsv.CSVWriter;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 
 import java.io.*;
 
 import java.net.MalformedURLException;
 
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,10 +38,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
-public class CrearAnuncioViewController{
+public class CrearAnuncioViewController {
 
     public static int codigo = 0;
     AnuncioController anuncioController;
@@ -147,7 +154,7 @@ public class CrearAnuncioViewController{
     }
 
     @FXML
-    void eliminarAnuncio() throws AnuncioException, MalformedURLException, FileNotFoundException {
+    void eliminarAnuncio() throws AnuncioException, FileNotFoundException {
         if (anuncioController.eliminarAnuncio(anuncioDtoSelecionado)) {
             AlertaUtil.mostrarMensajeOk("Se elimino con éxito.");
             listaAnuncioDto.remove(anuncioDtoSelecionado);
@@ -158,6 +165,45 @@ public class CrearAnuncioViewController{
             AlertaUtil.mostrarMensajeError("No se puedo eliminar, intente más tarde.");
         }
 
+    }
+
+
+    @FXML
+    void exportarACsv() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV (*.csv)", "*.csv"));
+        File archivoCSV = fileChooser.showSaveDialog(new Stage());
+
+        if (archivoCSV != null) {
+            // Escribir los datos en el archivo CSV
+            try (CSVWriter writer = new CSVWriter(new FileWriter(archivoCSV))) {
+                // Escribir la línea de encabezado si es necesario
+                // Ajusta los nombres de los campos
+                writer.writeNext(new String[]{"nombre", "descripcion", "foto", "nombreAnunciante", "fechaPublicacion", "fechaTerminacion", "valorInicial", "codigo"});
+
+                // Escribir cada fila de datos
+                for (AnuncioDto anuncio : listaAnuncioDto) {
+                    String[] fila = new String[]{
+                            anuncio.nombre(),
+                            anuncio.descripcion(),
+                            anuncio.foto(),
+                            anuncio.nombreAnunciante(),
+                            anuncio.fechaPublicacion(),
+                            anuncio.fechaTerminacion(),
+                            String.valueOf(anuncio.valorInicial()),
+                            anuncio.codigo()
+                    };
+                    writer.writeNext(fila);
+                }
+
+                // Puedes agregar más configuraciones o ajustes según tus necesidades
+
+                AlertaUtil.mostrarMensajeOk("Se exporto correctamente");
+            } catch (IOException e) {
+                AlertaUtil.mostrarMensajeAlerta("No se pudo generar correctamente el archivo");
+                // Manejar la excepción apropiadamente
+            }
+        }
     }
 
     public String recuperarNombreAnunciante() {
@@ -176,6 +222,7 @@ public class CrearAnuncioViewController{
         initDataBinding();
         listenerSelection();
     }
+
     private void initDataBinding() {
 
         tcNombreAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
@@ -225,7 +272,7 @@ public class CrearAnuncioViewController{
         tvAnuncios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             anuncioDtoSelecionado = newSelection;
             try {
-                if(anuncioDtoSelecionado != null){
+                if (anuncioDtoSelecionado != null) {
                     mostrarInformacionAnuncio(anuncioDtoSelecionado);
                 }
             } catch (MalformedURLException e) {
@@ -237,7 +284,7 @@ public class CrearAnuncioViewController{
     private void mostrarInformacionAnuncio(AnuncioDto anuncioDtoSelecionado) throws MalformedURLException {
         if (anuncioDtoSelecionado != null) {
             txtDescripcion.setText(anuncioDtoSelecionado.descripcion());
-            txtValorInicial.setText(String.format("%.0f",anuncioDtoSelecionado.valorInicial()));
+            txtValorInicial.setText(String.format("%.0f", anuncioDtoSelecionado.valorInicial()));
             txtCodigo.setText(String.valueOf(anuncioDtoSelecionado.codigo()));
             dateInicio.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaPublicacion())));
             dateFin.setValue(LocalDate.parse(String.valueOf(anuncioDtoSelecionado.fechaTerminacion())));
@@ -275,7 +322,7 @@ public class CrearAnuncioViewController{
          *  luego itera la lista y si encuentra uno con el mismo nombre lo retorna
          */
         Image imagen = null;
-        File carpeta = new File("src/main/resources/imagenesAnuncios/");
+        File carpeta = new File(Persistencia.RUTA_FOTOS_SUBASTA);
 
         File[] archivos = carpeta.listFiles();
 
@@ -293,7 +340,7 @@ public class CrearAnuncioViewController{
     public void copiarArchivo(Path source) {
         nombreFoto = generarNombre();
         try {
-            Path destinoPath = Paths.get("src/main/resources/imagenesAnuncios/", nombreFoto );
+            Path destinoPath = Paths.get(Persistencia.RUTA_FOTOS_SUBASTA, nombreFoto);
             Files.createFile(destinoPath);
             Files.copy(source, destinoPath, StandardCopyOption.REPLACE_EXISTING);
 

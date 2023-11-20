@@ -2,22 +2,26 @@ package co.edu.uniquindio.subasta.controller;
 
 import jakarta.xml.bind.JAXBException;
 import javax.xml.bind.JAXB;
+import java.io.File;
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.nio.file.Files;
 
 
 public class UtilsRabbit {
-    public static final String QUEUE_NUEVA_PUBLICACION = "nueva_publicacion";
+    public static final String QUEUE_NUEVA_PUBLICACION = "nuevo XML";
     public static final String RUTA_XML = "src/main/resources/persistencia/model.xml";
 
-    //Convierte un objeto XML a una cadena
-    public static String convertObjectToXml(Object object) throws Exception {
-        StringWriter stringWriter = new StringWriter();
-        JAXB.marshal(object, stringWriter);
-        return stringWriter.toString();
+    public static String convertXmlFileToString() throws IOException {
+        File xmlFile = new File(RUTA_XML);
+        byte[] fileContent = Files.readAllBytes(xmlFile.toPath());
+        return new String(fileContent);
     }
-    // Convierte una cadena XML a un objeto
-    public static <T> T convertXmlToObject(String xmlString, Class<T> type) throws JAXBException {
-        return JAXB.unmarshal(new StringReader(xmlString), type);
+
+    // Convierte una cadena XML a un archivo
+    public static void convertStringToXmlFile(String xmlString, String filePath) throws IOException {
+        File xmlFile = new File(filePath);
+        Files.write(xmlFile.toPath(), xmlString.getBytes());
     }
 }

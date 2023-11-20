@@ -20,6 +20,7 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_ANUNCIANTES = "src/main/resources/persistencia/archivos/archivoAnunciantes.txt";
     public static final String RUTA_ARCHIVO_COMPRADORES = "src/main/resources/persistencia/archivos/archivoCompradores.txt";
     public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivos/archivoProductos.txt";
+    public static final String RUTA_FOTOS_SUBASTA = "/home/jacobo/Documentos/fotosSubasta";
 
     public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/Subasta_Log.txt";

@@ -12,6 +12,7 @@ module com.example.ejemplodto {
     requires java.xml.bind;
     requires kernel;
     requires layout;
+    requires com.opencsv;
 
     opens co.edu.uniquindio.subasta to javafx.fxml;
     opens co.edu.uniquindio.subasta.model to javafx.graphics;

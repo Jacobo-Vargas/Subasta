@@ -3,13 +3,11 @@ package co.edu.uniquindio.subasta.model;
 import co.edu.uniquindio.subasta.exceptions.AnuncioException;
 import co.edu.uniquindio.subasta.exceptions.ProductoException;
 import co.edu.uniquindio.subasta.model.services.ISubastaService;
-import co.edu.uniquindio.subasta.util.Persistencia;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Subasta implements ISubastaService, Serializable {
     @Serial
@@ -172,7 +170,8 @@ public class Subasta implements ISubastaService, Serializable {
             }
         }
         return actualizado;
-    } // para modificar la lsta de el anunciante y la global
+    }
+
 
 //    ----------------------------------Crud Puja------------------------
 
@@ -181,8 +180,9 @@ public class Subasta implements ISubastaService, Serializable {
     public List<Puja> obtenerLitaPuja() {
         return compradorLogueado.getListaPujas();
     }
-    public  Anuncio buscarAnuncioCodigo(String codigo){
-        Anuncio anuncio= listaAnuncios.stream().filter(Anuncio->Anuncio.getCodigo().equals(codigo)).findFirst().orElse(null);
+
+    public Anuncio buscarAnuncioCodigo(String codigo) {
+        Anuncio anuncio = listaAnuncios.stream().filter(Anuncio -> Anuncio.getCodigo().equals(codigo)).findFirst().orElse(null);
         return anuncio;
     }
 
@@ -227,7 +227,6 @@ public class Subasta implements ISubastaService, Serializable {
                 }
 
 
-
                 return true;
             } else {
                 return false;
@@ -236,17 +235,18 @@ public class Subasta implements ISubastaService, Serializable {
             return false;
         }
     }
+
     @Override
     public boolean eliminarPuja(Puja puja) throws Exception {
 
         //se quita del comprador
-        if(compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()))){
-            for(Anunciante anunciante:listaAnunciante){
+        if (compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()))) {
+            for (Anunciante anunciante : listaAnunciante) {
                 // se que quita de la lista de anunicantes
-                for(Anuncio anuncio:anunciante.getListaAnuncio()){
+                for (Anuncio anuncio : anunciante.getListaAnuncio()) {
 
-                    for(Puja puja1:anuncio.getListaPujas()){
-                        if(puja1.getCodigo().equals(puja.getCodigo())){
+                    for (Puja puja1 : anuncio.getListaPujas()) {
+                        if (puja1.getCodigo().equals(puja.getCodigo())) {
                             anuncio.getListaPujas().remove(puja);
                         }
                     }
@@ -254,36 +254,37 @@ public class Subasta implements ISubastaService, Serializable {
                 }
             }
             // se quita de la lista de anuncios globales
-            for(Anuncio anuncio:listaAnuncios){
-                for(Puja puja1:anuncio.getListaPujas()){
-                    if(puja1.getCodigo().equals(puja.getCodigo())){
+            for (Anuncio anuncio : listaAnuncios) {
+                for (Puja puja1 : anuncio.getListaPujas()) {
+                    if (puja1.getCodigo().equals(puja.getCodigo())) {
                         anuncio.getListaPujas().remove(puja);
                     }
                 }
             }
             return true;
-        }else{
+        } else {
             return false;
         }
 
         //for (Anunciante a : listaAnunciante) {
-            //a.getListaAnuncio().stream().anyMatch(anuncio -> {
-                //if (anuncio.getCodigo().equals(puja.getCodigoAnuncio())) {
-                    //anuncio.getListaPujas().remove(puja);
-                    //compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()));
-                    //for (Anuncio ag: listaAnuncios) {
-                        //ag.getListaPujas().removeIf(puja1 -> puja1.getCodigo().equals(puja.getCodigo()));
-                      //  break;
-                    //}
-                  //  return true;
+        //a.getListaAnuncio().stream().anyMatch(anuncio -> {
+        //if (anuncio.getCodigo().equals(puja.getCodigoAnuncio())) {
+        //anuncio.getListaPujas().remove(puja);
+        //compradorLogueado.getListaPujas().removeIf(Puja -> Puja.getCodigo().equals(puja.getCodigo()));
+        //for (Anuncio ag: listaAnuncios) {
+        //ag.getListaPujas().removeIf(puja1 -> puja1.getCodigo().equals(puja.getCodigo()));
+        //  break;
+        //}
+        //  return true;
 
-                //} else {
-              //      return false;
-            //    }
-          //  });
+        //} else {
+        //      return false;
+        //    }
+        //  });
         //}
 
     }
+
     @Override
     public List<Anuncio> obtenerListaAnuncio() {
         return listaAnuncios;

@@ -8,6 +8,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Anuncio implements Serializable {
     @Serial
@@ -123,5 +124,16 @@ public class Anuncio implements Serializable {
                 ", codigo='" + codigo + '\'' +
                 ", listaPujas=" + listaPujas +
                 '}';
+    }
+    public String toCsvString() {
+        // Utiliza stream para concatenar los valores separados por comas
+        String listaPujasCsv = listaPujas.stream()
+                .map(Puja::toString) // Ajusta este método según la clase Puja
+                .collect(Collectors.joining(","));
+
+        // Ajusta este formato según tus necesidades
+        return String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s",
+                producto, nombre, descripcion, foto, nombreAnunciante,
+                fechaPublicacion, fechaTerminacion, valorInicial, codigo, listaPujasCsv);
     }
 }

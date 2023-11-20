@@ -111,6 +111,7 @@
             <Button mnemonicParsing="false" onAction="#anuncioNuevo" stylesheets="@CSS/Style.css" text="Nuevo" />
             <Button mnemonicParsing="false" onAction="#agregarAnuncio" prefHeight="24.0" prefWidth="76.0" stylesheets="@CSS/Style.css" text="Agregar " />
             <Button mnemonicParsing="false" onAction="#actualizarAnuncio" stylesheets="@CSS/Style.css" text="Actualizar" />
+            <Button mnemonicParsing="false" onAction="#exportarACsv" text="Exportar a CSV" />
          </children>
       </HBox>
       <TableView fx:id="tvAnuncios" prefHeight="219.0" prefWidth="635.0">

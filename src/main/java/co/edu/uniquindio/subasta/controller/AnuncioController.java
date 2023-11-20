@@ -51,6 +51,8 @@ public class AnuncioController implements IAnuncioControllerService {
     public boolean actualizarAnuncio(AnuncioDto anuncioDto) throws AnuncioException {
         return modelFactoryController.actualizarAnuncio(anuncioDto);
     }
+
+
     @Override
     public List<CompradorDto> obtenerCompradores() throws CompradorException{
         return modelFactoryController.obtenerCompradores();

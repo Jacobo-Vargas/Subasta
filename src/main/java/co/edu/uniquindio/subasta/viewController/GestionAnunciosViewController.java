@@ -10,6 +10,7 @@ import co.edu.uniquindio.subasta.mapping.dto.ProductoDto;
 import co.edu.uniquindio.subasta.mapping.dto.PujaDto;
 import co.edu.uniquindio.subasta.util.AlertaUtil;
 import co.edu.uniquindio.subasta.util.GenerarReportePdf;
+import co.edu.uniquindio.subasta.util.Persistencia;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,26 +72,31 @@ public class GestionAnunciosViewController {
     }
 
     public void elegirPuja() {
-        boolean  bandera = false;
-        for (AnuncioDto a: listaAnuncioDto) {
-            if(a.codigo().equals(anuncioDtoSeleccionado.codigo())){
-                try {
-                    if(anuncioController.eliminarAnuncio(a)){
-                        GenerarReportePdf.generarPDFVenta(pujaDtoSelecionado,a,compradorDtoSeleccionado);
-                        AlertaUtil.mostrarMensajeOk("Se ha generado reporte\n se ha elegido con exito.");
-                        bandera = true;
-                        break;
+        if(pujaDtoSelecionado != null){
+            boolean  bandera = false;
+            for (AnuncioDto a: listaAnuncioDto) {
+                if(a.codigo().equals(anuncioDtoSeleccionado.codigo())){
+                    try {
+                        if(anuncioController.eliminarAnuncio(a)){
+                            GenerarReportePdf.generarPDFVenta(pujaDtoSelecionado,a,compradorDtoSeleccionado);
+                            AlertaUtil.mostrarMensajeOk("Se ha generado reporte\n se ha elegido con exito.");
+                            bandera = true;
+                            break;
+                        }
+                    } catch (AnuncioException e) {
+                        AlertaUtil.mostrarMensajeError("No se pudo escoger la puja");
+                    } catch (IOException e) {
+                        System.out.println("Error generando pdf.");
                     }
-                } catch (AnuncioException e) {
-                    AlertaUtil.mostrarMensajeError("No se pudo escoger la puja");
-                } catch (IOException e) {
-                    System.out.println("Error generando pdf.");
                 }
             }
+            if(!bandera){
+                AlertaUtil.mostrarMensajeError("No se pudo escoger la puja, intente más tarde.");
+            }else{
+                System.out.println("No hay pujas para mostrar");
+            }
         }
-        if(!bandera){
-            AlertaUtil.mostrarMensajeError("No se pudo escoger la puja, intente más tarde.");
-        }
+
     }
 
     private void obtenerAnuncios() {
@@ -136,7 +142,7 @@ public class GestionAnunciosViewController {
          *  luego itera la lista y si encuentra uno con el mismo nombre lo retorna
          */
         Image imagen = null;
-        File carpeta = new File("src/main/resources/imagenesAnuncios/");
+        File carpeta = new File(Persistencia.RUTA_FOTOS_SUBASTA);
 
         File[] archivos = carpeta.listFiles();
 
