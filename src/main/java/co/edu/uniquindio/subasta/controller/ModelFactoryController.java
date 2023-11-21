@@ -106,14 +106,14 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
         try {
             Connection connection = connectionFactory.newConnection();
             Channel channel = connection.createChannel();
-            channel.queueDeclare(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, false, false, false, null);
+            channel.queueDeclare(UtilsRabbit.QUEUE_NUEVOXML_COMPRADOR, false, false, false, null);
 
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 String message = new String(delivery.getBody());
                 System.out.println("Mensaje recibido: " + message);
             };
             while (true) {
-                channel.basicConsume(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, true, deliverCallback, consumerTag -> {
+                channel.basicConsume(UtilsRabbit.QUEUE_NUEVOXML_COMPRADOR, true, deliverCallback, consumerTag -> {
                 });
             }
         } catch (Exception e) {
@@ -135,6 +135,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
             if (!(subasta.verificarExistenciaAnunciante(anuncianteDto.cedula()))) {
                 getSubasta().getListaAnunciante().add(mapper.anuncianteDtoToAnunciante(anuncianteDto));
                 registrarAccionesSistema("Agregar Anunciante", 1, "agregarAnunciante");
+
                 guardarResourceXML();
                 return true;
             } else {
@@ -155,7 +156,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
                 registrarAccionesSistema("Agregar Comprador", 1, "agregarComprador");
                 guardarResourceXML();
                 try {
-                    producirMensaje(UtilsRabbit.QUEUE_NUEVA_PUBLICACION, UtilsRabbit.convertXmlFileToString());
+                    producirMensaje(UtilsRabbit.QUEUE_NUEVOXML_COMPRADOR, UtilsRabbit.convertXmlFileToString());
                 } catch (IOException e) {
                     System.out.println("Error al producir mensaje");
                 }
@@ -195,6 +196,11 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
             if (a.getCedula().equals(cedula) && a.getUsuario().getContrasenia().equals(contrasenia)) {
                 getSubasta().setAnuncianteLogueado(a);
                 registrarAccionesSistema(a.getNombre() + " inicio sesión.", 1, "INICIO DE SESIÓN");
+                try {
+                    producirMensaje("nuevo XML",UtilsRabbit.convertXmlFileToString());
+                } catch (IOException e) {
+                    System.out.println("Error al enviar la cola.");
+                }
                 acceso = true;
             }
         }

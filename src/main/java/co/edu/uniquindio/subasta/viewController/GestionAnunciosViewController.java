@@ -81,6 +81,7 @@ public class GestionAnunciosViewController {
                             GenerarReportePdf.generarPDFVenta(pujaDtoSelecionado,a,compradorDtoSeleccionado);
                             AlertaUtil.mostrarMensajeOk("Se ha generado reporte\n se ha elegido con exito.");
                             bandera = true;
+
                             break;
                         }
                     } catch (AnuncioException e) {

@@ -1354,3 +1354,11 @@ nov. 20, 2023 12:08:15 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardar
 INFORMACIÓN: ELIMINAR ANUNCIO,Se elimino un anuncio.,2023-11-20
 nov. 20, 2023 12:18:58 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: CIERRE DE SESIÓN.,juan cerró sesión.,2023-11-20
+nov. 20, 2023 12:44:54 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-20
+nov. 20, 2023 12:45:05 P. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-20
+nov. 21, 2023 10:36:49 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIOAPP,Inicio de sistema,2023-11-21
+nov. 21, 2023 10:37:33 A. M. co.edu.uniquindio.subasta.util.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: INICIO DE SESIÓN,juan inicio sesión.,2023-11-21
