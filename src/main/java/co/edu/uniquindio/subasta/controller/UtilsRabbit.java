@@ -24,7 +24,7 @@ public class UtilsRabbit {
     }
 
     // Convierte una cadena XML a un archivo
-    public static void convertStringToXmlFile(String xmlString, String filePath) throws IOException {
+    public static void convertStringToXmlFile(String xmlString, String RUTA_XML) throws IOException {
         File xmlFile = new File(filePath);
         Files.write(xmlFile.toPath(), xmlString.getBytes());
     }
