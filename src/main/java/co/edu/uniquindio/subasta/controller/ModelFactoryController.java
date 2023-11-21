@@ -84,7 +84,7 @@ public class ModelFactoryController implements IModelFactoryController, Runnable
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(queue, false, false, false, null);
             channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
-           // System.out.println(" [x] Sent '" + message + "'");
+            System.out.println(" [x] Sent '" + message + "'");
         } catch (Exception e) {
             System.out.println("Error al iniciar conexion con rabbit.");
             bandera = false;
