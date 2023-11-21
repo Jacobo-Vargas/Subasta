@@ -114,7 +114,7 @@ public class Anuncio implements Serializable {
     public String toString() {
         return "Anuncio{" +
                 "producto=" + producto +
-                ", nombre='" + nombre + '\'' +
+                ", nombre='" + nombre + '\''+
                 ", descripcion='" + descripcion + '\'' +
                 ", foto=" + foto +
                 ", nombreAnunciante='" + nombreAnunciante + '\'' +
